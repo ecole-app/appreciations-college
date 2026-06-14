@@ -179,12 +179,21 @@ var PROG=[
 
 var MAT={
   "EPS":{
-    pos:[{k:"investi",l:"investi(e)"},{k:"serieux",l:"sérieux/euse"},{k:"applique",l:"appliqué(e)"},
-         {k:"particip",l:"participation active"},{k:"equipe",l:"esprit d'équipe"},{k:"fairplay",l:"fair-play"},
-         {k:"ecoute",l:"écoute des consignes"},{k:"leader",l:"leadership"},{k:"technique",l:"bon niveau technique"},{k:"auto",l:"autonomie"}],
-    neg:[{k:"invest_n",l:"manque d'investissement"},{k:"bavard",l:"bavardage"},{k:"concentr",l:"manque de concentration"},
-         {k:"diff_tech",l:"difficultés techniques"},{k:"retrait",l:"en retrait"},{k:"irreg",l:"irrégulier(e)"},
-         {k:"effort_n",l:"efforts insuffisants"},{k:"perturb",l:"comportement perturbateur"}],
+    pos:[
+      {k:"investi",l:"investi(e)"},{k:"serieux",l:"sérieux/euse"},{k:"applique",l:"appliqué(e)"},
+      {k:"particip",l:"participation active"},{k:"equipe",l:"esprit d'équipe"},{k:"fairplay",l:"fair-play"},
+      {k:"ecoute",l:"écoute des consignes"},{k:"leader",l:"leadership"},{k:"technique",l:"bon niveau technique"},
+      {k:"auto",l:"autonomie"},{k:"tactique",l:"sens tactique"},{k:"arbitre",l:"rôle d'arbitre maîtrisé"},
+      {k:"observ_eps",l:"rôle d'observateur"},{k:"endurance",l:"endurance"},{k:"vitesse",l:"vitesse"},
+      {k:"coordination",l:"coordination"},{k:"equilibre",l:"équilibre"},{k:"souplesse",l:"souplesse"}
+    ],
+    neg:[
+      {k:"invest_n",l:"manque d'investissement"},{k:"bavard",l:"bavardage"},{k:"concentr",l:"manque de concentration"},
+      {k:"diff_tech",l:"difficultés techniques"},{k:"retrait",l:"en retrait"},{k:"irreg",l:"irrégulier(e)"},
+      {k:"effort_n",l:"efforts insuffisants"},{k:"perturb",l:"comportement perturbateur"},
+      {k:"arbitre_n",l:"rôle d'arbitre à améliorer"},{k:"tactique_n",l:"manque de sens tactique"},
+      {k:"endurance_n",l:"endurance à améliorer"},{k:"securite",l:"règles de sécurité à respecter"}
+    ],
     sports:[
       {k:"sp_relais",l:"Relais"},{k:"sp_course_l",l:"Course longue"},{k:"sp_demifond",l:"Demi-fond"},
       {k:"sp_sprint",l:"Sprint"},{k:"sp_basket",l:"Basket-ball"},{k:"sp_foot",l:"Football"},
@@ -194,83 +203,153 @@ var MAT={
     ]
   },
   "Français":{
-    pos:[{k:"expr_e",l:"expression écrite"},{k:"expr_o",l:"expression orale"},{k:"lecture",l:"lecture"},
-         {k:"ortho",l:"orthographe"},{k:"vocab",l:"vocabulaire"},{k:"analyse",l:"analyse"},
-         {k:"redac",l:"rédaction"},{k:"gram",l:"grammaire"},{k:"imagin",l:"imagination"},{k:"particip_f",l:"participation"}],
-    neg:[{k:"ortho_n",l:"orthographe"},{k:"expr_n",l:"expression"},{k:"lect_n",l:"lecture"},
-         {k:"gram_n",l:"grammaire"},{k:"particip_fn",l:"participation"},{k:"redac_n",l:"rédaction"},
-         {k:"concentr_f",l:"concentration"},{k:"bavard_f",l:"bavardage"}]
+    pos:[
+      {k:"expr_e",l:"expression écrite"},{k:"expr_o",l:"expression orale"},{k:"lecture",l:"lecture"},
+      {k:"ortho",l:"orthographe"},{k:"vocab",l:"vocabulaire riche"},{k:"analyse",l:"analyse de texte"},
+      {k:"redac",l:"rédaction"},{k:"gram",l:"grammaire"},{k:"imagin",l:"imagination"},{k:"particip_f",l:"participation"},
+      {k:"conjug",l:"conjugaison"},{k:"lecture_vx",l:"lecture à voix haute"},{k:"comprehension",l:"compréhension de texte"},
+      {k:"struct_redac",l:"structure des écrits"},{k:"ponctuation",l:"ponctuation"},{k:"argumentation",l:"argumentation"}
+    ],
+    neg:[
+      {k:"ortho_n",l:"orthographe"},{k:"expr_n",l:"expression écrite"},{k:"lect_n",l:"lecture"},
+      {k:"gram_n",l:"grammaire"},{k:"particip_fn",l:"participation"},{k:"redac_n",l:"rédaction"},
+      {k:"concentr_f",l:"concentration"},{k:"bavard_f",l:"bavardage"},{k:"conjug_n",l:"conjugaison"},
+      {k:"vocab_n_f",l:"vocabulaire pauvre"},{k:"struct_n",l:"structure des écrits"},{k:"ponct_n",l:"ponctuation"}
+    ]
   },
   "Maths":{
-    pos:[{k:"calcul",l:"calcul"},{k:"raison",l:"raisonnement logique"},{k:"geo",l:"géométrie"},
-         {k:"pb",l:"résolution de problèmes"},{k:"rigueur_m",l:"rigueur"},{k:"rapid",l:"rapidité"},
-         {k:"algebre",l:"algèbre"},{k:"method_m",l:"méthodologie"},{k:"particip_m",l:"participation"},{k:"abstr",l:"abstraction"}],
-    neg:[{k:"calcul_n",l:"calcul"},{k:"raison_n",l:"raisonnement"},{k:"lacunes",l:"lacunes"},
-         {k:"method_mn",l:"méthode"},{k:"concentr_m",l:"concentration"},{k:"travdom",l:"travail à la maison"},
-         {k:"abstr_n",l:"abstraction"},{k:"particip_mn",l:"participation"}]
+    pos:[
+      {k:"calcul",l:"calcul"},{k:"raison",l:"raisonnement logique"},{k:"geo",l:"géométrie"},
+      {k:"pb",l:"résolution de problèmes"},{k:"rigueur_m",l:"rigueur"},{k:"rapid",l:"rapidité"},
+      {k:"algebre",l:"algèbre"},{k:"method_m",l:"méthodologie"},{k:"particip_m",l:"participation"},
+      {k:"abstr",l:"abstraction"},{k:"frac",l:"fractions"},{k:"propor",l:"proportionnalité"},
+      {k:"stats",l:"statistiques"},{k:"construction",l:"constructions géométriques"},{k:"calcul_mental",l:"calcul mental"}
+    ],
+    neg:[
+      {k:"calcul_n",l:"calcul"},{k:"raison_n",l:"raisonnement"},{k:"lacunes",l:"lacunes de base"},
+      {k:"method_mn",l:"méthode"},{k:"concentr_m",l:"concentration"},{k:"travdom",l:"travail à la maison"},
+      {k:"abstr_n",l:"abstraction"},{k:"particip_mn",l:"participation"},{k:"frac_n",l:"fractions"},
+      {k:"propor_n",l:"proportionnalité"},{k:"calcul_mental_n",l:"calcul mental"},{k:"erreurs_calcul",l:"erreurs de calcul fréquentes"}
+    ]
   },
   "Anglais":{
-    pos:[{k:"co",l:"compréhension orale"},{k:"eo_a",l:"expression orale"},{k:"ce_a",l:"compréhension écrite"},
-         {k:"ee_a",l:"expression écrite"},{k:"vocab_a",l:"vocabulaire"},{k:"prononc",l:"prononciation"},
-         {k:"gram_a",l:"grammaire"},{k:"particip_a",l:"participation"},{k:"aisance",l:"aisance à l'oral"},{k:"memo_a",l:"mémorisation"}],
-    neg:[{k:"vocab_an",l:"vocabulaire"},{k:"gram_an",l:"grammaire"},{k:"oral_an",l:"expression orale"},
-         {k:"particip_an",l:"participation"},{k:"prononc_n",l:"prononciation"},{k:"memo_an",l:"mémorisation"},{k:"ecrit_an",l:"expression écrite"}]
+    pos:[
+      {k:"co",l:"compréhension orale"},{k:"eo_a",l:"expression orale"},{k:"ce_a",l:"compréhension écrite"},
+      {k:"ee_a",l:"expression écrite"},{k:"vocab_a",l:"vocabulaire"},{k:"prononc",l:"prononciation"},
+      {k:"gram_a",l:"grammaire"},{k:"particip_a",l:"participation"},{k:"aisance",l:"aisance à l'oral"},
+      {k:"memo_a",l:"mémorisation"},{k:"intonation",l:"intonation"},{k:"interact",l:"interaction orale"},
+      {k:"culture_a",l:"culture anglo-saxonne"},{k:"temps_verb",l:"temps verbaux"}
+    ],
+    neg:[
+      {k:"vocab_an",l:"vocabulaire"},{k:"gram_an",l:"grammaire"},{k:"oral_an",l:"expression orale"},
+      {k:"particip_an",l:"participation"},{k:"prononc_n",l:"prononciation"},{k:"memo_an",l:"mémorisation"},
+      {k:"ecrit_an",l:"expression écrite"},{k:"temps_verb_n",l:"temps verbaux"},{k:"intonation_n",l:"intonation"},
+      {k:"timidite_a",l:"timidité à l'oral"}
+    ]
   },
   "Arabe":{
-    pos:[{k:"lect_ar",l:"lecture"},{k:"ecrit_ar",l:"écriture"},{k:"compr_ar",l:"compréhension"},
-         {k:"expr_ar",l:"expression"},{k:"vocab_ar",l:"vocabulaire"},{k:"particip_ar",l:"participation"},
-         {k:"memo_ar",l:"mémorisation"},{k:"calligr",l:"calligraphie"}],
-    neg:[{k:"lect_arn",l:"lecture"},{k:"ecrit_arn",l:"écriture"},{k:"vocab_arn",l:"vocabulaire"},
-         {k:"particip_arn",l:"participation"},{k:"memo_arn",l:"mémorisation"}]
+    pos:[
+      {k:"lect_ar",l:"lecture"},{k:"ecrit_ar",l:"écriture"},{k:"compr_ar",l:"compréhension"},
+      {k:"expr_ar",l:"expression"},{k:"vocab_ar",l:"vocabulaire"},{k:"particip_ar",l:"participation"},
+      {k:"memo_ar",l:"mémorisation"},{k:"calligr",l:"calligraphie"},{k:"gram_ar",l:"grammaire arabe"},
+      {k:"diction_ar",l:"diction"},{k:"conjugaison_ar",l:"conjugaison"}
+    ],
+    neg:[
+      {k:"lect_arn",l:"lecture"},{k:"ecrit_arn",l:"écriture"},{k:"vocab_arn",l:"vocabulaire"},
+      {k:"particip_arn",l:"participation"},{k:"memo_arn",l:"mémorisation"},{k:"gram_arn",l:"grammaire"},
+      {k:"calligr_n",l:"calligraphie"},{k:"conjugaison_arn",l:"conjugaison"}
+    ]
   },
   "Espagnol":{
-    pos:[{k:"compr_e",l:"compréhension"},{k:"expr_e2",l:"expression orale"},{k:"vocab_e",l:"vocabulaire"},
-         {k:"gram_e",l:"grammaire"},{k:"particip_e",l:"participation"},{k:"prononc_e",l:"prononciation"},
-         {k:"aisance_e",l:"aisance à l'oral"},{k:"ecrit_e",l:"expression écrite"}],
-    neg:[{k:"vocab_en",l:"vocabulaire"},{k:"gram_en",l:"grammaire"},{k:"oral_en",l:"expression orale"},
-         {k:"particip_en",l:"participation"},{k:"ecrit_en",l:"expression écrite"}]
+    pos:[
+      {k:"compr_e",l:"compréhension"},{k:"expr_e2",l:"expression orale"},{k:"vocab_e",l:"vocabulaire"},
+      {k:"gram_e",l:"grammaire"},{k:"particip_e",l:"participation"},{k:"prononc_e",l:"prononciation"},
+      {k:"aisance_e",l:"aisance à l'oral"},{k:"ecrit_e",l:"expression écrite"},
+      {k:"interact_e",l:"interaction orale"},{k:"temps_e",l:"temps verbaux"},{k:"culture_e",l:"culture hispanique"}
+    ],
+    neg:[
+      {k:"vocab_en",l:"vocabulaire"},{k:"gram_en",l:"grammaire"},{k:"oral_en",l:"expression orale"},
+      {k:"particip_en",l:"participation"},{k:"ecrit_en",l:"expression écrite"},
+      {k:"prononc_en",l:"prononciation"},{k:"temps_en",l:"temps verbaux"},{k:"timidite_e",l:"timidité à l'oral"}
+    ]
   },
   "Histoire-Géo/EMC":{
-    pos:[{k:"connais",l:"connaissances solides"},{k:"analyse_h",l:"esprit d'analyse"},{k:"redac_h",l:"rédaction"},
-         {k:"particip_h",l:"participation"},{k:"carte",l:"lecture de cartes"},{k:"crit_h",l:"esprit critique"},
-         {k:"memo_h",l:"mémorisation"},{k:"cito",l:"sens civique"}],
-    neg:[{k:"connais_n",l:"connaissances"},{k:"analyse_hn",l:"analyse"},{k:"redac_hn",l:"rédaction"},
-         {k:"particip_hn",l:"participation"},{k:"memo_hn",l:"mémorisation"},{k:"concentr_h",l:"concentration"}]
+    pos:[
+      {k:"connais",l:"connaissances solides"},{k:"analyse_h",l:"esprit d'analyse"},{k:"redac_h",l:"rédaction"},
+      {k:"particip_h",l:"participation"},{k:"carte",l:"lecture de cartes"},{k:"crit_h",l:"esprit critique"},
+      {k:"memo_h",l:"mémorisation"},{k:"cito",l:"sens civique"},{k:"chro",l:"repères chronologiques"},
+      {k:"doc_h",l:"analyse de documents"},{k:"debat",l:"prise de parole en débat"},{k:"legende",l:"légende de carte"}
+    ],
+    neg:[
+      {k:"connais_n",l:"connaissances"},{k:"analyse_hn",l:"analyse"},{k:"redac_hn",l:"rédaction"},
+      {k:"particip_hn",l:"participation"},{k:"memo_hn",l:"mémorisation"},{k:"concentr_h",l:"concentration"},
+      {k:"chro_n",l:"repères chronologiques"},{k:"carte_n",l:"lecture de cartes"},{k:"doc_hn",l:"analyse de documents"}
+    ]
   },
   "SVT":{
-    pos:[{k:"observ",l:"sens de l'observation"},{k:"experi",l:"démarche expérimentale"},{k:"cr_svt",l:"comptes-rendus soignés"},
-         {k:"particip_s",l:"participation"},{k:"raison_s",l:"raisonnement scientifique"},{k:"memo_s",l:"mémorisation"},
-         {k:"soin_s",l:"soin du travail"},{k:"curio_s",l:"curiosité scientifique"}],
-    neg:[{k:"memo_sn",l:"mémorisation"},{k:"cr_svtn",l:"comptes-rendus"},{k:"particip_sn",l:"participation"},
-         {k:"soin_sn",l:"soin"},{k:"raison_sn",l:"raisonnement"},{k:"concentr_s",l:"concentration"}]
+    pos:[
+      {k:"observ",l:"sens de l'observation"},{k:"experi",l:"démarche expérimentale"},{k:"cr_svt",l:"comptes-rendus soignés"},
+      {k:"particip_s",l:"participation"},{k:"raison_s",l:"raisonnement scientifique"},{k:"memo_s",l:"mémorisation"},
+      {k:"soin_s",l:"soin du travail"},{k:"curio_s",l:"curiosité scientifique"},{k:"schema",l:"schémas soignés"},
+      {k:"classif",l:"classification du vivant"},{k:"ecologie",l:"conscience écologique"},{k:"microscope",l:"utilisation du microscope"}
+    ],
+    neg:[
+      {k:"memo_sn",l:"mémorisation"},{k:"cr_svtn",l:"comptes-rendus"},{k:"particip_sn",l:"participation"},
+      {k:"soin_sn",l:"soin"},{k:"raison_sn",l:"raisonnement"},{k:"concentr_s",l:"concentration"},
+      {k:"schema_n",l:"schémas"},{k:"legende_svt",l:"légendes des schémas"}
+    ]
   },
   "Physique-Chimie":{
-    pos:[{k:"manip",l:"habileté en manipulation"},{k:"raison_p",l:"raisonnement scientifique"},{k:"rigueur_p",l:"rigueur"},
-         {k:"particip_p",l:"participation"},{k:"calcul_p",l:"calcul"},{k:"cr_pc",l:"comptes-rendus"},
-         {k:"curio_p",l:"curiosité scientifique"},{k:"method_p",l:"méthodologie"}],
-    neg:[{k:"calcul_pn",l:"calcul"},{k:"method_pn",l:"méthode"},{k:"particip_pn",l:"participation"},
-         {k:"manip_n",l:"manipulation"},{k:"memo_pn",l:"mémorisation"},{k:"concentr_p",l:"concentration"}]
+    pos:[
+      {k:"manip",l:"habileté en manipulation"},{k:"raison_p",l:"raisonnement scientifique"},{k:"rigueur_p",l:"rigueur"},
+      {k:"particip_p",l:"participation"},{k:"calcul_p",l:"calcul"},{k:"cr_pc",l:"comptes-rendus"},
+      {k:"curio_p",l:"curiosité scientifique"},{k:"method_p",l:"méthodologie"},{k:"securite_p",l:"respect des règles de sécurité"},
+      {k:"schema_p",l:"schémas de montage"},{k:"formule",l:"utilisation des formules"},{k:"unite",l:"rigueur des unités"}
+    ],
+    neg:[
+      {k:"calcul_pn",l:"calcul"},{k:"method_pn",l:"méthode"},{k:"particip_pn",l:"participation"},
+      {k:"manip_n",l:"manipulation"},{k:"memo_pn",l:"mémorisation"},{k:"concentr_p",l:"concentration"},
+      {k:"securite_pn",l:"règles de sécurité"},{k:"formule_n",l:"utilisation des formules"},{k:"unite_n",l:"rigueur des unités"}
+    ]
   },
   "Technologie":{
-    pos:[{k:"concept",l:"sens de la conception"},{k:"fabric",l:"habileté en fabrication"},{k:"num",l:"maîtrise du numérique"},
-         {k:"creat_t",l:"créativité"},{k:"particip_t",l:"participation"},{k:"method_t",l:"méthodologie"},
-         {k:"soin_t",l:"soin du travail"},{k:"auto_t",l:"autonomie"}],
-    neg:[{k:"soin_tn",l:"soin"},{k:"method_tn",l:"méthode"},{k:"particip_tn",l:"participation"},
-         {k:"auto_tn",l:"autonomie"},{k:"concentr_t",l:"concentration"}]
+    pos:[
+      {k:"concept",l:"sens de la conception"},{k:"fabric",l:"habileté en fabrication"},{k:"num",l:"maîtrise du numérique"},
+      {k:"creat_t",l:"créativité"},{k:"particip_t",l:"participation"},{k:"method_t",l:"méthodologie"},
+      {k:"soin_t",l:"soin du travail"},{k:"auto_t",l:"autonomie"},{k:"cad",l:"dessin technique"},
+      {k:"programme",l:"programmation"},{k:"proto",l:"réalisation de prototypes"},{k:"cahier_charges",l:"respect du cahier des charges"}
+    ],
+    neg:[
+      {k:"soin_tn",l:"soin"},{k:"method_tn",l:"méthode"},{k:"particip_tn",l:"participation"},
+      {k:"auto_tn",l:"autonomie"},{k:"concentr_t",l:"concentration"},{k:"cad_n",l:"dessin technique"},
+      {k:"programme_n",l:"programmation"},{k:"cahier_tn",l:"respect du cahier des charges"}
+    ]
   },
   "Arts Plastiques":{
-    pos:[{k:"creat_a",l:"créativité"},{k:"tech_a",l:"maîtrise technique"},{k:"imagin_a",l:"imagination"},
-         {k:"soin_a",l:"soin"},{k:"particip_ap",l:"participation"},{k:"origin",l:"originalité"},
-         {k:"sensib",l:"sensibilité artistique"},{k:"auto_a",l:"autonomie"}],
-    neg:[{k:"soin_an",l:"soin"},{k:"implic_an",l:"implication"},{k:"tech_an",l:"technique"},
-         {k:"particip_apn",l:"participation"},{k:"finit",l:"finitions"}]
+    pos:[
+      {k:"creat_a",l:"créativité"},{k:"tech_a",l:"maîtrise technique"},{k:"imagin_a",l:"imagination"},
+      {k:"soin_a",l:"soin"},{k:"particip_ap",l:"participation"},{k:"origin",l:"originalité"},
+      {k:"sensib",l:"sensibilité artistique"},{k:"auto_a",l:"autonomie"},{k:"couleur",l:"maîtrise des couleurs"},
+      {k:"composition",l:"composition"},{k:"volume",l:"sens du volume"},{k:"narration_vis",l:"narration visuelle"}
+    ],
+    neg:[
+      {k:"soin_an",l:"soin"},{k:"implic_an",l:"implication"},{k:"tech_an",l:"technique"},
+      {k:"particip_apn",l:"participation"},{k:"finit",l:"finitions"},{k:"couleur_n",l:"maîtrise des couleurs"},
+      {k:"composition_n",l:"composition"},{k:"invest_ap",l:"investissement"}
+    ]
   },
   "Éducation Musicale":{
-    pos:[{k:"ecoute_m",l:"écoute musicale"},{k:"chant",l:"qualités vocales"},{k:"rythme",l:"sens du rythme"},
-         {k:"particip_mu",l:"participation"},{k:"sensib_m",l:"sensibilité musicale"},{k:"memo_mu",l:"mémorisation"},
-         {k:"engag_m",l:"engagement"},{k:"tech_m",l:"maîtrise technique"}],
-    neg:[{k:"particip_mun",l:"participation"},{k:"ecoute_mn",l:"écoute"},{k:"memo_mun",l:"mémorisation"},
-         {k:"engag_mn",l:"engagement"},{k:"tenue_m",l:"tenue en cours"}]
+    pos:[
+      {k:"ecoute_m",l:"écoute musicale"},{k:"chant",l:"qualités vocales"},{k:"rythme",l:"sens du rythme"},
+      {k:"particip_mu",l:"participation"},{k:"sensib_m",l:"sensibilité musicale"},{k:"memo_mu",l:"mémorisation"},
+      {k:"engag_m",l:"engagement"},{k:"tech_m",l:"maîtrise technique"},{k:"justesse",l:"justesse vocale"},
+      {k:"respiration",l:"maîtrise du souffle"},{k:"culture_mus",l:"culture musicale"},{k:"instrument",l:"pratique instrumentale"}
+    ],
+    neg:[
+      {k:"particip_mun",l:"participation"},{k:"ecoute_mn",l:"écoute"},{k:"memo_mun",l:"mémorisation"},
+      {k:"engag_mn",l:"engagement"},{k:"tenue_m",l:"tenue en cours"},{k:"justesse_n",l:"justesse vocale"},
+      {k:"rythme_n",l:"sens du rythme"},{k:"timidite_m",l:"timidité"}
+    ]
   }
 };
 
