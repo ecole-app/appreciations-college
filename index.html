@@ -371,24 +371,10 @@ function joinNoms(arr){
   return arr.slice(0,-1).join(", ")+" et "+arr[arr.length-1];
 }
 function joinNomsAvecDe(arr){
-  // Joints les noms après "fait preuve de" — les noms ont déjà leur article (une/un/de la/des...)
-  // On remplace juste "une " par "d'une ", "un " par "d'un " etc. pour l'élision après "de"
+  // Retourne juste les noms joints — le "de/d'" est géré dans la phrase
   if(!arr.length) return "";
-  function elide(s){
-    return s
-      .replace(/^une /,"d'une ")
-      .replace(/^un /,"d'un ")
-      .replace(/^de l'/,"de l'")
-      .replace(/^de la /,"de la ")
-      .replace(/^des /,"des ")
-      .replace(/^de '/,"d'");
-  }
-  if(arr.length===1) return elide(arr[0]);
-  return arr.map(function(n,i){
-    if(i===0) return elide(n);
-    // Pour les suivants après virgule ou "et", même élision
-    return elide(n);
-  }).slice(0,-1).join(", ")+" et "+elide(arr[arr.length-1]);
+  if(arr.length===1) return arr[0];
+  return arr.slice(0,-1).join(", ")+" et "+arr[arr.length-1];
 }
 function joinAdjs(arr){
   if(!arr.length) return "";
@@ -592,6 +578,9 @@ function construire(keys,ft,f,Il,il,mat,ri){
     if(profilMots.length) p=p.replace(/\.$/,"")+" (profil "+profilMots.join(", ")+" pris en compte).";
     if(autreMots.length) p=p.replace(/\.$/,"")+" À noter : "+autreMots.join(", ")+".";
   }
+
+   // Corriger "de une/un" → "d'une/d'un"
+  p=p.replace(/de une /g,"d'une ").replace(/de un /g,"d'un ");
 
   // Limite 255 caractères
   if(p.length>255){
