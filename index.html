@@ -24,6 +24,7 @@ body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--txt);font
 .chip.neg.on{background:#FCEBEB;color:#A32D2D;border-color:#F09595}
 .chip.comp.on{background:#fef0e6;color:#7a3a0a;border-color:var(--ora)}
 .chip.prog.on{background:#e6f4f1;color:var(--vd);border-color:var(--vert)}
+.chip.sport.on{background:#e8f0fe;color:#1a56a0;border-color:#4a80d4}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 label{font-size:13px;color:var(--mut);display:block;margin-bottom:4px}
 input,select{width:100%;font-size:14px;padding:8px 10px;border:1.5px solid var(--bor);border-radius:8px;background:var(--card);color:var(--txt)}
@@ -83,6 +84,7 @@ hr{border:none;border-top:1px solid var(--bor);margin:12px 0}
   <div class="sl">Général — toutes matières</div><div class="chips" id="cp-gen"></div>
   <div class="sl" id="lpos">Points positifs</div><div class="chips" id="cp-pos"></div>
   <div class="sl" id="lneg">Points à travailler</div><div class="chips" id="cp-neg"></div>
+  <div class="sl" id="lsport" style="display:none">Sports — EPS</div><div class="chips" id="cp-sport" style="display:none"></div>
   <div class="sl">Comportement</div><div class="chips" id="cp-comp"></div>
   <div class="sl">Progression</div><div class="chips" id="cp-prog"></div>
   <hr>
@@ -182,7 +184,14 @@ var MAT={
          {k:"ecoute",l:"écoute des consignes"},{k:"leader",l:"leadership"},{k:"technique",l:"bon niveau technique"},{k:"auto",l:"autonomie"}],
     neg:[{k:"invest_n",l:"manque d'investissement"},{k:"bavard",l:"bavardage"},{k:"concentr",l:"manque de concentration"},
          {k:"diff_tech",l:"difficultés techniques"},{k:"retrait",l:"en retrait"},{k:"irreg",l:"irrégulier(e)"},
-         {k:"effort_n",l:"efforts insuffisants"},{k:"perturb",l:"comportement perturbateur"}]
+         {k:"effort_n",l:"efforts insuffisants"},{k:"perturb",l:"comportement perturbateur"}],
+    sports:[
+      {k:"sp_relais",l:"Relais"},{k:"sp_course_l",l:"Course longue"},{k:"sp_demifond",l:"Demi-fond"},
+      {k:"sp_sprint",l:"Sprint"},{k:"sp_basket",l:"Basket-ball"},{k:"sp_foot",l:"Football"},
+      {k:"sp_ultimate",l:"Ultimate"},{k:"sp_ballon",l:"Ballon prisonnier"},{k:"sp_rugby",l:"Rugby à 7"},
+      {k:"sp_badminton",l:"Badminton"},{k:"sp_ttable",l:"Tennis de table"},{k:"sp_acro",l:"Acrosport"},
+      {k:"sp_renfo",l:"Renfo musculaire"},{k:"sp_orient",l:"Course d'orientation"},{k:"sp_lutte",l:"Lutte"}
+    ]
   },
   "Français":{
     pos:[{k:"expr_e",l:"expression écrite"},{k:"expr_o",l:"expression orale"},{k:"lecture",l:"lecture"},
@@ -403,11 +412,15 @@ function onMatiere(){
   var mat=document.getElementById("matiere").value;
   matCur=mat;
   var data=MAT[mat]||MAT["EPS"];
-  // Vider sélections pos/neg invalidées
   var valid=data.pos.concat(data.neg).map(function(c){return c.k;});
-  Object.keys(sel).forEach(function(k){if((sel[k]==="pos"||sel[k]==="neg")&&valid.indexOf(k)<0)delete sel[k];});
+  Object.keys(sel).forEach(function(k){if((sel[k]==="pos"||sel[k]==="neg"||sel[k]==="sport")&&valid.indexOf(k)<0&&!(sel[k]==="sport"))delete sel[k];});
   document.getElementById("lpos").textContent="Points positifs — "+mat;
   document.getElementById("lneg").textContent="Points à travailler — "+mat;
+  // Afficher section sports uniquement en EPS
+  var showSport=mat==="EPS";
+  document.getElementById("lsport").style.display=showSport?"":"none";
+  document.getElementById("cp-sport").style.display=showSport?"":"none";
+  if(!showSport) Object.keys(sel).forEach(function(k){if(sel[k]==="sport")delete sel[k];});
   renderAll();
 }
 function setG(g){
@@ -415,7 +428,7 @@ function setG(g){
   document.getElementById("gm").classList.toggle("on",g==="M");
   document.getElementById("gf").classList.toggle("on",g==="F");
 }
-function allC(){var r=[];[GEN,MAT[matCur]?MAT[matCur].pos:[],MAT[matCur]?MAT[matCur].neg:[],COMP,PROG].forEach(function(a){r=r.concat(a);});return r;}
+function allC(){var r=[];[GEN,MAT[matCur]?MAT[matCur].pos:[],MAT[matCur]?MAT[matCur].neg:[],COMP,PROG,MAT["EPS"].sports||[]].forEach(function(a){r=r.concat(a);});return r;}
 
 function renderAll(){
   var mat=document.getElementById("matiere").value||"EPS";
@@ -433,6 +446,18 @@ function renderAll(){
       el.appendChild(b);
     });
   });
+  // Chips sports (EPS uniquement)
+  var sportEl=document.getElementById("cp-sport");
+  if(sportEl&&data.sports){
+    sportEl.innerHTML="";
+    data.sports.forEach(function(c){
+      var b=document.createElement("button");
+      b.className="chip sport"+(sel[c.k]?" on":"");
+      b.textContent=c.l;
+      b.onclick=(function(k){return function(){tog(k,"sport");};})(c.k);
+      sportEl.appendChild(b);
+    });
+  }
   renderTags();
 }
 function tog(k,cat){if(sel[k])delete sel[k];else sel[k]=cat;renderAll();}
@@ -558,6 +583,18 @@ function construire(keys,ft,f,Il,il,mat,ri){
   // Préfixe matière
   if(mat&&mat!=="EPS"){
     p="En "+mat+", "+p.charAt(0).toLowerCase()+p.slice(1);
+  }
+
+  // Sports cochés → intégration dans la phrase
+  var sportKeys=keys.filter(function(k){return sel[k]==="sport";});
+  if(sportKeys.length){
+    var sportLabels=sportKeys.map(function(k){
+      var data2=MAT["EPS"]||{};
+      var found=(data2.sports||[]).filter(function(c){return c.k===k;})[0];
+      return found?found.l:k;
+    });
+    var sportStr=sportLabels.length===1?sportLabels[0]:sportLabels.slice(0,-1).join(", ")+" et "+sportLabels[sportLabels.length-1];
+    p=p.replace(/\.$/,"")+", notamment en "+sportStr+".";
   }
 
   // Mots libres — intégration naturelle
