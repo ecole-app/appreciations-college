@@ -170,7 +170,9 @@ var GEN=[
 ];
 var COMP=[
   {k:"attitude",l:"attitude positive"},{k:"respect",l:"respectueux/euse"},
-  {k:"agreable",l:"agréable en cours"},{k:"compneg",l:"comportement à améliorer"},{k:"ponctuel",l:"ponctuel(le)"}
+  {k:"agreable",l:"agréable en cours"},{k:"compneg",l:"comportement à améliorer"},
+  {k:"ponctuel",l:"ponctuel(le)"},{k:"assidu_c",l:"assidu(e)"},{k:"absences",l:"absences fréquentes"},
+  {k:"retards",l:"retards à corriger"},{k:"tenue",l:"tenue correcte"},{k:"tenue_n",l:"tenue inadaptée"}
 ];
 var PROG=[
   {k:"prog",l:"en progrès"},{k:"progression",l:"progression constante"},{k:"potentiel",l:"potentiel à exploiter"},
@@ -410,6 +412,9 @@ function adj(k,f){
 
 // Formulations négatives naturelles (plusieurs variantes)
 var NEG={
+  "absences":[["les absences fréquentes nuisent à la progression"],["les absences répétées pénalisent le suivi du cours"],["de nombreuses absences ont impacté les résultats"]],
+  "retards":[["les retards répétés perturbent le bon déroulement des cours"],["la ponctualité est à améliorer sérieusement"]],
+  "tenue_n":[["la tenue vestimentaire n'est pas adaptée aux cours"],["la tenue doit être conforme au règlement"]],
   "invest_n":[["l'investissement en cours doit s'améliorer"],["une plus grande implication est attendue"],["davantage d'engagement est nécessaire"]],
   "bavard":[["le bavardage perturbe le bon déroulement des séances"],["les bavardages nuisent à la concentration de la classe"],["le bavardage reste un obstacle à la progression"]],
   "concentr":[["la concentration doit être renforcée"],["un manque de concentration pénalise les résultats"],["une attention plus soutenue est nécessaire"]],
@@ -692,7 +697,13 @@ function construire(keys,ft,f,Il,il,mat,ri){
     if(sportMots.length) p=p.replace(/\.$/,"")+", notamment en "+sportMots.join(" et ")+".";
     if(qualMots.length) p=p.replace(/\.$/,"")+" "+Il+" se montre également "+qualMots.join(" et ")+".";
     if(profilMots.length) p=p.replace(/\.$/,"")+" (profil "+profilMots.join(", ")+" pris en compte).";
-    if(autreMots.length) p=p.replace(/\.$/,"")+" À noter : "+autreMots.join(", ")+".";
+    if(autreMots.length){
+      // Détecter absences/retards
+      var absKeywords=["absent","absente","absences","retard","retards"];
+      var isAbs=autreMots.some(function(m){return absKeywords.some(function(a){return m.toLowerCase().indexOf(a)>=0;});});
+      if(isAbs) p=p.replace(/\.$/,"")+". À signaler : "+autreMots.join(", ")+".";
+      else p=p.replace(/\.$/,"")+" ("+autreMots.join(", ")+").";
+    }
   }
 
    // Corriger "de une/un" → "d'une/d'un"
