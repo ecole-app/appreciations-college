@@ -360,10 +360,28 @@ function negDefaut(k){return [["des progrès sont attendus sur ce point"],["un e
 function getNeg(k,ri){var v=NEG[k]||negDefaut(k);return v[ri%v.length][0];}
 
 // Joindre des noms avec "et" (pas de "de une" → "d'une")
+function deElision(s){
+  // Ajoute "d'" devant voyelle au lieu de "de "
+  return s.replace(/^(un|une|de l'|de la|des|de) /i, function(m){ return m; });
+}
 function joinNoms(arr){
   if(!arr.length) return "";
   if(arr.length===1) return arr[0];
+  // "un X, un Y et un Z" — pas de "de" ajouté ici, déjà dans les noms
   return arr.slice(0,-1).join(", ")+" et "+arr[arr.length-1];
+}
+function prefixDe(s){
+  // Pour "fait preuve de X" : "de une" → "d'une", "de un" → "d'un"
+  var voyelles=/^(a|e|i|o|u|é|è|ê|à|â|î|ô|û|ù|h)/i;
+  var premier=s.charAt(0);
+  if(voyelles.test(premier)) return "d'"+s;
+  return "de "+s;
+}
+function joinNomsAvecDe(arr){
+  // "fait preuve de X et de Y"
+  if(!arr.length) return "";
+  if(arr.length===1) return prefixDe(arr[0]);
+  return arr.map(function(n,i){return i===0?prefixDe(n):"de "+n.replace(/^(un |une |des |de l'|de la )/,"");}).join(", ").replace(/,([^,]*)$/," et$1");
 }
 function joinAdjs(arr){
   if(!arr.length) return "";
@@ -468,9 +486,9 @@ function construire(keys,ft,f,Il,il,mat,ri){
 
   // Structures positives variées
   var structs_pos_adj_nom=[
-    function(){return "Élève "+joinAdjs(adjs)+", "+il+" fait preuve de "+joinNoms(noms);},
-    function(){return Il+" se montre "+joinAdjs(adjs)+" et témoigne de "+joinNoms(noms);},
-    function(){return "Bon trimestre : "+il+" est "+joinAdjs(adjs)+" et fait preuve de "+joinNoms(noms);},
+    function(){return "Élève "+joinAdjs(adjs)+", "+il+" fait preuve de "+joinNomsAvecDe(noms);},
+    function(){return Il+" se montre "+joinAdjs(adjs)+" et témoigne de "+joinNomsAvecDe(noms);},
+    function(){return "Bon trimestre : "+il+" est "+joinAdjs(adjs)+" et fait preuve de "+joinNomsAvecDe(noms);},
     function(){return Il+" affiche un profil encourageant : "+joinAdjs(adjs)+", avec "+joinNoms(noms);}
   ];
   var structs_pos_adj=[
@@ -479,7 +497,7 @@ function construire(keys,ft,f,Il,il,mat,ri){
     function(){return "Bon trimestre : "+il+" est "+joinAdjs(adjs);}
   ];
   var structs_pos_nom=[
-    function(){return Il+" fait preuve de "+joinNoms(noms);},
+    function(){return Il+" fait preuve de "+joinNomsAvecDe(noms);},
     function(){return "On retiendra de ce trimestre "+joinNoms(noms);},
     function(){return Il+" se distingue par "+joinNoms(noms);},
     function(){return "Bon travail : "+il+" témoigne de "+joinNoms(noms);}
@@ -549,16 +567,28 @@ function construire(keys,ft,f,Il,il,mat,ri){
     p="En "+mat+", "+p.charAt(0).toLowerCase()+p.slice(1);
   }
 
-  // Mots libres
+  // Mots libres — intégration naturelle
   if(ft.length){
-    var ctx=ft.join(", ");
-    var sports=["badminton","tennis","basket","football","handball","volley","athlétisme","natation","rugby","judo","escalade","demi-fond","ultimate","frisbee","acrosport","danse","boxe","lutte","cross","ping"];
+    var sports=["badminton","tennis","basket","football","handball","volley","athlétisme","natation","rugby","judo","escalade","demi-fond","ultimate","frisbee","acrosport","danse","boxe","lutte","cross","ping","course"];
     var profils=["ulis","segpa","dys","tdah","fragile","blessé","handicap","asthme","dispensé","inclusion","allophone"];
-    var isSp=ft.some(function(m){return sports.some(function(s){return m.toLowerCase().indexOf(s)>=0;});});
-    var isPr=ft.some(function(m){return profils.some(function(pr){return m.toLowerCase().indexOf(pr)>=0;});});
-    if(isSp) p=p.replace(/\.$/,"")+", notamment en "+ctx+".";
-    else if(isPr) p=p.replace(/\.$/,"")+" (profil "+ctx+" pris en compte).";
-    else p=p.replace(/\.$/,"")+" — "+ctx+".";
+    var qualites=["volontaire","courageux","courageuse","dynamique","motivé","motivée","enthousiaste","bienveillant","bienveillante","solidaire","discret","discrète","concentré","concentrée","patient","patiente"];
+    var sportMots=ft.filter(function(m){return sports.some(function(s){return m.toLowerCase().indexOf(s)>=0;});});
+    var profilMots=ft.filter(function(m){return profils.some(function(pr){return m.toLowerCase().indexOf(pr)>=0;});});
+    var qualMots=ft.filter(function(m){return qualites.some(function(q){return m.toLowerCase().indexOf(q)>=0;});});
+    var autreMots=ft.filter(function(m){
+      return !sports.some(function(s){return m.toLowerCase().indexOf(s)>=0;})
+          && !profils.some(function(pr){return m.toLowerCase().indexOf(pr)>=0;})
+          && !qualites.some(function(q){return m.toLowerCase().indexOf(q)>=0;});
+    });
+    if(sportMots.length) p=p.replace(/\.$/,"")+", notamment en "+sportMots.join(" et ")+".";
+    if(qualMots.length) p=p.replace(/\.$/,"")+" "+Il+" se montre également "+qualMots.join(" et ")+".";
+    if(profilMots.length) p=p.replace(/\.$/,"")+" (profil "+profilMots.join(", ")+" pris en compte).";
+    if(autreMots.length) p=p.replace(/\.$/,"")+" À noter : "+autreMots.join(", ")+".";
+  }
+
+  // Limite 255 caractères
+  if(p.length>255){
+    p=p.substring(0,252)+"...";
   }
 
   return p;
