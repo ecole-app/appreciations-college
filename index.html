@@ -370,18 +370,25 @@ function joinNoms(arr){
   // "un X, un Y et un Z" — pas de "de" ajouté ici, déjà dans les noms
   return arr.slice(0,-1).join(", ")+" et "+arr[arr.length-1];
 }
-function prefixDe(s){
-  // Pour "fait preuve de X" : "de une" → "d'une", "de un" → "d'un"
-  var voyelles=/^(a|e|i|o|u|é|è|ê|à|â|î|ô|û|ù|h)/i;
-  var premier=s.charAt(0);
-  if(voyelles.test(premier)) return "d'"+s;
-  return "de "+s;
-}
 function joinNomsAvecDe(arr){
-  // "fait preuve de X et de Y"
+  // Joints les noms après "fait preuve de" — les noms ont déjà leur article (une/un/de la/des...)
+  // On remplace juste "une " par "d'une ", "un " par "d'un " etc. pour l'élision après "de"
   if(!arr.length) return "";
-  if(arr.length===1) return prefixDe(arr[0]);
-  return arr.map(function(n,i){return i===0?prefixDe(n):"de "+n.replace(/^(un |une |des |de l'|de la )/,"");}).join(", ").replace(/,([^,]*)$/," et$1");
+  function elide(s){
+    return s
+      .replace(/^une /,"d'une ")
+      .replace(/^un /,"d'un ")
+      .replace(/^de l'/,"de l'")
+      .replace(/^de la /,"de la ")
+      .replace(/^des /,"des ")
+      .replace(/^de '/,"d'");
+  }
+  if(arr.length===1) return elide(arr[0]);
+  return arr.map(function(n,i){
+    if(i===0) return elide(n);
+    // Pour les suivants après virgule ou "et", même élision
+    return elide(n);
+  }).slice(0,-1).join(", ")+" et "+elide(arr[arr.length-1]);
 }
 function joinAdjs(arr){
   if(!arr.length) return "";
