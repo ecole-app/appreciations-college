@@ -5,60 +5,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Appréciations Collège Luqman</title>
 <style>
-:root{--vert:#1a7a6e;--vd:#145f55;--ora:#e8671a;--bg:#f0f2f0;--card:#fff;--bor:#dde8e6;--txt:#1a1a1a;--mut:#5a7570}
+:root{--v:#1a7a6e;--vd:#145f55;--o:#e8671a;--bg:#f0f2f0;--w:#fff;--b:#dde8e6;--t:#1a1a1a;--m:#5a7570}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:15px}
-.hdr{background:var(--vert);padding:14px 16px}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--t);font-size:15px}
+.hdr{background:var(--v);padding:14px 16px}
 .hdr h1{font-size:19px;font-weight:700;color:#fff}
 .bod{padding:14px}
 .tabs{display:flex;gap:8px;margin-bottom:16px}
-.tab{padding:8px 16px;border-radius:8px;border:1.5px solid var(--bor);background:var(--card);font-size:14px;cursor:pointer;color:var(--mut);flex:1;text-align:center}
-.tab.on{background:var(--vert);color:#fff;border-color:var(--vert);font-weight:600}
+.tab{padding:8px 16px;border-radius:8px;border:1.5px solid var(--b);background:var(--w);font-size:14px;cursor:pointer;color:var(--m);flex:1;text-align:center}
+.tab.on{background:var(--v);color:#fff;border-color:var(--v);font-weight:600}
 .sec{display:none}.sec.on{display:block}
-.card{background:var(--card);border:1px solid var(--bor);border-radius:12px;padding:14px;margin-bottom:14px}
-.sl{font-size:11px;font-weight:700;color:var(--vert);text-transform:uppercase;letter-spacing:.08em;margin:12px 0 7px}
+.card{background:var(--w);border:1px solid var(--b);border-radius:12px;padding:14px;margin-bottom:14px}
+.sl{font-size:11px;font-weight:700;color:var(--v);text-transform:uppercase;letter-spacing:.08em;margin:12px 0 7px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:2px}
-.chip{padding:5px 11px;border-radius:99px;border:1.5px solid var(--bor);background:var(--card);font-size:13px;cursor:pointer;color:var(--mut);user-select:none}
-.chip.gen.on{background:#e6f4f1;color:var(--vd);border-color:var(--vert)}
-.chip.pos.on{background:#e6f4f1;color:var(--vd);border-color:var(--vert)}
+.chip{padding:5px 11px;border-radius:99px;border:1.5px solid var(--b);background:var(--w);font-size:13px;cursor:pointer;color:var(--m);user-select:none}
+.chip.gen.on,.chip.pos.on,.chip.prog.on{background:#e6f4f1;color:var(--vd);border-color:var(--v)}
 .chip.neg.on{background:#FCEBEB;color:#A32D2D;border-color:#F09595}
-.chip.comp.on{background:#fef0e6;color:#7a3a0a;border-color:var(--ora)}
-.chip.prog.on{background:#e6f4f1;color:var(--vd);border-color:var(--vert)}
+.chip.comp.on{background:#fef0e6;color:#7a3a0a;border-color:var(--o)}
 .chip.sport.on{background:#e8f0fe;color:#1a56a0;border-color:#4a80d4}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-label{font-size:13px;color:var(--mut);display:block;margin-bottom:4px}
-input,select{width:100%;font-size:14px;padding:8px 10px;border:1.5px solid var(--bor);border-radius:8px;background:var(--card);color:var(--txt)}
-input:focus,select:focus{outline:none;border-color:var(--vert)}
+label{font-size:13px;color:var(--m);display:block;margin-bottom:4px}
+input,select{width:100%;font-size:14px;padding:8px 10px;border:1.5px solid var(--b);border-radius:8px;background:var(--w);color:var(--t)}
+input:focus,select:focus{outline:none;border-color:var(--v)}
 .gr{display:flex;gap:8px}
-.grb{padding:7px 14px;border-radius:99px;border:1.5px solid var(--bor);background:var(--card);font-size:13px;cursor:pointer;color:var(--mut)}
-.grb.on{background:var(--vert);color:#fff;border-color:var(--vert);font-weight:600}
+.grb{padding:7px 14px;border-radius:99px;border:1.5px solid var(--b);background:var(--w);font-size:13px;cursor:pointer;color:var(--m)}
+.grb.on{background:var(--v);color:#fff;border-color:var(--v);font-weight:600}
 .brow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-button.a{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:8px;border:1.5px solid var(--bor);background:var(--card);font-size:13px;cursor:pointer;color:var(--txt)}
+button.a{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;border-radius:8px;border:1.5px solid var(--b);background:var(--w);font-size:13px;cursor:pointer;color:var(--t)}
 button.a:hover{background:#f0f7f6}
-button.a.p{background:var(--ora);border-color:var(--ora);color:#fff;font-weight:600}
+button.a.p{background:var(--o);border-color:var(--o);color:#fff;font-weight:600}
 button.a.p:hover{background:#d45e15}
-.rb{background:#f4faf9;border:1.5px solid var(--vert);border-radius:10px;padding:13px;margin-top:10px}
+.rb{background:#f4faf9;border:1.5px solid var(--v);border-radius:10px;padding:13px;margin-top:10px}
 .rt{font-size:14px;line-height:1.75;min-height:44px;white-space:pre-wrap}
-.hint{font-size:12px;color:var(--mut);margin-top:5px}
-.stag{font-size:12px;padding:2px 8px;border-radius:99px;background:#e6f4f1;color:var(--vd);border:1px solid var(--vert);display:inline-block;margin:2px}
+.stag{font-size:12px;padding:2px 8px;border-radius:99px;background:#e6f4f1;color:var(--vd);border:1px solid var(--v);display:inline-block;margin:2px}
 .stags{display:flex;flex-wrap:wrap;margin:6px 0 2px;min-height:20px}
-hr{border:none;border-top:1px solid var(--bor);margin:12px 0}
-.ei{display:flex;align-items:flex-start;gap:8px;padding:10px 11px;background:var(--card);border:1px solid var(--bor);border-radius:8px;margin-bottom:8px}
+hr{border:none;border-top:1px solid var(--b);margin:12px 0}
+.ei{display:flex;align-items:flex-start;gap:8px;padding:10px 11px;background:var(--w);border:1px solid var(--b);border-radius:8px;margin-bottom:8px}
 .ein{flex:1;min-width:0}
 .en{font-size:14px;font-weight:600;color:var(--vd)}
-.em{font-size:12px;color:var(--mut);margin-top:2px}
+.em{font-size:12px;color:var(--m);margin-top:2px}
 .ep{font-size:13px;line-height:1.55;margin-top:5px}
-.ib{padding:5px 9px;font-size:12px;border-radius:7px;border:1px solid var(--bor);background:var(--card);cursor:pointer;color:var(--mut)}
+.ib{padding:5px 9px;font-size:12px;border-radius:7px;border:1px solid var(--b);background:var(--w);cursor:pointer;color:var(--m)}
 .ib:hover{background:#f0f7f6}
 .ib.d:hover{background:#FCEBEB;color:#A32D2D}
-.emp{font-size:13px;color:var(--mut);font-style:italic;padding:10px 0}
-.fb{padding:5px 11px;border-radius:99px;border:1.5px solid var(--bor);background:var(--card);font-size:13px;cursor:pointer;color:var(--mut)}
-.fb.on{background:var(--vert);color:#fff;border-color:var(--vert);font-weight:600}
+.emp{font-size:13px;color:var(--m);font-style:italic;padding:10px 0}
+.fb{padding:5px 11px;border-radius:99px;border:1.5px solid var(--b);background:var(--w);font-size:13px;cursor:pointer;color:var(--m)}
+.fb.on{background:var(--v);color:#fff;border-color:var(--v);font-weight:600}
 .fr{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
 .fs{font-size:13px;padding:5px 8px;border:1px solid #ccc;border-radius:8px;background:#fff;width:auto}
-.cnt{font-size:12px;color:var(--mut);margin-left:auto}
-.ok{background:#e6f4f1;color:var(--vd);border:1px solid var(--vert);border-radius:8px;padding:8px 11px;font-size:13px;margin-top:9px;display:none}
-.ebox{background:#f4faf9;border:1px solid var(--bor);border-radius:10px;padding:11px;font-size:13px;line-height:1.85;white-space:pre-wrap;min-height:50px}
+.cnt{font-size:12px;color:var(--m);margin-left:auto}
+.ok{background:#e6f4f1;color:var(--vd);border:1px solid var(--v);border-radius:8px;padding:8px 11px;font-size:13px;margin-top:9px;display:none}
+.ebox{background:#f4faf9;border:1px solid var(--b);border-radius:10px;padding:11px;font-size:13px;line-height:1.85;white-space:pre-wrap;min-height:50px}
+.ml{font-size:12px;color:var(--m);font-style:italic;display:block;margin-top:4px}
 @media(max-width:400px){.g2{grid-template-columns:1fr}}
 </style>
 </head>
@@ -71,28 +69,32 @@ hr{border:none;border-top:1px solid var(--bor);margin:12px 0}
   <button class="tab" onclick="setTab('exp')">↗ Export</button>
 </div>
 
-<div id="gen" class="sec on">
-<div class="card">
+<div id="gen" class="sec on"><div class="card">
   <div class="g2">
     <div><label>Prénom</label><input type="text" id="prenom" placeholder="Ex: Lucas"></div>
     <div><label>Classe</label><select id="classe" onchange="onClasse()"><option>6e</option><option>5e</option><option>4e</option><option>3e</option></select></div>
   </div>
   <div class="g2">
-    <div><label>Matière</label><select id="matiere" onchange="onMatiere()"><option>Français</option><option>Maths</option><option>Anglais</option><option>Arabe</option><option>Histoire-Géo/EMC</option><option>SVT</option><option>Physique-Chimie</option><option>Arts Plastiques</option><option>Éducation Musicale</option><option>EPS</option></select></div>
+    <div><label>Matière</label><select id="matiere" onchange="onMatiere()">
+      <option>Français</option><option>Maths</option><option>Anglais</option><option>Arabe</option>
+      <option>Histoire-Géo/EMC</option><option>SVT</option><option>Physique-Chimie</option>
+      <option>Arts Plastiques</option><option>Éducation Musicale</option><option>EPS</option>
+    </select></div>
     <div><label>Genre</label><div class="gr"><button class="grb on" id="gm" onclick="setG('M')">Garçon</button><button class="grb" id="gf" onclick="setG('F')">Fille</button></div></div>
   </div>
   <div class="g2">
-    <div><label>Moyenne <span style="font-weight:400;color:var(--mut)">(optionnelle, /20)</span></label><input type="number" id="moyenne" min="0" max="20" step="0.5" placeholder="Ex: 13.5" oninput="updateMoyLabel()"></div>
-    <div><label>Trimestre</label>
-      <select id="trim_sel" onchange="updateMoyLabel()">
-        <option value="">Non précisé</option>
-        <option value="T1">T1 — Début d'année</option>
-        <option value="T2">T2 — Milieu d'année</option>
-        <option value="T3">T3 — Fin d'année</option>
-      </select>
-      <span id="moy-label" style="font-size:12px;color:var(--mut);font-style:italic;display:block;margin-top:4px"></span>
+    <div><label>Moyenne <span style="font-weight:400;color:var(--m)">(optionnelle /20)</span></label>
+      <input type="number" id="moyenne" min="0" max="20" step="0.5" placeholder="Ex: 13.5" oninput="onMoy()">
+      <span class="ml" id="moy-lbl"></span>
     </div>
+    <div><label>Trimestre</label><select id="trim_sel" onchange="onMoy()">
+      <option value="">Non précisé</option>
+      <option value="T1">T1 — Début d'année</option>
+      <option value="T2">T2 — Milieu d'année</option>
+      <option value="T3">T3 — Fin d'année</option>
+    </select></div>
   </div>
+
   <div class="sl">Général — toutes matières</div><div class="chips" id="cp-gen"></div>
   <div class="sl" id="lpos">Points positifs</div><div class="chips" id="cp-pos"></div>
   <div class="sl" id="lneg">Points à travailler</div><div class="chips" id="cp-neg"></div>
@@ -101,10 +103,10 @@ hr{border:none;border-top:1px solid var(--bor);margin:12px 0}
   <div class="sl">Progression</div><div class="chips" id="cp-prog"></div>
   <hr>
   <div style="margin-bottom:10px">
-    <label>Mots libres <span style="font-weight:400;color:var(--mut)">(sport, contexte… virgules)</span></label>
-    <input type="text" id="free" placeholder="Ex: badminton, ULIS…" oninput="renderTags()">
+    <label>Mots libres <span style="font-weight:400;color:var(--m)">(sport, contexte… virgules)</span></label>
+    <input type="text" id="free" placeholder="Ex: ULIS, allophone…" oninput="renderTags()">
   </div>
-  <div style="font-size:12px;color:var(--mut);margin-bottom:3px">Mots-clés sélectionnés :</div>
+  <div style="font-size:12px;color:var(--m);margin-bottom:3px">Mots-clés sélectionnés :</div>
   <div class="stags" id="stags"><span style="font-size:12px;color:#aaa;font-style:italic">Aucun</span></div>
   <div class="brow">
     <button class="a p" onclick="generer()">⚡ Générer</button>
@@ -112,17 +114,15 @@ hr{border:none;border-top:1px solid var(--bor);margin:12px 0}
     <button class="a" onclick="resetForm()">✕ Réinitialiser</button>
   </div>
   <div id="rz" style="display:none" class="rb">
-    <div style="font-size:12px;color:var(--mut);margin-bottom:5px" id="rl">Phrase générée</div>
+    <div style="font-size:12px;color:var(--m);margin-bottom:5px" id="rl">Phrase générée</div>
     <div id="rt" class="rt"></div>
-    <div class="hint">Enregistrer pour sauvegarder.</div>
     <div class="brow">
       <button class="a p" onclick="enregistrer()">💾 Enregistrer</button>
       <button class="a" onclick="copierPhrase()">⎘ Copier</button>
     </div>
     <div class="ok" id="ok">✓ Enregistré !</div>
   </div>
-</div>
-</div>
+</div></div>
 
 <div id="lst" class="sec">
   <div class="fr">
@@ -134,17 +134,8 @@ hr{border:none;border-top:1px solid var(--bor);margin:12px 0}
     <span class="cnt" id="cnt"></span>
   </div>
   <div class="fr">
-    <select class="fs" id="fm" onchange="renderListe()">
-      <option value="t">Toutes matières</option>
-      <option>Français</option><option>Maths</option><option>Anglais</option><option>Arabe</option>
-      <option>Espagnol</option><option>Histoire-Géo/EMC</option><option>SVT</option>
-      <option>Physique-Chimie</option><option>Technologie</option>
-      <option>Arts Plastiques</option><option>Éducation Musicale</option><option>EPS</option>
-    </select>
-    <select class="fs" id="ft" onchange="renderListe()">
-      <option value="t">Tous trimestres</option>
-      <option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option>
-    </select>
+    <select class="fs" id="fm" onchange="renderListe()"><option value="t">Toutes matières</option><option>Français</option><option>Maths</option><option>Anglais</option><option>Arabe</option><option>Espagnol</option><option>Histoire-Géo/EMC</option><option>SVT</option><option>Physique-Chimie</option><option>Technologie</option><option>Arts Plastiques</option><option>Éducation Musicale</option><option>EPS</option></select>
+    <select class="fs" id="ft" onchange="renderListe()"><option value="t">Tous trimestres</option><option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option></select>
     <select class="fs" id="fa" onchange="renderListe()"><option value="t">Toutes années</option></select>
   </div>
   <div id="elist"></div>
@@ -153,13 +144,7 @@ hr{border:none;border-top:1px solid var(--bor);margin:12px 0}
 <div id="exp" class="sec">
   <div class="fr">
     <select class="fs" id="ecl" onchange="renderExp()"><option value="t">Toutes classes</option><option>6e</option><option>5e</option><option>4e</option><option>3e</option></select>
-    <select class="fs" id="emat" onchange="renderExp()">
-      <option value="t">Toutes matières</option>
-      <option>Français</option><option>Maths</option><option>Anglais</option><option>Arabe</option>
-      <option>Espagnol</option><option>Histoire-Géo/EMC</option><option>SVT</option>
-      <option>Physique-Chimie</option><option>Technologie</option>
-      <option>Arts Plastiques</option><option>Éducation Musicale</option><option>EPS</option>
-    </select>
+    <select class="fs" id="emat" onchange="renderExp()"><option value="t">Toutes matières</option><option>Français</option><option>Maths</option><option>Anglais</option><option>Arabe</option><option>Espagnol</option><option>Histoire-Géo/EMC</option><option>SVT</option><option>Physique-Chimie</option><option>Technologie</option><option>Arts Plastiques</option><option>Éducation Musicale</option><option>EPS</option></select>
     <select class="fs" id="etr" onchange="renderExp()"><option value="t">Tous trimestres</option><option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option></select>
     <select class="fs" id="ean" onchange="renderExp()"><option value="t">Toutes années</option></select>
     <button class="a" style="margin-left:auto" onclick="copierExp()">⎘ Copier</button>
@@ -169,931 +154,585 @@ hr{border:none;border-top:1px solid var(--bor);margin:12px 0}
 </div>
 
 <script>
-// ── DONNÉES ──────────────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════════
+// DONNÉES
+// ══════════════════════════════════════════════════════════════════════════════
 var M6=["Français","Maths","Anglais","Arabe","Histoire-Géo/EMC","SVT","Physique-Chimie","Arts Plastiques","Éducation Musicale","EPS"];
 var M5=["Français","Maths","Anglais","Arabe","Espagnol","Histoire-Géo/EMC","SVT","Physique-Chimie","Technologie","Arts Plastiques","Éducation Musicale","EPS"];
 
 var GEN=[
-  {k:"curieux",l:"curiosité"},{k:"rigoureux",l:"rigueur"},{k:"oral",l:"participation à l'oral"},
-  {k:"ecrit",l:"travail écrit soigné"},{k:"methode",l:"bonne méthode"},{k:"efforts_g",l:"efforts constants"},
+  {k:"curieux",l:"curiosité"},{k:"rigoureux",l:"rigueur"},{k:"oral_g",l:"participation à l'oral"},
+  {k:"ecrit_g",l:"travail écrit soigné"},{k:"methode_g",l:"bonne méthode"},{k:"efforts_g",l:"efforts constants"},
   {k:"auto_g",l:"autonomie"},{k:"respect_g",l:"respect des consignes"},{k:"entraide",l:"entraide"},
-  {k:"creativ",l:"créativité"},{k:"persev",l:"persévérance"},{k:"assidu",l:"assiduité"},
-  {k:"crit",l:"esprit critique"}
+  {k:"creativ_g",l:"créativité"},{k:"persev",l:"persévérance"},{k:"assidu_g",l:"assiduité"},
+  {k:"crit_g",l:"esprit critique"}
 ];
 var COMP=[
-  {k:"attitude",l:"attitude positive"},{k:"respect",l:"respectueux/euse"},
+  {k:"attitude",l:"attitude positive"},{k:"respect_c",l:"respectueux/euse"},
   {k:"agreable",l:"agréable en cours"},{k:"compneg",l:"comportement à améliorer"},
-  {k:"ponctuel",l:"ponctuel(le)"},{k:"assidu_c",l:"assidu(e)"},{k:"absences",l:"absences fréquentes"},
-  {k:"retards",l:"retards à corriger"},{k:"tenue",l:"tenue correcte"},{k:"tenue_n",l:"tenue inadaptée"}
+  {k:"ponctuel",l:"ponctuel(le)"},{k:"assidu_c",l:"assidu(e)"},
+  {k:"absences",l:"absences fréquentes"},{k:"retards",l:"retards à corriger"},
+  {k:"tenue_ok",l:"tenue correcte"},{k:"tenue_nok",l:"tenue inadaptée"}
 ];
 var PROG=[
-  {k:"prog",l:"en progrès"},{k:"progression",l:"progression constante"},{k:"potentiel",l:"potentiel à exploiter"},
-  {k:"encour",l:"résultats encourageants"},{k:"hausse",l:"trimestre en hausse"},{k:"acquis",l:"acquis solides"}
+  {k:"prog",l:"en progrès"},{k:"progression",l:"progression constante"},
+  {k:"potentiel",l:"potentiel à exploiter"},{k:"encour",l:"résultats encourageants"},
+  {k:"hausse",l:"trimestre en hausse"},{k:"acquis",l:"acquis solides"}
 ];
-
 var MAT={
   "EPS":{
-    pos:[
-      {k:"investi",l:"investi(e)"},{k:"serieux",l:"sérieux/euse"},{k:"applique",l:"appliqué(e)"},
-      {k:"particip",l:"participation active"},{k:"equipe",l:"esprit d'équipe"},{k:"fairplay",l:"fair-play"},
-      {k:"ecoute",l:"écoute des consignes"},{k:"leader",l:"leadership"},{k:"technique",l:"bon niveau technique"},
-      {k:"auto",l:"autonomie"},{k:"tactique",l:"sens tactique"},{k:"arbitre",l:"rôle d'arbitre maîtrisé"},
-      {k:"observ_eps",l:"rôle d'observateur"},{k:"endurance",l:"endurance"},{k:"vitesse",l:"vitesse"},
-      {k:"coordination",l:"coordination"},{k:"equilibre",l:"équilibre"},{k:"souplesse",l:"souplesse"}
-    ],
-    neg:[
-      {k:"invest_n",l:"manque d'investissement"},{k:"bavard",l:"bavardage"},{k:"concentr",l:"manque de concentration"},
-      {k:"diff_tech",l:"difficultés techniques"},{k:"retrait",l:"en retrait"},{k:"irreg",l:"irrégulier(e)"},
-      {k:"effort_n",l:"efforts insuffisants"},{k:"perturb",l:"comportement perturbateur"},
-      {k:"arbitre_n",l:"rôle d'arbitre à améliorer"},{k:"tactique_n",l:"manque de sens tactique"},
-      {k:"endurance_n",l:"endurance à améliorer"},{k:"securite",l:"règles de sécurité à respecter"}
-    ],
-    sports:[
-      {k:"sp_relais",l:"Relais"},{k:"sp_course_l",l:"Course longue"},{k:"sp_demifond",l:"Demi-fond"},
-      {k:"sp_sprint",l:"Sprint"},{k:"sp_basket",l:"Basket-ball"},{k:"sp_foot",l:"Football"},
-      {k:"sp_ultimate",l:"Ultimate"},{k:"sp_ballon",l:"Ballon prisonnier"},{k:"sp_rugby",l:"Rugby à 7"},
-      {k:"sp_badminton",l:"Badminton"},{k:"sp_ttable",l:"Tennis de table"},{k:"sp_acro",l:"Acrosport"},
-      {k:"sp_renfo",l:"Renfo musculaire"},{k:"sp_orient",l:"Course d'orientation"},{k:"sp_lutte",l:"Lutte"}
-    ]
+    pos:[{k:"investi",l:"investi(e)"},{k:"serieux",l:"sérieux/euse"},{k:"applique",l:"appliqué(e)"},{k:"particip",l:"participation active"},{k:"equipe",l:"esprit d'équipe"},{k:"fairplay",l:"fair-play"},{k:"ecoute_e",l:"écoute des consignes"},{k:"leader",l:"leadership"},{k:"technique",l:"bon niveau technique"},{k:"auto_e",l:"autonomie"},{k:"tactique",l:"sens tactique"},{k:"arbitre",l:"rôle d'arbitre maîtrisé"},{k:"endurance",l:"endurance"},{k:"vitesse",l:"vitesse"},{k:"coordination",l:"coordination"},{k:"equilibre",l:"équilibre"},{k:"souplesse",l:"souplesse"}],
+    neg:[{k:"invest_n",l:"manque d'investissement"},{k:"bavard_e",l:"bavardage"},{k:"concentr_e",l:"manque de concentration"},{k:"diff_tech",l:"difficultés techniques"},{k:"retrait_e",l:"en retrait"},{k:"irreg_e",l:"irrégulier(e)"},{k:"effort_n",l:"efforts insuffisants"},{k:"perturb",l:"comportement perturbateur"},{k:"arbitre_n",l:"rôle d'arbitre à améliorer"},{k:"tactique_n",l:"manque de sens tactique"},{k:"endurance_n",l:"endurance à améliorer"},{k:"securite_e",l:"règles de sécurité à respecter"}],
+    sports:[{k:"sp_relais",l:"Relais"},{k:"sp_course_l",l:"Course longue"},{k:"sp_demifond",l:"Demi-fond"},{k:"sp_sprint",l:"Sprint"},{k:"sp_basket",l:"Basket-ball"},{k:"sp_foot",l:"Football"},{k:"sp_ultimate",l:"Ultimate"},{k:"sp_ballon",l:"Ballon prisonnier"},{k:"sp_rugby",l:"Rugby à 7"},{k:"sp_badminton",l:"Badminton"},{k:"sp_ttable",l:"Tennis de table"},{k:"sp_acro",l:"Acrosport"},{k:"sp_renfo",l:"Renfo musculaire"},{k:"sp_orient",l:"Course d'orientation"},{k:"sp_lutte",l:"Lutte"}]
   },
   "Français":{
-    pos:[
-      {k:"expr_e",l:"expression écrite"},{k:"expr_o",l:"expression orale"},{k:"lecture",l:"lecture"},
-      {k:"ortho",l:"orthographe"},{k:"vocab",l:"vocabulaire riche"},{k:"analyse",l:"analyse de texte"},
-      {k:"redac",l:"rédaction"},{k:"gram",l:"grammaire"},{k:"imagin",l:"imagination"},{k:"particip_f",l:"participation"},
-      {k:"conjug",l:"conjugaison"},{k:"lecture_vx",l:"lecture à voix haute"},{k:"comprehension",l:"compréhension de texte"},
-      {k:"struct_redac",l:"structure des écrits"},{k:"ponctuation",l:"ponctuation"},{k:"argumentation",l:"argumentation"}
-    ],
-    neg:[
-      {k:"ortho_n",l:"orthographe"},{k:"expr_n",l:"expression écrite"},{k:"lect_n",l:"lecture"},
-      {k:"gram_n",l:"grammaire"},{k:"particip_fn",l:"participation"},{k:"redac_n",l:"rédaction"},
-      {k:"concentr_f",l:"concentration"},{k:"bavard_f",l:"bavardage"},{k:"conjug_n",l:"conjugaison"},
-      {k:"vocab_n_f",l:"vocabulaire pauvre"},{k:"struct_n",l:"structure des écrits"},{k:"ponct_n",l:"ponctuation"}
-    ]
+    pos:[{k:"expr_e",l:"expression écrite"},{k:"expr_o",l:"expression orale"},{k:"lecture",l:"lecture"},{k:"ortho",l:"orthographe"},{k:"vocab_f",l:"vocabulaire riche"},{k:"analyse_f",l:"analyse de texte"},{k:"redac_f",l:"rédaction"},{k:"gram_f",l:"grammaire"},{k:"imagin_f",l:"imagination"},{k:"particip_f",l:"participation"},{k:"conjug_f",l:"conjugaison"},{k:"lecture_vx",l:"lecture à voix haute"},{k:"compreh_f",l:"compréhension de texte"},{k:"struct_f",l:"structure des écrits"},{k:"ponct_f",l:"ponctuation"},{k:"argum_f",l:"argumentation"}],
+    neg:[{k:"ortho_n",l:"orthographe"},{k:"expr_n",l:"expression écrite"},{k:"lect_n",l:"lecture"},{k:"gram_n",l:"grammaire"},{k:"particip_fn",l:"participation"},{k:"redac_n",l:"rédaction"},{k:"concentr_f",l:"concentration"},{k:"bavard_f",l:"bavardage"},{k:"conjug_n",l:"conjugaison"},{k:"vocab_fn",l:"vocabulaire pauvre"},{k:"struct_n",l:"structure des écrits"},{k:"ponct_n",l:"ponctuation"}]
   },
   "Maths":{
-    pos:[
-      {k:"calcul",l:"calcul"},{k:"raison",l:"raisonnement logique"},{k:"geo",l:"géométrie"},
-      {k:"pb",l:"résolution de problèmes"},{k:"rigueur_m",l:"rigueur"},{k:"rapid",l:"rapidité"},
-      {k:"algebre",l:"algèbre"},{k:"method_m",l:"méthodologie"},{k:"particip_m",l:"participation"},
-      {k:"abstr",l:"abstraction"},{k:"frac",l:"fractions"},{k:"propor",l:"proportionnalité"},
-      {k:"stats",l:"statistiques"},{k:"construction",l:"constructions géométriques"},{k:"calcul_mental",l:"calcul mental"}
-    ],
-    neg:[
-      {k:"calcul_n",l:"calcul"},{k:"raison_n",l:"raisonnement"},{k:"lacunes",l:"lacunes de base"},
-      {k:"method_mn",l:"méthode"},{k:"concentr_m",l:"concentration"},{k:"travdom",l:"travail à la maison"},
-      {k:"abstr_n",l:"abstraction"},{k:"particip_mn",l:"participation"},{k:"frac_n",l:"fractions"},
-      {k:"propor_n",l:"proportionnalité"},{k:"calcul_mental_n",l:"calcul mental"},{k:"erreurs_calcul",l:"erreurs de calcul fréquentes"}
-    ]
+    pos:[{k:"calcul_m",l:"calcul"},{k:"raison_m",l:"raisonnement logique"},{k:"geo_m",l:"géométrie"},{k:"pb_m",l:"résolution de problèmes"},{k:"rigueur_m",l:"rigueur"},{k:"rapid_m",l:"rapidité"},{k:"algebre_m",l:"algèbre"},{k:"method_m",l:"méthodologie"},{k:"particip_m",l:"participation"},{k:"abstr_m",l:"abstraction"},{k:"frac_m",l:"fractions"},{k:"propor_m",l:"proportionnalité"},{k:"stats_m",l:"statistiques"},{k:"constr_m",l:"constructions géométriques"},{k:"calc_ment",l:"calcul mental"}],
+    neg:[{k:"calcul_mn",l:"calcul"},{k:"raison_mn",l:"raisonnement"},{k:"lacunes_m",l:"lacunes de base"},{k:"method_mn",l:"méthode"},{k:"concentr_m",l:"concentration"},{k:"travdom_m",l:"travail à la maison"},{k:"abstr_mn",l:"abstraction"},{k:"particip_mn",l:"participation"},{k:"frac_mn",l:"fractions"},{k:"propor_mn",l:"proportionnalité"},{k:"calc_ment_n",l:"calcul mental"},{k:"erreurs_m",l:"erreurs de calcul fréquentes"}]
   },
   "Anglais":{
-    pos:[
-      {k:"co",l:"compréhension orale"},{k:"eo_a",l:"expression orale"},{k:"ce_a",l:"compréhension écrite"},
-      {k:"ee_a",l:"expression écrite"},{k:"vocab_a",l:"vocabulaire"},{k:"prononc",l:"prononciation"},
-      {k:"gram_a",l:"grammaire"},{k:"particip_a",l:"participation"},{k:"aisance",l:"aisance à l'oral"},
-      {k:"memo_a",l:"mémorisation"},{k:"intonation",l:"intonation"},{k:"interact",l:"interaction orale"},
-      {k:"culture_a",l:"culture anglo-saxonne"},{k:"temps_verb",l:"temps verbaux"}
-    ],
-    neg:[
-      {k:"vocab_an",l:"vocabulaire"},{k:"gram_an",l:"grammaire"},{k:"oral_an",l:"expression orale"},
-      {k:"particip_an",l:"participation"},{k:"prononc_n",l:"prononciation"},{k:"memo_an",l:"mémorisation"},
-      {k:"ecrit_an",l:"expression écrite"},{k:"temps_verb_n",l:"temps verbaux"},{k:"intonation_n",l:"intonation"},
-      {k:"timidite_a",l:"timidité à l'oral"}
-    ]
+    pos:[{k:"co_a",l:"compréhension orale"},{k:"eo_a",l:"expression orale"},{k:"ce_a",l:"compréhension écrite"},{k:"ee_a",l:"expression écrite"},{k:"vocab_a",l:"vocabulaire"},{k:"prononc_a",l:"prononciation"},{k:"gram_a",l:"grammaire"},{k:"particip_a",l:"participation"},{k:"aisance_a",l:"aisance à l'oral"},{k:"memo_a",l:"mémorisation"},{k:"intonation_a",l:"intonation"},{k:"interact_a",l:"interaction orale"},{k:"culture_a",l:"culture anglo-saxonne"},{k:"temps_a",l:"temps verbaux"}],
+    neg:[{k:"vocab_an",l:"vocabulaire"},{k:"gram_an",l:"grammaire"},{k:"oral_an",l:"expression orale"},{k:"particip_an",l:"participation"},{k:"prononc_an",l:"prononciation"},{k:"memo_an",l:"mémorisation"},{k:"ecrit_an",l:"expression écrite"},{k:"temps_an",l:"temps verbaux"},{k:"timid_a",l:"timidité à l'oral"}]
   },
   "Arabe":{
-    pos:[
-      {k:"lect_ar",l:"lecture"},{k:"ecrit_ar",l:"écriture"},{k:"compr_ar",l:"compréhension"},
-      {k:"expr_ar",l:"expression"},{k:"vocab_ar",l:"vocabulaire"},{k:"particip_ar",l:"participation"},
-      {k:"memo_ar",l:"mémorisation"},{k:"calligr",l:"calligraphie"},{k:"gram_ar",l:"grammaire arabe"},
-      {k:"diction_ar",l:"diction"},{k:"conjugaison_ar",l:"conjugaison"}
-    ],
-    neg:[
-      {k:"lect_arn",l:"lecture"},{k:"ecrit_arn",l:"écriture"},{k:"vocab_arn",l:"vocabulaire"},
-      {k:"particip_arn",l:"participation"},{k:"memo_arn",l:"mémorisation"},{k:"gram_arn",l:"grammaire"},
-      {k:"calligr_n",l:"calligraphie"},{k:"conjugaison_arn",l:"conjugaison"}
-    ]
+    pos:[{k:"lect_ar",l:"lecture"},{k:"ecrit_ar",l:"écriture"},{k:"compr_ar",l:"compréhension"},{k:"expr_ar",l:"expression"},{k:"vocab_ar",l:"vocabulaire"},{k:"particip_ar",l:"participation"},{k:"memo_ar",l:"mémorisation"},{k:"calligr",l:"calligraphie"},{k:"gram_ar",l:"grammaire arabe"},{k:"conjug_ar",l:"conjugaison"}],
+    neg:[{k:"lect_arn",l:"lecture"},{k:"ecrit_arn",l:"écriture"},{k:"vocab_arn",l:"vocabulaire"},{k:"particip_arn",l:"participation"},{k:"memo_arn",l:"mémorisation"},{k:"gram_arn",l:"grammaire"},{k:"conjug_arn",l:"conjugaison"}]
   },
   "Espagnol":{
-    pos:[
-      {k:"compr_e",l:"compréhension"},{k:"expr_e2",l:"expression orale"},{k:"vocab_e",l:"vocabulaire"},
-      {k:"gram_e",l:"grammaire"},{k:"particip_e",l:"participation"},{k:"prononc_e",l:"prononciation"},
-      {k:"aisance_e",l:"aisance à l'oral"},{k:"ecrit_e",l:"expression écrite"},
-      {k:"interact_e",l:"interaction orale"},{k:"temps_e",l:"temps verbaux"},{k:"culture_e",l:"culture hispanique"}
-    ],
-    neg:[
-      {k:"vocab_en",l:"vocabulaire"},{k:"gram_en",l:"grammaire"},{k:"oral_en",l:"expression orale"},
-      {k:"particip_en",l:"participation"},{k:"ecrit_en",l:"expression écrite"},
-      {k:"prononc_en",l:"prononciation"},{k:"temps_en",l:"temps verbaux"},{k:"timidite_e",l:"timidité à l'oral"}
-    ]
+    pos:[{k:"compr_es",l:"compréhension"},{k:"expr_es",l:"expression orale"},{k:"vocab_es",l:"vocabulaire"},{k:"gram_es",l:"grammaire"},{k:"particip_es",l:"participation"},{k:"prononc_es",l:"prononciation"},{k:"aisance_es",l:"aisance à l'oral"},{k:"ecrit_es",l:"expression écrite"},{k:"interact_es",l:"interaction orale"},{k:"temps_es",l:"temps verbaux"}],
+    neg:[{k:"vocab_esn",l:"vocabulaire"},{k:"gram_esn",l:"grammaire"},{k:"oral_esn",l:"expression orale"},{k:"particip_esn",l:"participation"},{k:"ecrit_esn",l:"expression écrite"},{k:"timid_es",l:"timidité à l'oral"}]
   },
   "Histoire-Géo/EMC":{
-    pos:[
-      {k:"connais",l:"connaissances solides"},{k:"analyse_h",l:"esprit d'analyse"},{k:"redac_h",l:"rédaction"},
-      {k:"particip_h",l:"participation"},{k:"carte",l:"lecture de cartes"},{k:"crit_h",l:"esprit critique"},
-      {k:"memo_h",l:"mémorisation"},{k:"cito",l:"sens civique"},{k:"chro",l:"repères chronologiques"},
-      {k:"doc_h",l:"analyse de documents"},{k:"debat",l:"prise de parole en débat"},{k:"legende",l:"légende de carte"}
-    ],
-    neg:[
-      {k:"connais_n",l:"connaissances"},{k:"analyse_hn",l:"analyse"},{k:"redac_hn",l:"rédaction"},
-      {k:"particip_hn",l:"participation"},{k:"memo_hn",l:"mémorisation"},{k:"concentr_h",l:"concentration"},
-      {k:"chro_n",l:"repères chronologiques"},{k:"carte_n",l:"lecture de cartes"},{k:"doc_hn",l:"analyse de documents"}
-    ]
+    pos:[{k:"connais_h",l:"connaissances solides"},{k:"analyse_h",l:"esprit d'analyse"},{k:"redac_h",l:"rédaction"},{k:"particip_h",l:"participation"},{k:"carte_h",l:"lecture de cartes"},{k:"crit_h",l:"esprit critique"},{k:"memo_h",l:"mémorisation"},{k:"cito_h",l:"sens civique"},{k:"chro_h",l:"repères chronologiques"},{k:"doc_h",l:"analyse de documents"},{k:"debat_h",l:"prise de parole en débat"}],
+    neg:[{k:"connais_hn",l:"connaissances"},{k:"analyse_hn",l:"analyse"},{k:"redac_hn",l:"rédaction"},{k:"particip_hn",l:"participation"},{k:"memo_hn",l:"mémorisation"},{k:"concentr_h",l:"concentration"},{k:"chro_hn",l:"repères chronologiques"},{k:"carte_hn",l:"lecture de cartes"}]
   },
   "SVT":{
-    pos:[
-      {k:"observ",l:"sens de l'observation"},{k:"experi",l:"démarche expérimentale"},{k:"cr_svt",l:"comptes-rendus soignés"},
-      {k:"particip_s",l:"participation"},{k:"raison_s",l:"raisonnement scientifique"},{k:"memo_s",l:"mémorisation"},
-      {k:"soin_s",l:"soin du travail"},{k:"curio_s",l:"curiosité scientifique"},{k:"schema",l:"schémas soignés"},
-      {k:"classif",l:"classification du vivant"},{k:"ecologie",l:"conscience écologique"},{k:"microscope",l:"utilisation du microscope"}
-    ],
-    neg:[
-      {k:"memo_sn",l:"mémorisation"},{k:"cr_svtn",l:"comptes-rendus"},{k:"particip_sn",l:"participation"},
-      {k:"soin_sn",l:"soin"},{k:"raison_sn",l:"raisonnement"},{k:"concentr_s",l:"concentration"},
-      {k:"schema_n",l:"schémas"},{k:"legende_svt",l:"légendes des schémas"}
-    ]
+    pos:[{k:"observ_s",l:"sens de l'observation"},{k:"experi_s",l:"démarche expérimentale"},{k:"cr_svt",l:"comptes-rendus soignés"},{k:"particip_s",l:"participation"},{k:"raison_s",l:"raisonnement scientifique"},{k:"memo_s",l:"mémorisation"},{k:"soin_s",l:"soin du travail"},{k:"curio_s",l:"curiosité scientifique"},{k:"schema_s",l:"schémas soignés"},{k:"ecolo_s",l:"conscience écologique"}],
+    neg:[{k:"memo_sn",l:"mémorisation"},{k:"cr_svtn",l:"comptes-rendus"},{k:"particip_sn",l:"participation"},{k:"soin_sn",l:"soin"},{k:"raison_sn",l:"raisonnement"},{k:"concentr_s",l:"concentration"},{k:"schema_sn",l:"schémas"}]
   },
   "Physique-Chimie":{
-    pos:[
-      {k:"manip",l:"habileté en manipulation"},{k:"raison_p",l:"raisonnement scientifique"},{k:"rigueur_p",l:"rigueur"},
-      {k:"particip_p",l:"participation"},{k:"calcul_p",l:"calcul"},{k:"cr_pc",l:"comptes-rendus"},
-      {k:"curio_p",l:"curiosité scientifique"},{k:"method_p",l:"méthodologie"},{k:"securite_p",l:"respect des règles de sécurité"},
-      {k:"schema_p",l:"schémas de montage"},{k:"formule",l:"utilisation des formules"},{k:"unite",l:"rigueur des unités"}
-    ],
-    neg:[
-      {k:"calcul_pn",l:"calcul"},{k:"method_pn",l:"méthode"},{k:"particip_pn",l:"participation"},
-      {k:"manip_n",l:"manipulation"},{k:"memo_pn",l:"mémorisation"},{k:"concentr_p",l:"concentration"},
-      {k:"securite_pn",l:"règles de sécurité"},{k:"formule_n",l:"utilisation des formules"},{k:"unite_n",l:"rigueur des unités"}
-    ]
+    pos:[{k:"manip_p",l:"habileté en manipulation"},{k:"raison_p",l:"raisonnement scientifique"},{k:"rigueur_p",l:"rigueur"},{k:"particip_p",l:"participation"},{k:"calcul_p",l:"calcul"},{k:"cr_pc",l:"comptes-rendus"},{k:"curio_p",l:"curiosité scientifique"},{k:"method_p",l:"méthodologie"},{k:"secu_p",l:"respect des règles de sécurité"},{k:"schema_p",l:"schémas de montage"},{k:"formule_p",l:"utilisation des formules"}],
+    neg:[{k:"calcul_pn",l:"calcul"},{k:"method_pn",l:"méthode"},{k:"particip_pn",l:"participation"},{k:"manip_pn",l:"manipulation"},{k:"memo_pn",l:"mémorisation"},{k:"concentr_p",l:"concentration"},{k:"secu_pn",l:"règles de sécurité"},{k:"formule_pn",l:"utilisation des formules"}]
   },
   "Technologie":{
-    pos:[
-      {k:"concept",l:"sens de la conception"},{k:"fabric",l:"habileté en fabrication"},{k:"num",l:"maîtrise du numérique"},
-      {k:"creat_t",l:"créativité"},{k:"particip_t",l:"participation"},{k:"method_t",l:"méthodologie"},
-      {k:"soin_t",l:"soin du travail"},{k:"auto_t",l:"autonomie"},{k:"cad",l:"dessin technique"},
-      {k:"programme",l:"programmation"},{k:"proto",l:"réalisation de prototypes"},{k:"cahier_charges",l:"respect du cahier des charges"}
-    ],
-    neg:[
-      {k:"soin_tn",l:"soin"},{k:"method_tn",l:"méthode"},{k:"particip_tn",l:"participation"},
-      {k:"auto_tn",l:"autonomie"},{k:"concentr_t",l:"concentration"},{k:"cad_n",l:"dessin technique"},
-      {k:"programme_n",l:"programmation"},{k:"cahier_tn",l:"respect du cahier des charges"}
-    ]
+    pos:[{k:"concept_t",l:"sens de la conception"},{k:"fabric_t",l:"habileté en fabrication"},{k:"num_t",l:"maîtrise du numérique"},{k:"creat_t",l:"créativité"},{k:"particip_t",l:"participation"},{k:"method_t",l:"méthodologie"},{k:"soin_t",l:"soin du travail"},{k:"auto_t",l:"autonomie"},{k:"prog_t",l:"programmation"},{k:"cahier_t",l:"respect du cahier des charges"}],
+    neg:[{k:"soin_tn",l:"soin"},{k:"method_tn",l:"méthode"},{k:"particip_tn",l:"participation"},{k:"auto_tn",l:"autonomie"},{k:"concentr_t",l:"concentration"},{k:"prog_tn",l:"programmation"},{k:"cahier_tn",l:"respect du cahier des charges"}]
   },
   "Arts Plastiques":{
-    pos:[
-      {k:"creat_a",l:"créativité"},{k:"tech_a",l:"maîtrise technique"},{k:"imagin_a",l:"imagination"},
-      {k:"soin_a",l:"soin"},{k:"particip_ap",l:"participation"},{k:"origin",l:"originalité"},
-      {k:"sensib",l:"sensibilité artistique"},{k:"auto_a",l:"autonomie"},{k:"couleur",l:"maîtrise des couleurs"},
-      {k:"composition",l:"composition"},{k:"volume",l:"sens du volume"},{k:"narration_vis",l:"narration visuelle"}
-    ],
-    neg:[
-      {k:"soin_an",l:"soin"},{k:"implic_an",l:"implication"},{k:"tech_an",l:"technique"},
-      {k:"particip_apn",l:"participation"},{k:"finit",l:"finitions"},{k:"couleur_n",l:"maîtrise des couleurs"},
-      {k:"composition_n",l:"composition"},{k:"invest_ap",l:"investissement"}
-    ]
+    pos:[{k:"creat_a",l:"créativité"},{k:"tech_a",l:"maîtrise technique"},{k:"imagin_a",l:"imagination"},{k:"soin_a",l:"soin"},{k:"particip_a",l:"participation"},{k:"origin_a",l:"originalité"},{k:"sensib_a",l:"sensibilité artistique"},{k:"auto_a",l:"autonomie"},{k:"couleur_a",l:"maîtrise des couleurs"},{k:"compos_a",l:"composition"}],
+    neg:[{k:"soin_an",l:"soin"},{k:"implic_an",l:"implication"},{k:"tech_an",l:"technique"},{k:"particip_an",l:"participation"},{k:"finit_an",l:"finitions"},{k:"couleur_an",l:"maîtrise des couleurs"},{k:"compos_an",l:"composition"}]
   },
   "Éducation Musicale":{
-    pos:[
-      {k:"ecoute_m",l:"écoute musicale"},{k:"chant",l:"qualités vocales"},{k:"rythme",l:"sens du rythme"},
-      {k:"particip_mu",l:"participation"},{k:"sensib_m",l:"sensibilité musicale"},{k:"memo_mu",l:"mémorisation"},
-      {k:"engag_m",l:"engagement"},{k:"tech_m",l:"maîtrise technique"},{k:"justesse",l:"justesse vocale"},
-      {k:"respiration",l:"maîtrise du souffle"},{k:"culture_mus",l:"culture musicale"},{k:"instrument",l:"pratique instrumentale"}
-    ],
-    neg:[
-      {k:"particip_mun",l:"participation"},{k:"ecoute_mn",l:"écoute"},{k:"memo_mun",l:"mémorisation"},
-      {k:"engag_mn",l:"engagement"},{k:"tenue_m",l:"tenue en cours"},{k:"justesse_n",l:"justesse vocale"},
-      {k:"rythme_n",l:"sens du rythme"},{k:"timidite_m",l:"timidité"}
-    ]
+    pos:[{k:"ecoute_mu",l:"écoute musicale"},{k:"chant_mu",l:"qualités vocales"},{k:"rythme_mu",l:"sens du rythme"},{k:"particip_mu",l:"participation"},{k:"sensib_mu",l:"sensibilité musicale"},{k:"memo_mu",l:"mémorisation"},{k:"engag_mu",l:"engagement"},{k:"tech_mu",l:"maîtrise technique"},{k:"justesse_mu",l:"justesse vocale"}],
+    neg:[{k:"particip_mun",l:"participation"},{k:"ecoute_mun",l:"écoute"},{k:"memo_mun",l:"mémorisation"},{k:"engag_mun",l:"engagement"},{k:"tenue_mun",l:"tenue en cours"},{k:"justesse_mun",l:"justesse vocale"},{k:"timid_mu",l:"timidité"}]
   }
 };
 
-// Traductions positives → groupe nominal avec article
-var NOM={
+// Traductions positives : adjectifs accordables
+var ADJS={"investi":["investi","investie"],"serieux":["sérieux","sérieuse"],"applique":["appliqué","appliquée"],"auto_e":["autonome","autonome"],"fairplay":["fair-play","fair-play"],"rigoureux":["rigoureux","rigoureuse"],"assidu_g":["assidu","assidue"],"respect_c":["respectueux","respectueuse"],"ponctuel":["ponctuel","ponctuelle"],"assidu_c":["assidu","assidue"]};
+
+// Traductions positives : groupes nominaux (avec article)
+var NOMS={
   "investi":"un bel investissement","serieux":"un travail sérieux","applique":"une belle application",
-  "particip":"une participation active","equipe":"un bon esprit d'équipe","fairplay":"le fair-play",
-  "ecoute":"une bonne écoute","leader":"un vrai leadership","technique":"un bon niveau technique","auto":"de l'autonomie",
-  "expr_e":"une belle expression écrite","expr_o":"une bonne expression orale","lecture":"une lecture fluide",
-  "ortho":"une orthographe soignée","vocab":"un vocabulaire riche","analyse":"un bon esprit d'analyse",
-  "redac":"une rédaction de qualité","gram":"une maîtrise de la grammaire","imagin":"beaucoup d'imagination",
-  "particip_f":"une participation active","calcul":"de bonnes aptitudes en calcul","raison":"un bon raisonnement",
-  "geo":"de la rigueur en géométrie","pb":"une bonne résolution de problèmes","rigueur_m":"de la rigueur",
-  "rapid":"une belle rapidité","algebre":"une maîtrise de l'algèbre","method_m":"une bonne méthodologie",
-  "particip_m":"une participation active","abstr":"un bon sens de l'abstraction",
-  "co":"une bonne compréhension orale","eo_a":"une bonne expression orale","ce_a":"une bonne compréhension écrite",
-  "ee_a":"une bonne expression écrite","vocab_a":"un bon vocabulaire","prononc":"une belle prononciation",
-  "gram_a":"une bonne maîtrise grammaticale","particip_a":"une participation active","aisance":"une aisance à l'oral","memo_a":"une bonne mémorisation",
-  "lect_ar":"une bonne lecture","ecrit_ar":"une belle écriture","compr_ar":"une bonne compréhension",
-  "expr_ar":"une bonne expression","vocab_ar":"un bon vocabulaire","particip_ar":"une participation active",
-  "memo_ar":"une bonne mémorisation","calligr":"une belle calligraphie",
-  "compr_e":"une bonne compréhension","expr_e2":"une bonne expression orale","vocab_e":"un bon vocabulaire",
-  "gram_e":"une bonne grammaire","particip_e":"une participation active","prononc_e":"une belle prononciation",
-  "aisance_e":"une aisance à l'oral","ecrit_e":"une bonne expression écrite",
-  "connais":"de solides connaissances","analyse_h":"un bon esprit d'analyse","redac_h":"une rédaction de qualité",
-  "particip_h":"une participation active","carte":"une bonne lecture des cartes","crit_h":"un esprit critique",
-  "memo_h":"une bonne mémorisation","cito":"un sens civique développé",
-  "observ":"un bon sens de l'observation","experi":"une bonne démarche expérimentale","cr_svt":"des comptes-rendus soignés",
-  "particip_s":"une participation active","raison_s":"un bon raisonnement scientifique","memo_s":"une bonne mémorisation",
-  "soin_s":"un grand soin du travail","curio_s":"une curiosité scientifique",
-  "manip":"une bonne habileté en manipulation","raison_p":"un bon raisonnement scientifique","rigueur_p":"de la rigueur",
-  "particip_p":"une participation active","calcul_p":"de bonnes aptitudes en calcul","cr_pc":"des comptes-rendus soignés",
-  "curio_p":"une curiosité scientifique","method_p":"une bonne méthodologie",
-  "concept":"un bon sens de la conception","fabric":"une bonne habileté","num":"une maîtrise du numérique",
-  "creat_t":"de la créativité","particip_t":"une participation active","method_t":"une bonne méthodologie",
-  "soin_t":"un grand soin du travail","auto_t":"de l'autonomie",
-  "creat_a":"de la créativité","tech_a":"une bonne maîtrise technique","imagin_a":"beaucoup d'imagination",
-  "soin_a":"un grand soin du travail","particip_ap":"une participation active","origin":"de l'originalité",
-  "sensib":"une belle sensibilité artistique","auto_a":"de l'autonomie",
-  "ecoute_m":"une belle écoute musicale","chant":"de belles qualités vocales","rythme":"un bon sens du rythme",
-  "particip_mu":"une participation active","sensib_m":"une belle sensibilité musicale","memo_mu":"une bonne mémorisation",
-  "engag_m":"un bel engagement","tech_m":"une bonne maîtrise technique",
-  "curieux":"une vraie curiosité","rigoureux":"de la rigueur","oral":"une bonne participation à l'oral",
-  "ecrit":"un travail écrit soigné","methode":"une bonne méthode de travail","efforts_g":"des efforts constants",
-  "auto_g":"de l'autonomie","respect_g":"le respect des consignes","entraide":"un beau sens de l'entraide",
-  "creativ":"de la créativité","persev":"de la persévérance","assidu":"de l'assiduité","crit":"un bon esprit critique",
-  "attitude":"une attitude positive","agreable":"une présence agréable"
+  "particip":"une participation active","equipe":"un esprit d'équipe","fairplay":"le fair-play",
+  "ecoute_e":"une bonne écoute","leader":"un vrai leadership","technique":"un bon niveau technique","auto_e":"de l'autonomie",
+  "tactique":"un bon sens tactique","arbitre":"une maîtrise du rôle d'arbitre","endurance":"de l'endurance","vitesse":"de la vitesse","coordination":"une bonne coordination","equilibre":"de l'équilibre","souplesse":"de la souplesse",
+  "curieux":"une vraie curiosité","rigoureux":"de la rigueur","oral_g":"une bonne participation à l'oral","ecrit_g":"un travail écrit soigné","methode_g":"une bonne méthode","efforts_g":"des efforts constants","auto_g":"de l'autonomie","respect_g":"le respect des consignes","entraide":"un sens de l'entraide","creativ_g":"de la créativité","persev":"de la persévérance","assidu_g":"de l'assiduité","crit_g":"un bon esprit critique",
+  "attitude":"une attitude positive","agreable":"une présence agréable","ponctuel":"de la ponctualité","assidu_c":"de l'assiduité","tenue_ok":"une tenue correcte",
+  "expr_e":"une belle expression écrite","expr_o":"une bonne expression orale","lecture":"une lecture fluide","ortho":"une orthographe soignée","vocab_f":"un vocabulaire riche","analyse_f":"un bon esprit d'analyse","redac_f":"une rédaction de qualité","gram_f":"une maîtrise de la grammaire","imagin_f":"beaucoup d'imagination","particip_f":"une participation active","conjug_f":"une bonne conjugaison","lecture_vx":"une lecture à voix haute agréable","compreh_f":"une bonne compréhension","struct_f":"une structure des écrits soignée","ponct_f":"une bonne ponctuation","argum_f":"un esprit d'argumentation",
+  "calcul_m":"de bonnes aptitudes en calcul","raison_m":"un bon raisonnement logique","geo_m":"de la rigueur en géométrie","pb_m":"une bonne résolution de problèmes","rigueur_m":"de la rigueur","rapid_m":"une belle rapidité","algebre_m":"une bonne maîtrise de l'algèbre","method_m":"une bonne méthodologie","particip_m":"une participation active","abstr_m":"un bon sens de l'abstraction","frac_m":"une bonne maîtrise des fractions","propor_m":"une bonne compréhension de la proportionnalité","stats_m":"une bonne maîtrise des statistiques","constr_m":"une précision dans les constructions","calc_ment":"un bon calcul mental",
+  "co_a":"une bonne compréhension orale","eo_a":"une bonne expression orale","ce_a":"une bonne compréhension écrite","ee_a":"une bonne expression écrite","vocab_a":"un bon vocabulaire","prononc_a":"une belle prononciation","gram_a":"une bonne grammaire","particip_a":"une participation active","aisance_a":"une aisance à l'oral","memo_a":"une bonne mémorisation","intonation_a":"une bonne intonation","interact_a":"une bonne interaction orale","culture_a":"une bonne culture anglo-saxonne","temps_a":"une bonne maîtrise des temps verbaux",
+  "lect_ar":"une bonne lecture","ecrit_ar":"une belle écriture","compr_ar":"une bonne compréhension","expr_ar":"une bonne expression","vocab_ar":"un bon vocabulaire","particip_ar":"une participation active","memo_ar":"une bonne mémorisation","calligr":"une belle calligraphie","gram_ar":"une bonne grammaire","conjug_ar":"une bonne conjugaison",
+  "compr_es":"une bonne compréhension","expr_es":"une bonne expression orale","vocab_es":"un bon vocabulaire","gram_es":"une bonne grammaire","particip_es":"une participation active","prononc_es":"une belle prononciation","aisance_es":"une aisance à l'oral","ecrit_es":"une bonne expression écrite","interact_es":"une bonne interaction orale","temps_es":"une bonne maîtrise des temps verbaux",
+  "connais_h":"de solides connaissances","analyse_h":"un bon esprit d'analyse","redac_h":"une rédaction de qualité","particip_h":"une participation active","carte_h":"une bonne lecture des cartes","crit_h":"un esprit critique","memo_h":"une bonne mémorisation","cito_h":"un sens civique développé","chro_h":"une bonne maîtrise des repères chronologiques","doc_h":"une bonne analyse de documents","debat_h":"une aisance en débat",
+  "observ_s":"un bon sens de l'observation","experi_s":"une bonne démarche expérimentale","cr_svt":"des comptes-rendus soignés","particip_s":"une participation active","raison_s":"un bon raisonnement scientifique","memo_s":"une bonne mémorisation","soin_s":"un grand soin du travail","curio_s":"une curiosité scientifique","schema_s":"des schémas soignés","ecolo_s":"une conscience écologique",
+  "manip_p":"une bonne habileté en manipulation","raison_p":"un bon raisonnement scientifique","rigueur_p":"de la rigueur","particip_p":"une participation active","calcul_p":"de bonnes aptitudes en calcul","cr_pc":"des comptes-rendus soignés","curio_p":"une curiosité scientifique","method_p":"une bonne méthodologie","secu_p":"le respect des règles de sécurité","schema_p":"des schémas de montage soignés","formule_p":"une bonne utilisation des formules",
+  "concept_t":"un bon sens de la conception","fabric_t":"une bonne habileté en fabrication","num_t":"une maîtrise du numérique","creat_t":"de la créativité","particip_t":"une participation active","method_t":"une bonne méthodologie","soin_t":"un grand soin du travail","auto_t":"de l'autonomie","prog_t":"une bonne pratique de la programmation","cahier_t":"le respect du cahier des charges",
+  "creat_a":"de la créativité","tech_a":"une bonne maîtrise technique","imagin_a":"beaucoup d'imagination","soin_a":"un grand soin du travail","particip_a":"une participation active","origin_a":"de l'originalité","sensib_a":"une belle sensibilité artistique","auto_a":"de l'autonomie","couleur_a":"une bonne maîtrise des couleurs","compos_a":"un beau sens de la composition",
+  "ecoute_mu":"une belle écoute musicale","chant_mu":"de belles qualités vocales","rythme_mu":"un bon sens du rythme","particip_mu":"une participation active","sensib_mu":"une belle sensibilité musicale","memo_mu":"une bonne mémorisation","engag_mu":"un bel engagement","tech_mu":"une bonne maîtrise technique","justesse_mu":"une belle justesse vocale"
 };
 
-// Traductions adjectifs (accordés selon genre)
-function adj(k,f){
-  var m={"investi":["investi","investie"],"serieux":["sérieux","sérieuse"],"applique":["appliqué","appliquée"],
-         "auto":["autonome","autonome"],"fairplay":["fair-play","fair-play"],"rigoureux":["rigoureux","rigoureuse"],
-         "assidu":["assidu","assidue"],"respect":["respectueux","respectueuse"],"ponctuel":["ponctuel","ponctuelle"]};
-  if(!m[k]) return null;
-  return m[k][f?1:0];
-}
-
-// Formulations négatives naturelles (plusieurs variantes)
-var NEG={
-  "absences":[["les absences fréquentes nuisent à la progression"],["les absences répétées pénalisent le suivi du cours"],["de nombreuses absences ont impacté les résultats"]],
-  "retards":[["les retards répétés perturbent le bon déroulement des cours"],["la ponctualité est à améliorer sérieusement"]],
-  "tenue_n":[["la tenue vestimentaire n'est pas adaptée aux cours"],["la tenue doit être conforme au règlement"]],
-  "invest_n":[["l'investissement en cours doit s'améliorer"],["une plus grande implication est attendue"],["davantage d'engagement est nécessaire"]],
-  "bavard":[["le bavardage perturbe le bon déroulement des séances"],["les bavardages nuisent à la concentration de la classe"],["le bavardage reste un obstacle à la progression"]],
-  "concentr":[["la concentration doit être renforcée"],["un manque de concentration pénalise les résultats"],["une attention plus soutenue est nécessaire"]],
-  "diff_tech":[["des lacunes techniques sont à combler"],["des bases techniques restent à consolider"],["la maîtrise technique est encore à développer"]],
-  "retrait":[["une participation plus active est attendue"],["un investissement plus visible dans les activités est souhaité"],["la discrétion en cours nuit à la progression"]],
-  "irreg":[["la régularité dans l'effort est à améliorer"],["l'investissement manque de constance"],["des résultats trop irréguliers freinent la progression"]],
-  "effort_n":[["davantage d'efforts sont nécessaires pour progresser"],["une remobilisation est attendue"],["l'effort fourni reste en dessous des attentes"]],
-  "perturb":[["le comportement perturbe le bon déroulement des cours"],["une attitude plus respectueuse est indispensable"],["le comportement nuit au groupe"]],
-  "ortho_n":[["l'orthographe est encore à consolider"],["des progrès en orthographe sont attendus"]],
-  "expr_n":[["l'expression gagnerait à être enrichie"],["un travail sur l'expression est nécessaire"]],
-  "lect_n":[["la lecture doit être davantage travaillée"],["des progrès en lecture sont attendus"]],
-  "gram_n":[["la grammaire est encore à consolider"],["des lacunes grammaticales sont à combler"]],
-  "particip_fn":[["la participation doit s'améliorer"],["une implication plus active en classe est attendue"]],
-  "redac_n":[["la rédaction est encore insuffisante"],["des progrès en rédaction sont attendus"]],
-  "concentr_f":[["la concentration doit être renforcée"],["un manque de concentration nuit aux résultats"]],
-  "bavard_f":[["le bavardage nuit au bon déroulement du cours"],["les bavardages perturbent la classe"]],
-  "calcul_n":[["le calcul est encore à renforcer"],["des lacunes en calcul sont à combler"]],
-  "raison_n":[["le raisonnement doit être mieux structuré"],["des progrès en raisonnement sont attendus"]],
-  "lacunes":[["des lacunes importantes sont à combler"],["des bases solides restent à acquérir"]],
-  "method_mn":[["une méthode de travail est à acquérir"],["le manque de méthode pénalise les résultats"]],
-  "concentr_m":[["la concentration doit être améliorée"],["un manque de concentration pénalise les résultats"]],
-  "travdom":[["le travail personnel à la maison est insuffisant"],["davantage de travail à la maison est attendu"]],
-  "abstr_n":[["l'abstraction reste difficile à appréhender"],["des difficultés d'abstraction sont à surmonter"]],
-  "particip_mn":[["la participation doit s'améliorer"],["une implication plus active est attendue"]],
-  "vocab_an":[["le vocabulaire est à enrichir"],["des efforts sur le vocabulaire sont nécessaires"]],
-  "gram_an":[["la grammaire est à consolider"],["des lacunes grammaticales sont à combler"]],
-  "oral_an":[["l'expression orale est encore timide"],["l'oral doit être davantage travaillé"]],
-  "particip_an":[["la participation doit s'améliorer"],["une implication plus active est attendue"]],
-  "prononc_n":[["la prononciation est à améliorer"],["des progrès en prononciation sont attendus"]],
-  "memo_an":[["la mémorisation du vocabulaire est insuffisante"],["des efforts de mémorisation sont nécessaires"]],
-  "ecrit_an":[["l'expression écrite est encore à développer"],["des progrès à l'écrit sont attendus"]]
+// Formulations négatives naturelles — tableaux de variantes
+var NEG_PHRS={
+  "invest_n":["l'investissement en cours doit progresser","une plus grande implication est attendue","le manque d'engagement pénalise les résultats","l'implication reste insuffisante"],
+  "bavard_e":["le bavardage perturbe le bon déroulement des séances","les bavardages nuisent à la concentration","le bavardage reste un frein à la progression"],
+  "concentr_e":["la concentration doit être renforcée","le manque de concentration pénalise les résultats","une attention plus soutenue est nécessaire"],
+  "diff_tech":["des lacunes techniques sont à combler","des bases techniques restent à consolider","la maîtrise technique est encore à développer"],
+  "retrait_e":["une participation plus active est attendue","la discrétion en cours nuit à la progression","un investissement plus visible est souhaité"],
+  "irreg_e":["la régularité dans l'effort est à améliorer","l'investissement manque de constance","l'irrégularité dans le travail freine la progression"],
+  "effort_n":["davantage d'efforts sont nécessaires pour progresser","l'effort fourni reste en dessous des attentes","une remobilisation est indispensable"],
+  "perturb":["le comportement perturbe le bon déroulement des cours","l'attitude en cours est problématique et doit évoluer","le comportement nuit à l'ambiance de travail"],
+  "arbitre_n":["le rôle d'arbitre est encore à maîtriser","l'arbitrage nécessite plus de rigueur"],
+  "tactique_n":["le sens tactique est à développer","la prise de décision en jeu est à améliorer"],
+  "endurance_n":["l'endurance est à améliorer","les capacités physiques sont à développer"],
+  "securite_e":["les règles de sécurité doivent être mieux respectées","la sécurité en cours doit être une priorité"],
+  "ortho_n":["l'orthographe est encore à consolider","des progrès en orthographe sont attendus","les erreurs orthographiques sont encore trop fréquentes"],
+  "expr_n":["l'expression écrite gagnerait à être enrichie","l'expression doit être davantage travaillée"],
+  "lect_n":["la lecture doit être davantage travaillée","des progrès en lecture sont attendus"],
+  "gram_n":["la grammaire est encore à consolider","des lacunes grammaticales sont à combler"],
+  "particip_fn":["la participation doit s'améliorer","une implication plus active en classe est attendue","la prise de parole est encore trop rare"],
+  "redac_n":["la rédaction est encore insuffisante","des progrès en rédaction sont attendus","les écrits manquent de structure et de développement"],
+  "concentr_f":["la concentration doit être renforcée","le manque de concentration nuit aux résultats"],
+  "bavard_f":["le bavardage nuit au bon déroulement du cours","les bavardages perturbent la classe"],
+  "conjug_n":["la conjugaison est encore à consolider","des lacunes en conjugaison sont à combler"],
+  "vocab_fn":["le vocabulaire est encore limité et doit être enrichi","un effort sur l'enrichissement du vocabulaire est attendu"],
+  "struct_n":["la structure des écrits est à améliorer","les productions manquent d'organisation"],
+  "ponct_n":["la ponctuation est à maîtriser","des erreurs de ponctuation fréquentes sont à corriger"],
+  "calcul_mn":["le calcul est encore à renforcer","des lacunes en calcul sont à combler"],
+  "raison_mn":["le raisonnement doit être mieux structuré","des progrès en raisonnement sont attendus"],
+  "lacunes_m":["des lacunes de base sont à combler prioritairement","des fondamentaux restent à acquérir"],
+  "method_mn":["une méthode de travail est à acquérir","le manque de méthode pénalise les résultats"],
+  "concentr_m":["la concentration doit être améliorée","le manque de concentration pénalise les résultats"],
+  "travdom_m":["le travail personnel à la maison est insuffisant","davantage de travail à la maison est attendu"],
+  "abstr_mn":["l'abstraction reste difficile à appréhender","des difficultés d'abstraction persistent"],
+  "particip_mn":["la participation doit s'améliorer","une implication plus active est attendue"],
+  "frac_mn":["les fractions sont encore à consolider","des lacunes sur les fractions sont à combler"],
+  "propor_mn":["la proportionnalité est encore à maîtriser"],
+  "calc_ment_n":["le calcul mental est à renforcer"],
+  "erreurs_m":["les erreurs de calcul sont encore trop fréquentes","la rigueur dans les calculs est à améliorer"],
+  "vocab_an":["le vocabulaire est à enrichir","des efforts sur le vocabulaire sont nécessaires"],
+  "gram_an":["la grammaire est à consolider","des lacunes grammaticales persistent"],
+  "oral_an":["l'expression orale est encore timide","l'oral doit être davantage travaillé"],
+  "particip_an":["la participation doit s'améliorer","une prise de parole plus régulière est attendue"],
+  "prononc_an":["la prononciation est à améliorer","des progrès en prononciation sont attendus"],
+  "memo_an":["la mémorisation du vocabulaire est insuffisante","des efforts de mémorisation sont nécessaires"],
+  "ecrit_an":["l'expression écrite est encore à développer","des progrès à l'écrit sont attendus"],
+  "temps_an":["les temps verbaux sont encore à consolider"],
+  "timid_a":["la timidité à l'oral freine la progression","la prise de parole doit être plus affirmée"],
+  "absences":["les absences fréquentes nuisent à la progression","les absences répétées pénalisent le suivi du cours"],
+  "retards":["les retards répétés perturbent le bon déroulement des cours","la ponctualité doit s'améliorer"],
+  "tenue_nok":["la tenue n'est pas adaptée au cours","le règlement vestimentaire doit être respecté"]
 };
-// Pour les clés non listées
-function negDefaut(k){return [["des progrès sont attendus sur ce point"],["un effort particulier est à fournir"]];}
 
-function getNeg(k,ri){var v=NEG[k]||negDefaut(k);return v[ri%v.length][0];}
-
-// Joindre des noms avec "et" (pas de "de une" → "d'une")
-function deElision(s){
-  // Ajoute "d'" devant voyelle au lieu de "de "
-  return s.replace(/^(un|une|de l'|de la|des|de) /i, function(m){ return m; });
-}
-function joinNoms(arr){
-  if(!arr.length) return "";
-  if(arr.length===1) return arr[0];
-  // "un X, un Y et un Z" — pas de "de" ajouté ici, déjà dans les noms
-  return arr.slice(0,-1).join(", ")+" et "+arr[arr.length-1];
-}
-function joinNomsAvecDe(arr){
-  // Retourne juste les noms joints — le "de/d'" est géré dans la phrase
-  if(!arr.length) return "";
-  if(arr.length===1) return arr[0];
-  return arr.slice(0,-1).join(", ")+" et "+arr[arr.length-1];
-}
-function joinAdjs(arr){
-  if(!arr.length) return "";
-  if(arr.length===1) return arr[0];
-  return arr.slice(0,-1).join(", ")+" et "+arr[arr.length-1];
+function getNegPhrase(k, ri) {
+  var opts = NEG_PHRS[k];
+  if (!opts || !opts.length) return "des progrès sont attendus";
+  return opts[ri % opts.length];
 }
 
-// ── ÉTAT ─────────────────────────────────────────────────────────────────────
+// ══════════════════════════════════════════════════════════════════════════════
+// ÉTAT
+// ══════════════════════════════════════════════════════════════════════════════
 var KEY="eps_v3";
-var genre="M",sel={},filtreCur="toutes",phrase="",prenomCur="",classeCur="",matCur="",ri=0;
+var genre="M", sel={}, filtreCur="toutes", phrase="", prenomCur="", classeCur="", matCur="EPS", ri=0;
 
-function db(){try{return JSON.parse(localStorage.getItem(KEY)||"[]");}catch(e){return[];}}
+function DB(){try{return JSON.parse(localStorage.getItem(KEY)||"[]");}catch(e){return[];}}
 function dbS(d){localStorage.setItem(KEY,JSON.stringify(d));}
-function trim(){var m=new Date().getMonth()+1;return m>=9?"T1":m<=3?"T2":"T3";}
+function trimAuto(){var m=new Date().getMonth()+1;return m>=9?"T1":m<=3?"T2":"T3";}
 function annee(){var n=new Date(),m=n.getMonth()+1,y=n.getFullYear();return m>=9?y+"-"+(y+1):(y-1)+"-"+y;}
 
-// ── UI ───────────────────────────────────────────────────────────────────────
-function onClasse(){
-  var cl=document.getElementById("classe").value;
-  var liste=cl==="6e"?M6:M5;
-  var sel_mat=document.getElementById("matiere");
-  sel_mat.innerHTML=liste.map(function(m){return "<option>"+m+"</option>";}).join("");
+// ══════════════════════════════════════════════════════════════════════════════
+// MOYENNE
+// ══════════════════════════════════════════════════════════════════════════════
+function getMoy() {
+  var v = parseFloat(document.getElementById("moyenne").value);
+  return isNaN(v) || v < 0 || v > 20 ? null : v;
+}
+function getTrim() { return document.getElementById("trim_sel").value || ""; }
+
+function onMoy() {
+  var v = getMoy();
+  var lbl = "";
+  if (v !== null) {
+    if (v < 8) lbl = "Résultats insuffisants";
+    else if (v < 10) lbl = "Résultats fragiles";
+    else if (v < 12) lbl = "Résultats passables";
+    else if (v < 14) lbl = "Résultats corrects";
+    else if (v < 16) lbl = "Bon trimestre";
+    else if (v < 18) lbl = "Très bon trimestre";
+    else lbl = "Excellent trimestre";
+  }
+  document.getElementById("moy-lbl").textContent = lbl;
+}
+
+function getConclu(isGood, ri) {
+  var v = getMoy();
+  var tr = getTrim();
+
+  // Tableaux de conclusions selon niveau et trimestre
+  var C = {
+    insuf: {
+      T1: ["Un travail régulier dès maintenant est indispensable.","Ces difficultés doivent être prises en charge sans tarder.","Un engagement plus fort est attendu pour la suite de l'année.","Il est encore tôt, mais ces lacunes doivent être comblées rapidement.","Une remobilisation rapide est nécessaire.","Ces axes de progrès devront être travaillés tout au long de l'année."],
+      T2: ["Un effort urgent est attendu pour redresser la situation au T3.","Il est encore temps de progresser, mais l'engagement doit être immédiat.","Ces lacunes doivent être comblées avant le bilan final.","Le troisième trimestre doit être celui de la remobilisation.","Un engagement total est indispensable pour terminer l'année correctement.","La situation doit impérativement évoluer."],
+      T3: ["Un travail de fond sera indispensable pour aborder la prochaine année.","La prochaine rentrée devra être l'occasion d'un vrai nouveau départ.","Ces lacunes persistantes devront être surmontées l'année prochaine.","Un bilan final en-dessous des attentes. Un engagement fort sera attendu à la rentrée.","Ces difficultés devront être prises en charge sérieusement l'an prochain.","Un effort majeur sera nécessaire pour progresser l'année prochaine."],
+      "": ["Une remobilisation sérieuse est indispensable.","Un effort important est attendu.","Des efforts soutenus sont nécessaires pour progresser.","Une implication bien plus forte est attendue.","Le potentiel doit se concrétiser en résultats.","Un engagement plus fort est nécessaire."]
+    },
+    fragile: {
+      T1: ["Un travail régulier permettra de consolider les bases.","Un investissement plus constant est attendu pour la suite.","Il est encore tôt pour s'inquiéter, mais des efforts sont nécessaires.","Ces fragilités doivent être corrigées rapidement.","Un engagement plus régulier permettra de progresser.","La marge de progression est encore importante."],
+      T2: ["Un effort supplémentaire au T3 permettrait de redresser la situation.","Il est encore temps de progresser significativement.","Ces fragilités doivent être comblées avant le bilan final.","Le troisième trimestre doit être l'occasion de progresser.","Un engagement plus fort permettrait d'améliorer les résultats.","La situation doit s'améliorer pour terminer l'année correctement."],
+      T3: ["Des progrès seront attendus pour la prochaine rentrée.","La prochaine année devra être l'occasion de consolider ces bases.","Ces fragilités persistantes devront être surmontées l'an prochain.","Un travail de consolidation s'impose pour l'année suivante.","Un effort plus régulier sera attendu l'année prochaine.","La progression n'a pas été suffisante sur l'ensemble de l'année."],
+      "": ["Des efforts supplémentaires sont attendus.","Un travail plus régulier permettra de progresser.","Le niveau peut et doit progresser.","Un engagement plus constant est nécessaire.","Ces fragilités peuvent être surmontées avec du travail.","Un investissement plus fort est attendu."]
+    },
+    passable: {
+      T1: ["Des efforts réguliers permettront de progresser.","Il faudra confirmer sur la durée.","La marge de progression est encore importante.","Un engagement plus constant permettra d'atteindre un meilleur niveau.","L'objectif est de viser plus haut progressivement.","Un début d'année honorable mais perfectible."],
+      T2: ["Un dernier effort au T3 permettrait de terminer l'année en beauté.","Le niveau peut encore progresser significativement.","L'objectif est de consolider ces acquis et de viser plus haut.","Un engagement plus soutenu au T3 ferait la différence.","La tendance doit s'améliorer pour le bilan final.","Ces résultats sont à consolider."],
+      T3: ["Des progrès sont attendus pour la prochaine rentrée.","L'objectif sera de viser plus haut l'année prochaine.","La marge de progression est encore importante.","Un travail plus régulier permettra de progresser l'an prochain.","Ces résultats peuvent et doivent s'améliorer.","Une progression plus marquée est attendue l'année prochaine."],
+      "": ["Des efforts supplémentaires permettraient de progresser.","Un engagement plus régulier permettrait d'atteindre de meilleurs résultats.","Le niveau est correct mais peut progresser.","Continuons les efforts pour viser plus haut.","La marge de progression est encore importante.","Un investissement plus constant est attendu."]
+    },
+    bon: {
+      T1: ["Continuons sur cette lancée !","Les bases sont solides pour une belle année.","Il faudra confirmer ce niveau sur la durée.","Un très bon début d'année.","Ces résultats promettent une belle progression.","La dynamique est positive, maintenons-la."],
+      T2: ["Un dernier effort pour clôturer l'année en beauté.","La tendance est très positive pour le bilan final.","Maintenons ce cap jusqu'au bout.","Ces résultats témoignent d'un travail régulier.","L'objectif est de maintenir ce niveau au T3.","Une très bonne dynamique à confirmer."],
+      T3: ["Bravo pour ce travail !","Ces résultats récompensent un engagement régulier.","Une belle année à saluer.","Ces résultats sont le fruit d'un investissement constant.","Excellent travail tout au long de l'année.","Un bilan final très satisfaisant."],
+      "": ["Continuons dans cette dynamique.","Bon trimestre.","Ces résultats témoignent d'un travail sérieux.","Les efforts payent.","Très satisfaisant.","Bravo pour ce travail."]
+    },
+    tresbien: {
+      T1: ["Ces résultats promettent une très belle année !","Les bases sont excellentes pour la suite.","Un début d'année remarquable.","Ces résultats sont à saluer.","La barre est placée très haut.","Félicitations pour ce début d'année !"],
+      T2: ["La tendance est au beau fixe pour le bilan final !","Ces résultats récompensent un travail remarquable.","Maintenons ce niveau jusqu'au bout !","Un deuxième trimestre exceptionnel.","La dynamique est excellente.","Ces performances sont à saluer."],
+      T3: ["Bravo pour cette très belle année !","Ces résultats couronnent une année de travail exemplaire.","Une fin d'année brillante.","Félicitations pour cette belle année !","Ces résultats témoignent d'un investissement remarquable.","Une année brillante à saluer chaleureusement."],
+      "": ["Très bon trimestre !","Ces résultats témoignent d'un travail remarquable.","Bravo pour cet engagement.","Excellent trimestre !","Ces performances sont à saluer.","Un trimestre brillant."]
+    },
+    excellent: {
+      T1: ["Ces résultats exceptionnels auguren d'une très belle année !","Félicitations pour ce début d'année brillant !","Un départ remarquable.","Ces résultats sont à saluer chaleureusement.","La barre est placée très haut.","Un premier trimestre hors normes !"],
+      T2: ["Ces performances exceptionnelles sont à saluer !","La dynamique est au beau fixe.","Ces résultats récompensent un travail exceptionnel.","Un deuxième trimestre brillant !","Félicitations pour ces performances remarquables.","Ces résultats sont hors normes."],
+      T3: ["Félicitations pour cette année brillante !","Ces résultats couronnent une année exceptionnelle.","Une fin d'année remarquable à saluer.","Bravo pour cette année brillante !","Ces résultats sont le fruit d'un travail exceptionnel.","Une année hors normes."],
+      "": ["Excellent trimestre !","Ces résultats sont remarquables.","Félicitations !","Des performances hors normes.","Bravo pour ce trimestre brillant !","Ces résultats sont exceptionnels."]
+    }
+  };
+
+  var niveau;
+  if (v === null) niveau = isGood ? C.bon : C.passable;
+  else if (v < 8) niveau = C.insuf;
+  else if (v < 12) niveau = C.fragile;
+  else if (v < 14) niveau = C.passable;
+  else if (v < 16) niveau = C.bon;
+  else if (v < 18) niveau = C.tresbien;
+  else niveau = C.excellent;
+
+  var arr = niveau[tr] || niveau[""];
+  return arr[ri % arr.length];
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// UI
+// ══════════════════════════════════════════════════════════════════════════════
+function onClasse() {
+  var cl = document.getElementById("classe").value;
+  var liste = cl === "6e" ? M6 : M5;
+  var s = document.getElementById("matiere");
+  var cur = s.value;
+  s.innerHTML = liste.map(function(m){return "<option"+(m===cur?" selected":"")+">"+m+"</option>";}).join("");
   onMatiere();
 }
-function onMatiere(){
-  var mat=document.getElementById("matiere").value;
-  matCur=mat;
-  var data=MAT[mat]||MAT["EPS"];
-  var valid=data.pos.concat(data.neg).map(function(c){return c.k;});
-  Object.keys(sel).forEach(function(k){if((sel[k]==="pos"||sel[k]==="neg"||sel[k]==="sport")&&valid.indexOf(k)<0&&!(sel[k]==="sport"))delete sel[k];});
-  document.getElementById("lpos").textContent="Points positifs — "+mat;
-  document.getElementById("lneg").textContent="Points à travailler — "+mat;
-  // Afficher section sports uniquement en EPS
-  var showSport=mat==="EPS";
-  document.getElementById("lsport").style.display=showSport?"":"none";
-  document.getElementById("cp-sport").style.display=showSport?"":"none";
-  if(!showSport) Object.keys(sel).forEach(function(k){if(sel[k]==="sport")delete sel[k];});
+
+function onMatiere() {
+  var mat = document.getElementById("matiere").value;
+  matCur = mat;
+  var data = MAT[mat] || MAT["EPS"];
+  var valid = {};
+  data.pos.concat(data.neg).forEach(function(c){valid[c.k]=1;});
+  Object.keys(sel).forEach(function(k){if((sel[k]==="pos"||sel[k]==="neg")&&!valid[k])delete sel[k];});
+  if(sel) Object.keys(sel).forEach(function(k){if(sel[k]==="sport"&&mat!=="EPS")delete sel[k];});
+  document.getElementById("lpos").textContent = "Points positifs — " + mat;
+  document.getElementById("lneg").textContent = "Points à travailler — " + mat;
+  var showSport = mat === "EPS";
+  document.getElementById("lsport").style.display = showSport ? "" : "none";
+  document.getElementById("cp-sport").style.display = showSport ? "" : "none";
   renderAll();
 }
-function setG(g){
-  genre=g;
-  document.getElementById("gm").classList.toggle("on",g==="M");
-  document.getElementById("gf").classList.toggle("on",g==="F");
-}
-function allC(){var r=[];[GEN,MAT[matCur]?MAT[matCur].pos:[],MAT[matCur]?MAT[matCur].neg:[],COMP,PROG,MAT["EPS"].sports||[]].forEach(function(a){r=r.concat(a);});return r;}
 
-function renderAll(){
-  var mat=document.getElementById("matiere").value||"EPS";
-  var data=MAT[mat]||MAT["EPS"];
-  var cats={gen:GEN,pos:data.pos,neg:data.neg,comp:COMP,prog:PROG};
-  Object.keys(cats).forEach(function(cat){
-    var el=document.getElementById("cp-"+cat);
-    if(!el)return;
-    el.innerHTML="";
-    cats[cat].forEach(function(c){
-      var b=document.createElement("button");
-      b.className="chip "+cat+(sel[c.k]?" on":"");
-      b.textContent=c.l;
-      b.onclick=(function(k,ca){return function(){tog(k,ca);};})(c.k,cat);
+function setG(g) {
+  genre = g;
+  document.getElementById("gm").classList.toggle("on", g==="M");
+  document.getElementById("gf").classList.toggle("on", g==="F");
+}
+
+function allChipsList() {
+  var r = [].concat(GEN, COMP, PROG);
+  var d = MAT[matCur] || MAT["EPS"];
+  r = r.concat(d.pos, d.neg);
+  if (d.sports) r = r.concat(d.sports);
+  return r;
+}
+
+function renderAll() {
+  var mat = document.getElementById("matiere").value || "EPS";
+  var data = MAT[mat] || MAT["EPS"];
+  var cats = {gen:GEN, pos:data.pos, neg:data.neg, comp:COMP, prog:PROG};
+  Object.keys(cats).forEach(function(cat) {
+    var el = document.getElementById("cp-"+cat);
+    if (!el) return;
+    el.innerHTML = "";
+    cats[cat].forEach(function(c) {
+      var b = document.createElement("button");
+      b.className = "chip " + cat + (sel[c.k] ? " on" : "");
+      b.textContent = c.l;
+      b.onclick = (function(k,ca){return function(){tog(k,ca);};})(c.k, cat);
       el.appendChild(b);
     });
   });
-  // Chips sports (EPS uniquement)
-  var sportEl=document.getElementById("cp-sport");
-  if(sportEl&&data.sports){
-    sportEl.innerHTML="";
-    data.sports.forEach(function(c){
-      var b=document.createElement("button");
-      b.className="chip sport"+(sel[c.k]?" on":"");
-      b.textContent=c.l;
-      b.onclick=(function(k){return function(){tog(k,"sport");};})(c.k);
+  var sportEl = document.getElementById("cp-sport");
+  if (sportEl && data.sports) {
+    sportEl.innerHTML = "";
+    data.sports.forEach(function(c) {
+      var b = document.createElement("button");
+      b.className = "chip sport" + (sel[c.k] ? " on" : "");
+      b.textContent = c.l;
+      b.onclick = (function(k){return function(){tog(k,"sport");};})(c.k);
       sportEl.appendChild(b);
     });
   }
   renderTags();
 }
-function tog(k,cat){if(sel[k])delete sel[k];else sel[k]=cat;renderAll();}
-function renderTags(){
-  var keys=Object.keys(sel);
-  var fv=document.getElementById("free").value;
-  var ft=fv?fv.split(",").map(function(s){return s.trim();}).filter(Boolean):[];
-  var all=keys.concat(ft);
-  var el=document.getElementById("stags");
-  if(!all.length){el.innerHTML='<span style="font-size:12px;color:#aaa;font-style:italic">Aucun</span>';return;}
-  el.innerHTML=all.map(function(k){var f=allC().filter(function(c){return c.k===k;})[0];return '<span class="stag">'+(f?f.l:k)+"</span>";}).join("");
+
+function tog(k, cat) {
+  if (sel[k]) delete sel[k]; else sel[k] = cat;
+  renderAll();
 }
 
-// ── GÉNÉRATION ───────────────────────────────────────────────────────────────
-function construire(keys,ft,f,Il,il,mat,ri){
-  var gen=keys.filter(function(k){return sel[k]==="gen";});
-  var pos=keys.filter(function(k){return sel[k]==="pos";});
-  var neg=keys.filter(function(k){return sel[k]==="neg";});
-  var comp=keys.filter(function(k){return sel[k]==="comp";});
-  var prog=keys.filter(function(k){return sel[k]==="prog";});
-  var compneg=comp.indexOf("compneg")>=0;
-  var comppos=comp.filter(function(k){return k!=="compneg";});
+function renderTags() {
+  var keys = Object.keys(sel);
+  var fv = document.getElementById("free").value;
+  var ft = fv ? fv.split(",").map(function(s){return s.trim();}).filter(Boolean) : [];
+  var all = keys.concat(ft);
+  var el = document.getElementById("stags");
+  if (!all.length) { el.innerHTML='<span style="font-size:12px;color:#aaa;font-style:italic">Aucun</span>'; return; }
+  var chips = allChipsList();
+  el.innerHTML = all.map(function(k){
+    var f = chips.filter(function(c){return c.k===k;})[0];
+    return '<span class="stag">'+(f?f.l:k)+'</span>';
+  }).join("");
+}
 
-  // Listes adjectifs et noms pour le positif
-  var adjs=[];
-  var noms=[];
+// ══════════════════════════════════════════════════════════════════════════════
+// GÉNÉRATION
+// ══════════════════════════════════════════════════════════════════════════════
+function genPhrase(keys, ft, f, Il, il, mat, ri) {
+  var gen  = keys.filter(function(k){return sel[k]==="gen";});
+  var pos  = keys.filter(function(k){return sel[k]==="pos";});
+  var neg  = keys.filter(function(k){return sel[k]==="neg";});
+  var comp = keys.filter(function(k){return sel[k]==="comp";});
+  var prog = keys.filter(function(k){return sel[k]==="prog";});
+  var sport= keys.filter(function(k){return sel[k]==="sport";});
+  var compNeg = comp.indexOf("compneg") >= 0;
+  var compPos = comp.filter(function(k){return k!=="compneg";});
+
+  // Séparer adjectifs et noms côté positif
+  var adjs = [], noms = [];
   pos.concat(gen).forEach(function(k){
-    var a=adj(k,f);
-    if(a) adjs.push(a);
-    else if(NOM[k]) noms.push(NOM[k]);
+    var entry = ADJS[k];
+    if (entry) adjs.push(entry[f?1:0]);
+    else if (NOMS[k]) noms.push(NOMS[k]);
   });
-  comppos.forEach(function(k){
-    var a=adj(k,f);
-    if(a) adjs.push(a);
-    else if(NOM[k]) noms.push(NOM[k]);
+  compPos.forEach(function(k){
+    var entry = ADJS[k];
+    if (entry) adjs.push(entry[f?1:0]);
+    else if (NOMS[k]) noms.push(NOMS[k]);
   });
 
-  var progL={"prog":"en progrès","progression":"une progression constante","potentiel":"un potentiel à exploiter","encour":"des résultats encourageants","hausse":"un trimestre en hausse","acquis":"des acquis solides"};
-  var progNoms=prog.map(function(k){return progL[k]||k;});
+  var progL = {prog:"en progrès",progression:"une progression constante",potentiel:"un potentiel à exploiter",encour:"des résultats encourageants",hausse:"un trimestre en hausse",acquis:"des acquis solides"};
+  var progNoms = prog.map(function(k){return progL[k]||k;});
 
-  var hasPos=adjs.length+noms.length>0;
-  var hasNeg=neg.length>0;
-  var hasProg=prog.length>0;
+  var hasPos = adjs.length + noms.length > 0;
+  var hasNeg = neg.length > 0 || compNeg;
+  var hasProg = prog.length > 0;
 
-  // Structures positives variées
-  var structs_pos_adj_nom=[
-    function(){return "Élève "+joinAdjs(adjs)+", "+il+" fait preuve de "+joinNomsAvecDe(noms);},
-    function(){return Il+" se montre "+joinAdjs(adjs)+" et témoigne de "+joinNomsAvecDe(noms);},
-    function(){return "Bon trimestre : "+il+" est "+joinAdjs(adjs)+" et fait preuve de "+joinNomsAvecDe(noms);},
-    function(){return Il+" affiche un profil encourageant : "+joinAdjs(adjs)+", avec "+joinNoms(noms);}
-  ];
-  var structs_pos_adj=[
-    function(){return "Élève "+joinAdjs(adjs);},
-    function(){return Il+" se montre "+joinAdjs(adjs)+" en cours";},
-    function(){return "Bon trimestre : "+il+" est "+joinAdjs(adjs);}
-  ];
-  var structs_pos_nom=[
-    function(){return Il+" fait preuve de "+joinNomsAvecDe(noms);},
-    function(){return "On retiendra de ce trimestre "+joinNoms(noms);},
-    function(){return Il+" se distingue par "+joinNoms(noms);},
-    function(){return "Bon travail : "+il+" témoigne de "+joinNoms(noms);}
-  ];
-
-  function buildPos(){
-    if(adjs.length&&noms.length) return structs_pos_adj_nom[ri%structs_pos_adj_nom.length]();
-    if(adjs.length) return structs_pos_adj[ri%structs_pos_adj.length]();
-    if(noms.length) return structs_pos_nom[ri%structs_pos_nom.length]();
-    return Il+" s'investit de manière satisfaisante";
+  function joinA(arr) {
+    if (!arr.length) return "";
+    if (arr.length===1) return arr[0];
+    return arr.slice(0,-1).join(", ") + " et " + arr[arr.length-1];
+  }
+  function joinN(arr) {
+    // Joindre des groupes nominaux : "une X, une Y et une Z"
+    if (!arr.length) return "";
+    if (arr.length===1) return arr[0];
+    return arr.slice(0,-1).join(", ") + " et " + arr[arr.length-1];
+  }
+  function fixElision(s) {
+    return s.replace(/de une /g,"d'une ").replace(/de un /g,"d'un ").replace(/de de /g,"de ");
   }
 
-  // Formulations négatives
-  function buildNeg(){
-    var phrases=neg.map(function(k){return getNeg(k,ri);});
-    if(phrases.length===1) return phrases[0];
-    return phrases.slice(0,-1).join(", ")+" et "+phrases[phrases.length-1];
+  // Structures positives
+  var SP = [
+    function(){return "Élève " + joinA(adjs) + (noms.length?", "+Il+" fait preuve de "+joinN(noms):"") + ".";},
+    function(){return Il + " se montre " + (adjs.length?joinA(adjs)+" et témoigne":"témoigne") + " de " + (noms.length?joinN(noms):joinA(adjs)) + ".";},
+    function(){return "Bon trimestre : " + il + (adjs.length?" est "+joinA(adjs):"") + (noms.length?" et fait preuve de "+joinN(noms):"") + ".";},
+    function(){return Il + " se distingue par " + (noms.length?joinN(noms):joinA(adjs)) + ".";},
+    function(){return "On retiendra " + (noms.length?joinN(noms):joinA(adjs)+" et un engagement sérieux") + " ce trimestre.";}
+  ];
+  // Versions simplifiées si seulement adjs ou seulement noms
+  var SPA = [
+    function(){return "Élève " + joinA(adjs) + ".";},
+    function(){return Il + " se montre " + joinA(adjs) + " en cours.";},
+    function(){return "Bon trimestre : " + il + " est " + joinA(adjs) + ".";}
+  ];
+  var SPN = [
+    function(){return Il + " fait preuve de " + joinN(noms) + ".";},
+    function(){return "On retiendra " + joinN(noms) + " ce trimestre.";},
+    function(){return Il + " se distingue par " + joinN(noms) + ".";},
+    function(){return "Bon travail : " + il + " témoigne de " + joinN(noms) + ".";}
+  ];
+
+  function buildPos() {
+    if (adjs.length && noms.length) return fixElision(SP[ri%SP.length]());
+    if (adjs.length) return SPA[ri%SPA.length]();
+    if (noms.length) return fixElision(SPN[ri%SPN.length]());
+    return Il + " participe aux activités.";
   }
 
-  // Conclusions basées sur la moyenne si disponible, sinon sur le nombre de points positifs
-  var moyInfo=getMoyInfos();
-  var concBon=moyInfo?moyInfo.concluBon:["Bon trimestre.","À poursuivre.","Continuons dans cette dynamique.","Ces efforts sont à saluer."];
-  var concExc=moyInfo?moyInfo.concluExc:["Excellent trimestre, félicitations !","Très bon trimestre !","Bravo pour ce travail !","Des résultats à la hauteur de l'engagement."];
-  var isExc=moyInfo?(parseFloat(document.getElementById("moyenne").value)>=15):(pos.length+gen.length)>=3;
-  var conclu=(isExc?concExc:concBon)[ri%(isExc?concExc:concBon).length];
+  function buildNeg() {
+    var phrases = neg.map(function(k){return getNegPhrase(k, ri);});
+    if (compNeg) phrases.push("le comportement en cours est à améliorer");
+    if (!phrases.length) return "des progrès sont attendus";
+    if (phrases.length === 1) return phrases[0];
+    return phrases.slice(0,-1).join(", ") + " et " + phrases[phrases.length-1];
+  }
 
-  // Liaisons négatif
-  var liaisons=["Cependant, ","Toutefois, ","Il est à noter que ","Un point de vigilance : "];
-  var liai=liaisons[ri%liaisons.length];
-
-  var p="";
-
-  var trim=document.getElementById("trim_sel")?document.getElementById("trim_sel").value:"";
-
-  var introsT={
-    "T1":["En ce début d'année, ","Dès ce premier trimestre, ","Pour ce premier trimestre, ","En début d'année, ","Ce premier trimestre montre que ","À ce stade de l'année, "],
-    "T2":["À mi-parcours, ","En ce deuxième trimestre, ","Pour ce milieu d'année, ","À mi-année, ","Ce deuxième trimestre montre que ","Au cœur de cette année, "],
-    "T3":["En fin d'année, ","Pour ce bilan final, ","À l'issue de cette année, ","En ce troisième trimestre, ","Ce bilan de fin d'année montre que ","Pour clôturer l'année, "],
-    "":["Ce trimestre, ","Sur ce trimestre, ","Pour cette période, ","Au cours de ce trimestre, ","Ce trimestre montre que ","À ce stade, "]
+  var tr = getTrim();
+  var introNeg = {
+    T1: ["En ce début d'année, ","Dès ce premier trimestre, ","Pour ce premier trimestre, ","En début d'année, ","À ce stade de l'année, ","Ce premier trimestre montre que "],
+    T2: ["À mi-parcours, ","En ce deuxième trimestre, ","Pour ce milieu d'année, ","À mi-année, ","Au cœur de cette année, ","Ce deuxième trimestre montre que "],
+    T3: ["En fin d'année, ","Pour ce bilan final, ","À l'issue de cette année, ","En ce troisième trimestre, ","Pour clôturer l'année, ","Ce troisième trimestre montre que "],
+    "": ["Ce trimestre, ","Sur ce trimestre, ","Pour cette période, ","Au cours de ce trimestre, ","À ce stade, ","Ce trimestre montre que "]
   };
-  var conclusNegT={
-    "T1":["Un travail régulier dès maintenant permettra de progresser.","Une remobilisation rapide est indispensable pour la suite de l'année.","Il est encore tôt, mais ces points doivent être corrigés sans tarder.","Ces difficultés doivent être prises en charge rapidement.","Un engagement plus fort est attendu pour le reste de l'année.","Ces axes de progrès devront être travaillés tout au long de l'année."],
-    "T2":["Un dernier effort au T3 est indispensable pour redresser la situation.","Il est encore temps de progresser significativement au troisième trimestre.","Ces points devront impérativement s'améliorer pour terminer l'année correctement.","Le troisième trimestre doit être l'occasion d'une vraie remobilisation.","Un engagement total est attendu pour clôturer l'année de façon satisfaisante.","Ces lacunes devront être comblées avant le bilan final."],
-    "T3":["Un travail de fond sera indispensable pour la prochaine rentrée.","Ces difficultés devront impérativement être surmontées l'année prochaine.","La prochaine rentrée devra être l'occasion d'un nouveau départ.","Ces axes prioritaires devront être travaillés sérieusement l'an prochain.","Un bilan final en-dessous des attentes. Un réel engagement sera attendu à la rentrée.","Ces points restent à améliorer pour aborder la prochaine année dans de meilleures conditions."],
-    "":["Une remobilisation sérieuse est attendue.","Un effort régulier permettra de progresser.","Des efforts constants sont nécessaires.","Une implication plus forte est indispensable.","Ces points doivent être travaillés avec régularité.","Un engagement plus soutenu est attendu."]
-  };
-  var introArr=introsT[trim]||introsT[""];
-  var concluNegArr=conclusNegT[trim]||conclusNegT[""];
+  var introArr = introNeg[tr] || introNeg[""];
+  var liai = ["Cependant, ","Toutefois, ","Il est à noter que ","Un point de vigilance : ","Néanmoins, ","Il faudra veiller à ce que "];
 
-  if(hasPos&&hasNeg){
-    p=buildPos()+". "+liai+buildNeg()+". "+concluNegArr[ri%concluNegArr.length];
-    if(hasProg&&prog.indexOf("potentiel")<0) p+=" "+Il+" affiche néanmoins "+joinNoms(progNoms)+".";
-  } else if(hasPos){
-    p=buildPos()+". ";
-    if(hasProg) p+=Il+" affiche "+joinNoms(progNoms)+". "+conclu;
-    else p+=conclu;
-  } else if(hasNeg){
-    if(neg.indexOf("perturb")>=0){
-      var ppT={
-        "T1":[Il+" perturbe déjà le bon déroulement des cours. Une attitude plus respectueuse est indispensable dès maintenant.","Le comportement de "+il+" est problématique dès ce début d'année. Un changement d'attitude est attendu immédiatement."],
-        "T2":[Il+" continue de perturber le bon déroulement des cours. Cette situation doit changer au T3.","À mi-parcours, le comportement de "+il+" reste problématique. Une vraie remobilisation est indispensable."],
-        "T3":["En fin d'année, le comportement de "+il+" a nui au bon déroulement des cours. Un changement s'imposera l'an prochain.","Ce troisième trimestre confirme un comportement perturbateur. La prochaine rentrée devra être l'occasion d'un vrai changement."],
-        "":  [Il+" perturbe le bon déroulement des cours. Une attitude plus respectueuse est indispensable.","Le comportement de "+il+" nuit à l'ambiance de travail. Un changement d'attitude est attendu."]
+  var conclu = getConclu(hasPos && !hasNeg, ri);
+  var isNegOnly = !hasPos && hasNeg;
+
+  var p = "";
+
+  if (hasPos && hasNeg) {
+    p = buildPos() + " " + liai[ri%liai.length] + buildNeg() + ". " + conclu;
+    if (hasProg && prog.indexOf("potentiel")<0) p += " " + Il + " affiche par ailleurs " + joinN(progNoms) + ".";
+  } else if (hasPos) {
+    p = buildPos();
+    if (hasProg) p += " " + Il + " affiche " + joinN(progNoms) + ". " + conclu;
+    else p += " " + conclu;
+  } else if (isNegOnly) {
+    if (neg.indexOf("perturb") >= 0) {
+      var pp = {
+        T1: [Il+" perturbe déjà le bon déroulement des cours. Une attitude plus respectueuse est indispensable dès maintenant.",
+             "Le comportement de "+il+" est problématique dès ce début d'année. Un changement immédiat est attendu."],
+        T2: [Il+" continue de perturber le cours. Cette situation doit impérativement changer au T3.",
+             "À mi-parcours, le comportement de "+il+" reste problématique. Une remobilisation est indispensable."],
+        T3: ["En fin d'année, le comportement de "+il+" a nui au bon déroulement des cours. Un changement s'imposera l'an prochain.",
+             "Ce troisième trimestre confirme un comportement perturbateur. La prochaine rentrée devra être l'occasion d'un vrai changement."],
+        "": [Il+" perturbe le bon déroulement des cours. Une attitude plus respectueuse est indispensable.",
+             "Le comportement de "+il+" nuit à l'ambiance de travail. Un changement d'attitude est attendu."]
       };
-      var ppArr=ppT[trim]||ppT[""];
-      p=ppArr[ri%ppArr.length];
+      var ppArr = pp[tr] || pp[""];
+      p = ppArr[ri % ppArr.length];
     } else {
-      p=introArr[ri%introArr.length]+buildNeg()+". "+concluNegArr[ri%concluNegArr.length];
+      p = introArr[ri%introArr.length] + buildNeg() + ". " + conclu;
     }
-    if(hasProg&&prog.indexOf("potentiel")>=0) p+=" Le potentiel est là, il faut s'en saisir.";
-  // Préfixe matière
-  if(mat&&mat!=="EPS"){
-    p="En "+mat+", "+p.charAt(0).toLowerCase()+p.slice(1);
-  }
-
-  // Sports cochés → intégration dans la phrase
-  var sportKeys=keys.filter(function(k){return sel[k]==="sport";});
-  if(sportKeys.length){
-    var sportLabels=sportKeys.map(function(k){
-      var data2=MAT["EPS"]||{};
-      var found=(data2.sports||[]).filter(function(c){return c.k===k;})[0];
-      return found?found.l:k;
-    });
-    var sportStr=sportLabels.length===1?sportLabels[0]:sportLabels.slice(0,-1).join(", ")+" et "+sportLabels[sportLabels.length-1];
-    p=p.replace(/\.$/,"")+", notamment en "+sportStr+".";
-  }
-
-  // Mots libres — intégration naturelle
-  if(ft.length){
-    var sports=["badminton","tennis","basket","football","handball","volley","athlétisme","natation","rugby","judo","escalade","demi-fond","ultimate","frisbee","acrosport","danse","boxe","lutte","cross","ping","course"];
-    var profils=["ulis","segpa","dys","tdah","fragile","blessé","handicap","asthme","dispensé","inclusion","allophone"];
-    var qualites=["volontaire","courageux","courageuse","dynamique","motivé","motivée","enthousiaste","bienveillant","bienveillante","solidaire","discret","discrète","concentré","concentrée","patient","patiente"];
-    var sportMots=ft.filter(function(m){return sports.some(function(s){return m.toLowerCase().indexOf(s)>=0;});});
-    var profilMots=ft.filter(function(m){return profils.some(function(pr){return m.toLowerCase().indexOf(pr)>=0;});});
-    var qualMots=ft.filter(function(m){return qualites.some(function(q){return m.toLowerCase().indexOf(q)>=0;});});
-    var autreMots=ft.filter(function(m){
-      return !sports.some(function(s){return m.toLowerCase().indexOf(s)>=0;})
-          && !profils.some(function(pr){return m.toLowerCase().indexOf(pr)>=0;})
-          && !qualites.some(function(q){return m.toLowerCase().indexOf(q)>=0;});
-    });
-    if(sportMots.length) p=p.replace(/\.$/,"")+", notamment en "+sportMots.join(" et ")+".";
-    if(qualMots.length) p=p.replace(/\.$/,"")+" "+Il+" se montre également "+qualMots.join(" et ")+".";
-    if(profilMots.length) p=p.replace(/\.$/,"")+" (profil "+profilMots.join(", ")+" pris en compte).";
-    if(autreMots.length){
-      // Détecter absences/retards
-      var absKeywords=["absent","absente","absences","retard","retards"];
-      var isAbs=autreMots.some(function(m){return absKeywords.some(function(a){return m.toLowerCase().indexOf(a)>=0;});});
-      if(isAbs) p=p.replace(/\.$/,"")+". À signaler : "+autreMots.join(", ")+".";
-      else p=p.replace(/\.$/,"")+" ("+autreMots.join(", ")+").";
+    if (hasProg && prog.indexOf("potentiel")>=0) p += " Le potentiel est là, il faut s'en saisir.";
+  } else if (compNeg) {
+    var cpArr = [Il+" doit revoir son attitude en cours. Des efforts de respect sont attendus.",
+                 "Le comportement de "+il+" est à améliorer. Une implication plus positive est souhaitée.",
+                 "L'attitude en cours laisse à désirer. Un effort est demandé.",
+                 Il+" doit adopter une attitude plus respectueuse et constructive."];
+    p = cpArr[ri % cpArr.length];
+  } else if (hasProg) {
+    if (prog.indexOf("potentiel") >= 0) {
+      p = Il+" dispose d'un réel potentiel à exploiter. Avec plus d'implication, les résultats seront au rendez-vous.";
+    } else {
+      var pi = ["Ce trimestre, "+il+" affiche ","Les résultats témoignent de ","On note "];
+      p = fixElision(pi[ri%pi.length] + joinN(progNoms) + ". " + conclu);
     }
+  } else {
+    p = Il + " participe aux activités. Des marges de progression existent.";
   }
 
-   // Corriger "de une/un" → "d'une/d'un"
-  p=p.replace(/de une /g,"d'une ").replace(/de un /g,"d'un ");
+  p = fixElision(p);
 
-  // Limite 255 caractères
-  if(p.length>255){
-    p=p.substring(0,252)+"...";
+  // Préfixe matière (sauf EPS)
+  if (mat && mat !== "EPS") {
+    p = "En " + mat + ", " + p.charAt(0).toLowerCase() + p.slice(1);
   }
+
+  // Sports cochés
+  if (sport.length) {
+    var d2 = MAT["EPS"] || {};
+    var sportLabels = sport.map(function(k){
+      var found = (d2.sports||[]).filter(function(c){return c.k===k;})[0];
+      return found ? found.l : k;
+    });
+    var sportStr = sportLabels.length===1 ? sportLabels[0] : sportLabels.slice(0,-1).join(", ")+" et "+sportLabels[sportLabels.length-1];
+    p = p.replace(/\.$/, "") + ", notamment en " + sportStr + ".";
+  }
+
+  // Mots libres
+  var fv = document.getElementById("free").value;
+  var ftArr = fv ? fv.split(",").map(function(s){return s.trim();}).filter(Boolean) : [];
+  if (ftArr.length) {
+    var profils = ["ulis","segpa","dys","tdah","fragile","blessé","handicap","asthme","dispensé","inclusion","allophone"];
+    var isProfil = ftArr.some(function(m){return profils.some(function(pr){return m.toLowerCase().indexOf(pr)>=0;});});
+    var ctx = ftArr.join(", ");
+    if (isProfil) p = p.replace(/\.$/, "") + " (profil "+ctx+" pris en compte).";
+    else p = p.replace(/\.$/, "") + " ("+ctx+").";
+  }
+
+  // Limite 255 chars
+  if (p.length > 255) p = p.substring(0, 252) + "...";
 
   return p;
 }
-}
 
-function generer(){
-  var keys=Object.keys(sel);
-  var fv=document.getElementById("free").value;
-  var ft=fv?fv.split(",").map(function(s){return s.trim();}).filter(Boolean):[];
-  if(!keys.length&&!ft.length){alert("Sélectionne au moins un mot-clé.");return;}
-  prenomCur=document.getElementById("prenom").value.trim();
-  classeCur=document.getElementById("classe").value;
-  matCur=document.getElementById("matiere").value;
-  var f=genre==="F";
-  var Il=prenomCur||(f?"Elle":"Il");
-  var il=prenomCur||(f?"elle":"il");
-  try{
-    phrase=construire(keys,ft,f,Il,il,matCur,ri);
-  }catch(e){
-    phrase="Erreur de génération. Essaie de modifier les mots-clés. ("+e.message+")";
-  }
-  if(!phrase||phrase.trim()===""){
-    phrase="Génération impossible avec cette combinaison. Essaie de regénérer.";
-  }
-  document.getElementById("rz").style.display="block";
-  document.getElementById("ok").style.display="none";
-  document.getElementById("rl").textContent=prenomCur?"Phrase pour "+prenomCur:"Phrase générée";
-  document.getElementById("rt").textContent=phrase;
+function generer() {
+  var keys = Object.keys(sel);
+  var fv = document.getElementById("free").value;
+  var ft = fv ? fv.split(",").map(function(s){return s.trim();}).filter(Boolean) : [];
+  if (!keys.length && !ft.length) { alert("Sélectionne au moins un mot-clé."); return; }
+  prenomCur = document.getElementById("prenom").value.trim();
+  classeCur = document.getElementById("classe").value;
+  matCur = document.getElementById("matiere").value;
+  var f = genre === "F";
+  var Il = prenomCur || (f?"Elle":"Il");
+  var il = prenomCur || (f?"elle":"il");
+  phrase = genPhrase(keys, ft, f, Il, il, matCur, ri);
+  document.getElementById("rz").style.display = "block";
+  document.getElementById("ok").style.display = "none";
+  document.getElementById("rl").textContent = prenomCur ? "Phrase pour "+prenomCur : "Phrase générée";
+  document.getElementById("rt").textContent = phrase;
 }
-function regenerer(){ri++;generer();}
+function regenerer() { ri++; generer(); }
 
-function enregistrer(){
-  if(!phrase)return;
-  var d=db();
-  d.push({id:Date.now(),prenom:prenomCur||"—",classe:classeCur,matiere:matCur,genre:genre,phrase:phrase,date:new Date().toLocaleDateString("fr-FR"),tri:trim(),an:annee()});
-  dbS(d);badge();popAn();
-  var b=document.getElementById("ok");b.style.display="block";setTimeout(function(){b.style.display="none";},2000);
+function enregistrer() {
+  if (!phrase) return;
+  var d = DB();
+  d.push({id:Date.now(),prenom:prenomCur||"—",classe:classeCur,matiere:matCur,genre:genre,phrase:phrase,date:new Date().toLocaleDateString("fr-FR"),tri:trimAuto(),an:annee()});
+  dbS(d); badge(); popAn();
+  var b = document.getElementById("ok");
+  b.style.display = "block";
+  setTimeout(function(){b.style.display="none";}, 2000);
 }
-function copierPhrase(){
+function copierPhrase() {
   navigator.clipboard.writeText(phrase).catch(function(){var t=document.createElement("textarea");t.value=phrase;document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);});
 }
-function getMoyInfos(){
-  var v=parseFloat(document.getElementById("moyenne").value);
-  if(isNaN(v)||v<0||v>20) return null;
-  var t=document.getElementById("trim_sel").value||"";
-
-  var data={
-    // < 8 — Insuffisant
-    insuf:{
-      label:"Résultats insuffisants",
-      T1:{
-        bon:["Ce premier trimestre révèle des difficultés importantes. Un travail régulier est indispensable dès maintenant.",
-             "Les résultats de ce début d'année sont en-dessous des attentes. Une remobilisation rapide est nécessaire.",
-             "Un premier trimestre difficile. Il est essentiel de poser des bases solides sans tarder.",
-             "Les résultats sont insuffisants. Ce début d'année doit servir de prise de conscience pour s'engager davantage.",
-             "Un départ compliqué. Des efforts importants sont à fournir pour combler les lacunes identifiées.",
-             "Ce trimestre met en lumière des fragilités importantes. Un soutien et un engagement plus fort sont attendus."],
-        exc:["Malgré quelques points positifs, les résultats restent insuffisants. Un effort soutenu est indispensable.",
-             "Les qualités observées n'ont pas encore suffi à compenser les lacunes. Il faut s'investir davantage.",
-             "Un premier trimestre en-dessous des attentes. Le potentiel existe mais doit se concrétiser en résultats."]
-      },
-      T2:{
-        bon:["À mi-parcours, les résultats restent insuffisants. Une remobilisation immédiate est indispensable.",
-             "Le deuxième trimestre confirme des difficultés persistantes. Un effort urgent est attendu.",
-             "Les résultats de ce trimestre sont préoccupants. Il est encore temps de redresser la situation.",
-             "Des lacunes importantes persistent. Un travail sérieux et régulier est indispensable pour le troisième trimestre.",
-             "À mi-année, la situation est préoccupante. Une implication bien plus forte est attendue.",
-             "Les résultats ne progressent pas suffisamment. Un engagement total est nécessaire pour terminer l'année correctement."],
-        exc:["Malgré les efforts observés, les résultats restent insuffisants. La mobilisation doit être encore plus forte.",
-             "Les points positifs ne compensent pas les lacunes. Un travail intensif est attendu pour le T3."]
-      },
-      T3:{
-        bon:["Ce troisième trimestre clôture une année difficile. Des efforts importants seront nécessaires l'an prochain.",
-             "Les résultats finaux restent insuffisants. Une remise en question sérieuse s'impose pour la rentrée.",
-             "Une année en-dessous des attentes. Il faudra repartir sur de meilleures bases l'année prochaine.",
-             "Bilan final insuffisant. La progression attendue n'a pas été au rendez-vous.",
-             "Ce trimestre confirme une année difficile. Un travail de fond sera indispensable pour progresser.",
-             "Les résultats de fin d'année sont insuffisants. Un effort majeur est à envisager pour la suite."],
-        exc:["Malgré quelques qualités observées, les résultats finaux restent en-dessous des attentes.",
-             "Les progrès attendus n'ont pas été suffisants pour atteindre le niveau requis."]
-      },
-      def:{
-        bon:["Les résultats sont insuffisants. Un effort important est indispensable pour progresser.",
-             "Les résultats sont en-dessous des attentes. Un travail sérieux et régulier est attendu.",
-             "Un niveau insuffisant. Une remobilisation est nécessaire sans attendre.",
-             "Des lacunes importantes à combler. Un engagement plus fort est attendu.",
-             "Les résultats restent insuffisants malgré les efforts. Il faut redoubler d'implication.",
-             "Le niveau atteint est insuffisant. Des efforts soutenus sont indispensables."],
-        exc:["Malgré quelques points positifs, les résultats restent insuffisants.",
-             "Les qualités ne se sont pas traduites en résultats satisfaisants."]
-      }
-    },
-    // 8-11 — Fragile
-    fragile:{
-      label:"Résultats fragiles",
-      T1:{
-        bon:["Un premier trimestre fragile. Il faudra consolider les bases pour progresser.",
-             "Les résultats de ce début d'année restent fragiles. Un travail plus régulier est attendu.",
-             "Un départ hésitant. Des efforts supplémentaires permettront de solidifier les acquis.",
-             "Ce premier trimestre révèle des fragilités à corriger rapidement.",
-             "Les résultats sont passables. Il est encore tôt pour s'inquiéter, mais un investissement plus fort est attendu.",
-             "Un début d'année en demi-teinte. La progression est possible avec un engagement plus régulier."],
-        exc:["Les qualités observées doivent se traduire par de meilleurs résultats. Encourageant mais perfectible.",
-             "Bon état d'esprit, mais les résultats restent fragiles. Continuons à travailler."]
-      },
-      T2:{
-        bon:["À mi-parcours, les résultats restent fragiles. Un travail plus soutenu est indispensable.",
-             "Le deuxième trimestre ne montre pas encore la progression attendue. Des efforts sont nécessaires.",
-             "Les résultats stagnent. Un engagement plus fort est attendu pour le troisième trimestre.",
-             "À mi-année, le niveau reste fragile. Il est encore temps de progresser significativement.",
-             "Des résultats insuffisants pour valider les compétences. Un travail de fond est à fournir.",
-             "Le cap du milieu d'année révèle des fragilités persistantes à combler."],
-        exc:["Les efforts sont visibles mais pas encore suffisants. Restons mobilisés pour le T3.",
-             "L'implication est là, les résultats doivent suivre. Encourageant mais à confirmer."]
-      },
-      T3:{
-        bon:["Un bilan de fin d'année fragile. Des progrès sont attendus pour la prochaine rentrée.",
-             "Les résultats finaux restent en-dessous du niveau attendu. Un travail de consolidation s'impose.",
-             "Une année en demi-teinte. Des efforts plus soutenus seront nécessaires l'an prochain.",
-             "Bilan final fragile. La progression n'a pas été suffisante sur l'ensemble de l'année.",
-             "Les résultats de fin d'année témoignent de lacunes persistantes à combler.",
-             "Une année insuffisante sur le plan des résultats. Un réel engagement sera attendu l'année prochaine."],
-        exc:["Les qualités observées n'ont pas suffi à compenser les lacunes sur l'ensemble de l'année.",
-             "Malgré les efforts, les résultats finaux restent fragiles."]
-      },
-      def:{
-        bon:["Les résultats restent fragiles. Des efforts supplémentaires sont attendus.",
-             "Un niveau passable qui peut et doit progresser.",
-             "Les résultats sont insuffisants pour valider pleinement les acquis.",
-             "Des fragilités persistent. Un travail régulier permettra de progresser.",
-             "Le niveau atteint est fragile. Des efforts plus constants sont nécessaires.",
-             "Des résultats passables qui appellent à un engagement plus soutenu."],
-        exc:["Les qualités observées méritent de se concrétiser en de meilleurs résultats.",
-             "L'investissement doit se traduire par une progression plus marquée."]
-      }
-    },
-    // 12-13 — Passable
-    passable:{
-      label:"Résultats passables",
-      T1:{
-        bon:["Un premier trimestre correct. Des efforts réguliers permettront de progresser.",
-             "Un début d'année satisfaisant. Il faudra confirmer sur la durée.",
-             "Les résultats sont passables. Un engagement plus constant est attendu pour la suite.",
-             "Un premier trimestre honorable. La marge de progression est encore importante.",
-             "Début d'année correct, mais perfectible. L'objectif est de viser plus haut.",
-             "Un trimestre passable qui laisse entrevoir une progression possible avec plus d'investissement."],
-        exc:["Bon début d'année. Les qualités observées permettent d'envisager une belle progression.",
-             "Premier trimestre encourageant. Les bases sont là pour aller plus loin."]
-      },
-      T2:{
-        bon:["À mi-parcours, les résultats sont satisfaisants mais perfectibles. Continuons les efforts.",
-             "Un deuxième trimestre passable. Un dernier effort pour terminer l'année en beauté.",
-             "Le niveau est correct. Un engagement plus soutenu au T3 permettrait de progresser.",
-             "À mi-année, les résultats sont dans la moyenne. Visons plus haut pour finir fort.",
-             "Résultats passables à mi-parcours. La tendance doit s'améliorer pour le bilan final.",
-             "Un deuxième trimestre honorable. Il faut maintenant s'appuyer sur ces bases pour progresser."],
-        exc:["Bon milieu d'année. Les qualités sont là pour terminer en beauté.",
-             "Un trimestre encourageant. La dynamique positive doit se confirmer au T3."]
-      },
-      T3:{
-        bon:["Un bilan de fin d'année correct mais perfectible. Des progrès sont attendus l'an prochain.",
-             "Les résultats finaux sont passables. Un travail plus régulier permettra de progresser.",
-             "Une année dans la moyenne. L'objectif sera de viser plus haut la prochaine fois.",
-             "Bilan final satisfaisant. La marge de progression est encore importante.",
-             "Les résultats de fin d'année sont corrects sans être remarquables.",
-             "Une année passable. Un engagement plus fort permettrait d'atteindre de meilleurs résultats."],
-        exc:["Un bilan de fin d'année honorable. Les qualités observées permettent d'envisager une progression.",
-             "Les résultats finaux sont corrects. Les efforts fournis sont à saluer."]
-      },
-      def:{
-        bon:["Des résultats passables. Un engagement plus régulier permettrait de progresser.",
-             "Le niveau est correct mais perfectible. Continuons les efforts.",
-             "Des résultats dans la moyenne, avec une marge de progression encore importante.",
-             "Un trimestre satisfaisant sans être remarquable. Visons plus haut.",
-             "Les résultats sont passables. Un effort supplémentaire permettrait de progresser davantage.",
-             "Correct mais perfectible. L'investissement doit être plus constant."],
-        exc:["Les qualités observées méritent de se traduire par de meilleurs résultats.",
-             "Bon état d'esprit. Les résultats doivent suivre."]
-      }
-    },
-    // 14-15 — Bon
-    bon:{
-      label:"Bon trimestre",
-      T1:{
-        bon:["Un très bon début d'année. Continuons sur cette lancée !",
-             "Excellent premier trimestre. Les bases sont solides pour la suite.",
-             "Un départ remarquable. Il faudra confirmer ce niveau tout au long de l'année.",
-             "Bon premier trimestre. L'objectif est de maintenir ce niveau sur la durée.",
-             "Un début d'année très encourageant. Les fondations sont là pour une belle année.",
-             "Premier trimestre réussi. Ces résultats témoignent d'un travail sérieux et régulier.",
-             "Un très bon départ. La dynamique est positive, il faut la maintenir."],
-        exc:["Excellent début d'année ! Les qualités observées promettent une belle progression.",
-             "Un premier trimestre remarquable. Les résultats récompensent un investissement sérieux."]
-      },
-      T2:{
-        bon:["À mi-parcours, les résultats sont très satisfaisants. Maintenons ce cap !",
-             "Un deuxième trimestre réussi. La tendance est très positive pour le bilan final.",
-             "Bons résultats à mi-année. Un dernier effort pour clôturer l'année en beauté.",
-             "À mi-parcours, le niveau est très satisfaisant. Continuons dans cette dynamique.",
-             "Un deuxième trimestre encourageant. L'objectif est de maintenir ces bons résultats.",
-             "De bons résultats à mi-année qui témoignent d'un travail régulier et sérieux.",
-             "Très bon deuxième trimestre. La progression est au rendez-vous."],
-        exc:["Excellent milieu d'année ! Les résultats récompensent un travail remarquable.",
-             "Un deuxième trimestre exceptionnel. La dynamique est au beau fixe."]
-      },
-      T3:{
-        bon:["Un bilan de fin d'année très satisfaisant. Bravo pour ce travail !",
-             "De très bons résultats finaux qui récompensent un engagement sérieux tout au long de l'année.",
-             "Une belle année ! Les résultats témoignent d'un travail régulier et efficace.",
-             "Bilan final très positif. Ces résultats sont le fruit d'un investissement constant.",
-             "Une fin d'année réussie. Ces bons résultats sont à saluer.",
-             "Un bilan final très satisfaisant. Bravo pour cette belle année de travail.",
-             "De très bons résultats pour clôturer l'année. Excellent travail !"],
-        exc:["Bilan final excellent. Une année remarquable qui récompense un travail exceptionnel.",
-             "Des résultats finaux remarquables. Bravo pour cette excellente année !"]
-      },
-      def:{
-        bon:["Bon trimestre. Continuons dans cette dynamique.",
-             "De bons résultats qui récompensent un travail sérieux.",
-             "Un trimestre réussi. Les efforts payent.",
-             "Très satisfaisant. Les résultats sont à la hauteur de l'investissement.",
-             "Bon trimestre. Ces résultats témoignent d'un engagement régulier.",
-             "De bons résultats. Bravo pour ce travail sérieux.",
-             "Un trimestre réussi. Maintenons ce cap."],
-        exc:["Excellent trimestre ! Les qualités se traduisent en de très bons résultats.",
-             "De très bons résultats. Le travail fourni est remarquable."]
-      }
-    },
-    // 16-17 — Très bon
-    tresbien:{
-      label:"Très bon trimestre",
-      T1:{
-        bon:["Un début d'année exceptionnel. Ces résultats promettent une très belle année.",
-             "Excellent premier trimestre ! Le niveau atteint est remarquable.",
-             "Un départ fantastique. Ces résultats témoignent d'un investissement exemplaire.",
-             "Premier trimestre exceptionnel. Les bases sont solides pour une année remarquable.",
-             "Un tout premier trimestre remarquable. La barre est placée très haut.",
-             "Excellent début d'année ! Ces résultats récompensent un travail rigoureux et constant."],
-        exc:["Un premier trimestre hors normes. Félicitations pour ces résultats exceptionnels.",
-             "Des résultats remarquables dès le premier trimestre. Bravo !"]
-      },
-      T2:{
-        bon:["À mi-parcours, les résultats sont exceptionnels. Maintenons ce niveau !",
-             "Un deuxième trimestre remarquable. La tendance est très positive pour le bilan final.",
-             "Excellent milieu d'année ! Ces résultats témoignent d'un travail constant et exigeant.",
-             "À mi-année, le niveau est exceptionnel. Ces résultats sont à saluer.",
-             "Un deuxième trimestre hors pair. Bravo pour cet engagement exemplaire.",
-             "De très bons résultats à mi-parcours. L'objectif est de clôturer l'année en beauté."],
-        exc:["Un deuxième trimestre exceptionnel. Ces résultats récompensent un travail remarquable.",
-             "Excellent milieu d'année ! La dynamique est au beau fixe."]
-      },
-      T3:{
-        bon:["Un bilan de fin d'année exceptionnel. Bravo pour cette très belle année !",
-             "Des résultats finaux remarquables qui couronnent une année de travail exemplaire.",
-             "Une fin d'année brillante. Ces résultats témoignent d'un engagement remarquable.",
-             "Bilan final exceptionnel. Une très belle année à saluer.",
-             "Des résultats de fin d'année remarquables. Bravo pour cet investissement exemplaire.",
-             "Une année brillante ! Ces résultats finaux sont le fruit d'un travail exceptionnel."],
-        exc:["Bilan final exceptionnel. Une année remarquable qui mérite toutes les félicitations.",
-             "Des résultats finaux hors normes. Bravo pour cette année exceptionnelle !"]
-      },
-      def:{
-        bon:["Très bon trimestre ! Ces résultats témoignent d'un travail remarquable.",
-             "Excellent trimestre. Le niveau atteint est très satisfaisant.",
-             "De très bons résultats. Bravo pour cet engagement exemplaire.",
-             "Très bon trimestre ! L'investissement se traduit par d'excellents résultats.",
-             "Des résultats remarquables. Ces efforts sont à saluer.",
-             "Excellent trimestre. Ces résultats récompensent un travail rigoureux.",
-             "Très bon trimestre ! Continuons sur cette lancée."],
-        exc:["Excellent trimestre ! Des résultats exceptionnels qui récompensent un travail remarquable.",
-             "Des résultats hors normes. Félicitations !"]
-      }
-    },
-    // >= 18 — Excellent
-    excellent:{
-      label:"Excellent trimestre",
-      T1:{
-        bon:["Un premier trimestre brillant. Ces résultats exceptionnels auguren d'une très belle année.",
-             "Début d'année exceptionnel ! Ces résultats témoignent d'une maîtrise remarquable.",
-             "Un départ fulgurant. Ces résultats placent la barre très haut.",
-             "Premier trimestre hors normes. Bravo pour cet investissement exemplaire.",
-             "Un début d'année brillant. Ces résultats sont à la hauteur d'un engagement exceptionnel.",
-             "Excellent premier trimestre ! Ces résultats remarquables sont à saluer chaleureusement."],
-        exc:["Un premier trimestre exceptionnel. Félicitations pour ces résultats brillants !",
-             "Des résultats hors normes dès le premier trimestre. Bravo !"]
-      },
-      T2:{
-        bon:["À mi-parcours, les résultats sont brillants. Ces performances sont remarquables.",
-             "Un deuxième trimestre exceptionnel. La tendance est au beau fixe.",
-             "Excellent milieu d'année ! Ces résultats témoignent d'une maîtrise exemplaire.",
-             "À mi-année, le niveau est exceptionnel. Ces performances sont à saluer.",
-             "Un deuxième trimestre brillant. Bravo pour cet engagement remarquable.",
-             "Des résultats exceptionnels à mi-parcours. L'objectif est de maintenir ce niveau jusqu'au bout."],
-        exc:["Un deuxième trimestre brillant. Ces résultats récompensent un travail hors normes.",
-             "Excellent milieu d'année ! Ces performances sont remarquables."]
-      },
-      T3:{
-        bon:["Un bilan de fin d'année brillant. Ces résultats couronnent une année exceptionnelle.",
-             "Des résultats finaux hors normes. Bravo pour cette année brillante !",
-             "Une fin d'année exceptionnelle qui récompense un travail remarquable tout au long de l'année.",
-             "Bilan final brillant. Ces résultats témoignent d'une maîtrise exemplaire.",
-             "Des résultats de fin d'année exceptionnels. Félicitations pour cette belle année.",
-             "Une année brillante ! Ces résultats finaux couronnent un investissement remarquable."],
-        exc:["Bilan final exceptionnel. Félicitations pour cette année brillante !",
-             "Des résultats finaux hors normes qui récompensent une année de travail exemplaire."]
-      },
-      def:{
-        bon:["Excellent trimestre ! Ces résultats remarquables témoignent d'un investissement exceptionnel.",
-             "Des résultats hors normes. Bravo pour ce travail brillant !",
-             "Excellent trimestre ! Ces performances sont à saluer chaleureusement.",
-             "Des résultats exceptionnels. Félicitations pour cet engagement remarquable.",
-             "Un trimestre brillant. Ces résultats témoignent d'une maîtrise exemplaire.",
-             "Excellent trimestre ! Ces performances sont remarquables.",
-             "Des résultats hors normes. Bravo !"],
-        exc:["Excellent trimestre ! Ces résultats exceptionnels récompensent un travail brillant.",
-             "Des performances hors normes. Félicitations !"]
-      }
-    }
-  };
-
-  var niveau;
-  if(v<8) niveau=data.insuf;
-  else if(v<10) niveau=data.fragile;
-  else if(v<12) niveau=data.passable;
-  else if(v<14) niveau=data.passable;
-  else if(v<16) niveau=data.bon;
-  else if(v<18) niveau=data.tresbien;
-  else niveau=data.excellent;
-
-  var trimData=t&&niveau[t]?niveau[t]:niveau.def;
-  return {label:niveau.label, concluBon:trimData.bon, concluExc:trimData.exc};
-}
-function updateMoyLabel(){
-  var info=getMoyInfos();
-  document.getElementById("moy-label").textContent=info?info.label:"";
-}
-function resetForm(){
-  sel={};ri=0;
+function resetForm() {
+  sel={}; ri=0;
   document.getElementById("prenom").value="";
   document.getElementById("moyenne").value="";
-  document.getElementById("moy-label").textContent="";
+  document.getElementById("moy-lbl").textContent="";
+  document.getElementById("trim_sel").value="";
   document.getElementById("free").value="";
   document.getElementById("rz").style.display="none";
-  phrase="";renderAll();
+  phrase=""; renderAll();
 }
 
-// ── LISTE ────────────────────────────────────────────────────────────────────
-function filtrer(f,btn){
+// ══════════════════════════════════════════════════════════════════════════════
+// LISTE / EXPORT
+// ══════════════════════════════════════════════════════════════════════════════
+function filtrer(f,btn) {
   filtreCur=f;
   document.querySelectorAll(".fb").forEach(function(b){b.classList.remove("on");});
-  btn.classList.add("on");renderListe();
+  btn.classList.add("on"); renderListe();
 }
-function popAn(){
-  var d=db();var ans=[];
+function popAn() {
+  var d=DB(); var ans=[];
   d.forEach(function(e){if(e.an&&ans.indexOf(e.an)<0)ans.push(e.an);});
   ans.sort().reverse();
   ["fa","ean"].forEach(function(id){
-    var el=document.getElementById(id);if(!el)return;
+    var el=document.getElementById(id); if(!el)return;
     el.innerHTML='<option value="t">Toutes années</option>'+ans.map(function(a){return '<option value="'+a+'">'+a+'</option>';}).join("");
   });
 }
-function renderListe(){
-  var d=db();
+function renderListe() {
+  var d=DB();
   var fm=document.getElementById("fm").value;
   var ft=document.getElementById("ft").value;
   var fa=document.getElementById("fa").value;
@@ -1105,7 +744,7 @@ function renderListe(){
   var el=document.getElementById("elist");
   if(!d.length){el.innerHTML='<div class="emp">Aucune appréciation enregistrée.</div>';return;}
   el.innerHTML=d.map(function(e){
-    return '<div class="ei"><div class="ein"><div class="en">'+e.prenom+' <span style="font-weight:400;font-size:12px;color:var(--mut)">'+e.classe+'</span></div>'
+    return '<div class="ei"><div class="ein"><div class="en">'+e.prenom+' <span style="font-weight:400;font-size:12px;color:var(--m)">'+e.classe+'</span></div>'
       +'<div class="em">'+(e.tri||"")+" "+(e.an||"")+" · "+(e.matiere||"")+" · "+e.date+'</div>'
       +'<div class="ep">'+e.phrase+'</div></div>'
       +'<div style="display:flex;flex-direction:column;gap:5px;flex-shrink:0">'
@@ -1113,20 +752,14 @@ function renderListe(){
       +'<button class="ib d" onclick="delItem('+e.id+')">🗑</button></div></div>';
   }).join("");
 }
-function cpItem(id){var e=db().filter(function(x){return x.id===id;})[0];if(e)navigator.clipboard.writeText(e.phrase).catch(function(){});}
-function delItem(id){if(!confirm("Supprimer ?"))return;dbS(db().filter(function(x){return x.id!==id;}));badge();renderListe();renderExp();}
-
-// ── EXPORT ───────────────────────────────────────────────────────────────────
-function renderExp(){
-  var d=db();
-  var ecl=document.getElementById("ecl").value;
-  var emat=document.getElementById("emat").value;
-  var etr=document.getElementById("etr").value;
-  var ean=document.getElementById("ean").value;
-  if(ecl!=="t") d=d.filter(function(e){return e.classe===ecl;});
-  if(emat!=="t") d=d.filter(function(e){return e.matiere===emat;});
-  if(etr!=="t") d=d.filter(function(e){return (e.tri||"T1")===etr;});
-  if(ean!=="t") d=d.filter(function(e){return (e.an||"")===ean;});
+function cpItem(id){var e=DB().filter(function(x){return x.id===id;})[0];if(e)navigator.clipboard.writeText(e.phrase).catch(function(){});}
+function delItem(id){if(!confirm("Supprimer ?"))return;dbS(DB().filter(function(x){return x.id!==id;}));badge();renderListe();renderExp();}
+function renderExp() {
+  var d=DB();
+  if(document.getElementById("ecl").value!=="t") d=d.filter(function(e){return e.classe===document.getElementById("ecl").value;});
+  if(document.getElementById("emat").value!=="t") d=d.filter(function(e){return e.matiere===document.getElementById("emat").value;});
+  if(document.getElementById("etr").value!=="t") d=d.filter(function(e){return (e.tri||"T1")===document.getElementById("etr").value;});
+  if(document.getElementById("ean").value!=="t") d=d.filter(function(e){return (e.an||"")===document.getElementById("ean").value;});
   var el=document.getElementById("ecnt");
   if(!d.length){el.textContent="Aucune appréciation.";return;}
   el.textContent=d.map(function(e){
@@ -1134,9 +767,7 @@ function renderExp(){
   }).join("\n\n");
 }
 function copierExp(){navigator.clipboard.writeText(document.getElementById("ecnt").textContent).catch(function(){});}
-
-function badge(){var n=db().length;document.getElementById("bdg").textContent=n?"("+n+")":"";}
-
+function badge(){var n=DB().length;document.getElementById("bdg").textContent=n?"("+n+")":"";}
 function setTab(id){
   document.querySelectorAll(".tab").forEach(function(t,i){t.classList.toggle("on",["gen","lst","exp"][i]===id);});
   document.querySelectorAll(".sec").forEach(function(s){s.classList.remove("on");});
@@ -1145,24 +776,24 @@ function setTab(id){
   if(id==="exp"){popAn();renderExp();}
 }
 
-// ── INIT ─────────────────────────────────────────────────────────────────────
-// Migration données eps_v2 → eps_v3
+// ══════════════════════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════════════════════
+// Migration eps_v2 → eps_v3
 (function(){
   try{
     var old=localStorage.getItem("eps_v2");
     var cur=localStorage.getItem("eps_v3");
-    if(old&&!cur){
-      localStorage.setItem("eps_v3",old);
-    } else if(old&&cur){
-      var d1=JSON.parse(old)||[];
-      var d2=JSON.parse(cur)||[];
+    if(old&&!cur){localStorage.setItem("eps_v3",old);}
+    else if(old&&cur){
+      var d1=JSON.parse(old)||[],d2=JSON.parse(cur)||[];
       var ids=d2.map(function(x){return x.id;});
       var merged=d2.concat(d1.filter(function(x){return ids.indexOf(x.id)<0;}));
       localStorage.setItem("eps_v3",JSON.stringify(merged));
     }
   }catch(e){}
 })();
-onClasse();
+
 onMatiere();
 badge();
 </script>
