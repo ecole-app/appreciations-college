@@ -83,7 +83,15 @@ hr{border:none;border-top:1px solid var(--bor);margin:12px 0}
   </div>
   <div class="g2">
     <div><label>Moyenne <span style="font-weight:400;color:var(--mut)">(optionnelle, /20)</span></label><input type="number" id="moyenne" min="0" max="20" step="0.5" placeholder="Ex: 13.5" oninput="updateMoyLabel()"></div>
-    <div style="display:flex;align-items:flex-end;padding-bottom:2px"><span id="moy-label" style="font-size:13px;color:var(--mut);font-style:italic"></span></div>
+    <div><label>Trimestre</label>
+      <select id="trim_sel" onchange="updateMoyLabel()">
+        <option value="">Non précisé</option>
+        <option value="T1">T1 — Début d'année</option>
+        <option value="T2">T2 — Milieu d'année</option>
+        <option value="T3">T3 — Fin d'année</option>
+      </select>
+      <span id="moy-label" style="font-size:12px;color:var(--mut);font-style:italic;display:block;margin-top:4px"></span>
+    </div>
   </div>
   <div class="sl">Général — toutes matières</div><div class="chips" id="cp-gen"></div>
   <div class="sl" id="lpos">Points positifs</div><div class="chips" id="cp-pos"></div>
@@ -754,12 +762,293 @@ function copierPhrase(){
 function getMoyInfos(){
   var v=parseFloat(document.getElementById("moyenne").value);
   if(isNaN(v)||v<0||v>20) return null;
-  if(v<8)   return {label:"Résultats insuffisants",concluBon:["Des efforts importants sont nécessaires.","Les résultats sont en-dessous des attentes.","Un travail sérieux est indispensable pour progresser."],concluExc:["Des efforts importants sont nécessaires.","Les résultats restent insuffisants malgré quelques points positifs."]};
-  if(v<10)  return {label:"Résultats passables",concluBon:["Des efforts sont encore nécessaires.","Les résultats restent fragiles.","Il faudra travailler davantage pour progresser."],concluExc:["Des progrès sont à réaliser pour atteindre un niveau satisfaisant.","Les résultats sont encore insuffisants."]};
-  if(v<12)  return {label:"Résultats passables",concluBon:["Des progrès sont encore possibles.","Passable. Des efforts supplémentaires sont attendus.","Le niveau est suffisant mais perfectible."],concluExc:["Des progrès sont encore à réaliser.","Le niveau atteint reste en-dessous du potentiel."]};
-  if(v<14)  return {label:"Bon trimestre",concluBon:["Bon trimestre.","À poursuivre.","Continuons dans cette dynamique."],concluExc:["Bon trimestre, félicitations.","De bons résultats qui récompensent le travail fourni."]};
-  if(v<16)  return {label:"Très bon trimestre",concluBon:["Très bon trimestre.","De très bons résultats.","Continuons dans cette dynamique positive."],concluExc:["Très bon trimestre, félicitations !","Excellent travail, de très bons résultats."]};
-  return {label:"Excellent trimestre",concluBon:["Excellent trimestre !","Des résultats remarquables.","Félicitations pour ce trimestre exceptionnel !"],concluExc:["Excellent trimestre, félicitations !","Des résultats exceptionnels. Bravo !"]};
+  var t=document.getElementById("trim_sel").value||"";
+
+  var data={
+    // < 8 — Insuffisant
+    insuf:{
+      label:"Résultats insuffisants",
+      T1:{
+        bon:["Ce premier trimestre révèle des difficultés importantes. Un travail régulier est indispensable dès maintenant.",
+             "Les résultats de ce début d'année sont en-dessous des attentes. Une remobilisation rapide est nécessaire.",
+             "Un premier trimestre difficile. Il est essentiel de poser des bases solides sans tarder.",
+             "Les résultats sont insuffisants. Ce début d'année doit servir de prise de conscience pour s'engager davantage.",
+             "Un départ compliqué. Des efforts importants sont à fournir pour combler les lacunes identifiées.",
+             "Ce trimestre met en lumière des fragilités importantes. Un soutien et un engagement plus fort sont attendus."],
+        exc:["Malgré quelques points positifs, les résultats restent insuffisants. Un effort soutenu est indispensable.",
+             "Les qualités observées n'ont pas encore suffi à compenser les lacunes. Il faut s'investir davantage.",
+             "Un premier trimestre en-dessous des attentes. Le potentiel existe mais doit se concrétiser en résultats."]
+      },
+      T2:{
+        bon:["À mi-parcours, les résultats restent insuffisants. Une remobilisation immédiate est indispensable.",
+             "Le deuxième trimestre confirme des difficultés persistantes. Un effort urgent est attendu.",
+             "Les résultats de ce trimestre sont préoccupants. Il est encore temps de redresser la situation.",
+             "Des lacunes importantes persistent. Un travail sérieux et régulier est indispensable pour le troisième trimestre.",
+             "À mi-année, la situation est préoccupante. Une implication bien plus forte est attendue.",
+             "Les résultats ne progressent pas suffisamment. Un engagement total est nécessaire pour terminer l'année correctement."],
+        exc:["Malgré les efforts observés, les résultats restent insuffisants. La mobilisation doit être encore plus forte.",
+             "Les points positifs ne compensent pas les lacunes. Un travail intensif est attendu pour le T3."]
+      },
+      T3:{
+        bon:["Ce troisième trimestre clôture une année difficile. Des efforts importants seront nécessaires l'an prochain.",
+             "Les résultats finaux restent insuffisants. Une remise en question sérieuse s'impose pour la rentrée.",
+             "Une année en-dessous des attentes. Il faudra repartir sur de meilleures bases l'année prochaine.",
+             "Bilan final insuffisant. La progression attendue n'a pas été au rendez-vous.",
+             "Ce trimestre confirme une année difficile. Un travail de fond sera indispensable pour progresser.",
+             "Les résultats de fin d'année sont insuffisants. Un effort majeur est à envisager pour la suite."],
+        exc:["Malgré quelques qualités observées, les résultats finaux restent en-dessous des attentes.",
+             "Les progrès attendus n'ont pas été suffisants pour atteindre le niveau requis."]
+      },
+      def:{
+        bon:["Les résultats sont insuffisants. Un effort important est indispensable pour progresser.",
+             "Les résultats sont en-dessous des attentes. Un travail sérieux et régulier est attendu.",
+             "Un niveau insuffisant. Une remobilisation est nécessaire sans attendre.",
+             "Des lacunes importantes à combler. Un engagement plus fort est attendu.",
+             "Les résultats restent insuffisants malgré les efforts. Il faut redoubler d'implication.",
+             "Le niveau atteint est insuffisant. Des efforts soutenus sont indispensables."],
+        exc:["Malgré quelques points positifs, les résultats restent insuffisants.",
+             "Les qualités ne se sont pas traduites en résultats satisfaisants."]
+      }
+    },
+    // 8-11 — Fragile
+    fragile:{
+      label:"Résultats fragiles",
+      T1:{
+        bon:["Un premier trimestre fragile. Il faudra consolider les bases pour progresser.",
+             "Les résultats de ce début d'année restent fragiles. Un travail plus régulier est attendu.",
+             "Un départ hésitant. Des efforts supplémentaires permettront de solidifier les acquis.",
+             "Ce premier trimestre révèle des fragilités à corriger rapidement.",
+             "Les résultats sont passables. Il est encore tôt pour s'inquiéter, mais un investissement plus fort est attendu.",
+             "Un début d'année en demi-teinte. La progression est possible avec un engagement plus régulier."],
+        exc:["Les qualités observées doivent se traduire par de meilleurs résultats. Encourageant mais perfectible.",
+             "Bon état d'esprit, mais les résultats restent fragiles. Continuons à travailler."]
+      },
+      T2:{
+        bon:["À mi-parcours, les résultats restent fragiles. Un travail plus soutenu est indispensable.",
+             "Le deuxième trimestre ne montre pas encore la progression attendue. Des efforts sont nécessaires.",
+             "Les résultats stagnent. Un engagement plus fort est attendu pour le troisième trimestre.",
+             "À mi-année, le niveau reste fragile. Il est encore temps de progresser significativement.",
+             "Des résultats insuffisants pour valider les compétences. Un travail de fond est à fournir.",
+             "Le cap du milieu d'année révèle des fragilités persistantes à combler."],
+        exc:["Les efforts sont visibles mais pas encore suffisants. Restons mobilisés pour le T3.",
+             "L'implication est là, les résultats doivent suivre. Encourageant mais à confirmer."]
+      },
+      T3:{
+        bon:["Un bilan de fin d'année fragile. Des progrès sont attendus pour la prochaine rentrée.",
+             "Les résultats finaux restent en-dessous du niveau attendu. Un travail de consolidation s'impose.",
+             "Une année en demi-teinte. Des efforts plus soutenus seront nécessaires l'an prochain.",
+             "Bilan final fragile. La progression n'a pas été suffisante sur l'ensemble de l'année.",
+             "Les résultats de fin d'année témoignent de lacunes persistantes à combler.",
+             "Une année insuffisante sur le plan des résultats. Un réel engagement sera attendu l'année prochaine."],
+        exc:["Les qualités observées n'ont pas suffi à compenser les lacunes sur l'ensemble de l'année.",
+             "Malgré les efforts, les résultats finaux restent fragiles."]
+      },
+      def:{
+        bon:["Les résultats restent fragiles. Des efforts supplémentaires sont attendus.",
+             "Un niveau passable qui peut et doit progresser.",
+             "Les résultats sont insuffisants pour valider pleinement les acquis.",
+             "Des fragilités persistent. Un travail régulier permettra de progresser.",
+             "Le niveau atteint est fragile. Des efforts plus constants sont nécessaires.",
+             "Des résultats passables qui appellent à un engagement plus soutenu."],
+        exc:["Les qualités observées méritent de se concrétiser en de meilleurs résultats.",
+             "L'investissement doit se traduire par une progression plus marquée."]
+      }
+    },
+    // 12-13 — Passable
+    passable:{
+      label:"Résultats passables",
+      T1:{
+        bon:["Un premier trimestre correct. Des efforts réguliers permettront de progresser.",
+             "Un début d'année satisfaisant. Il faudra confirmer sur la durée.",
+             "Les résultats sont passables. Un engagement plus constant est attendu pour la suite.",
+             "Un premier trimestre honorable. La marge de progression est encore importante.",
+             "Début d'année correct, mais perfectible. L'objectif est de viser plus haut.",
+             "Un trimestre passable qui laisse entrevoir une progression possible avec plus d'investissement."],
+        exc:["Bon début d'année. Les qualités observées permettent d'envisager une belle progression.",
+             "Premier trimestre encourageant. Les bases sont là pour aller plus loin."]
+      },
+      T2:{
+        bon:["À mi-parcours, les résultats sont satisfaisants mais perfectibles. Continuons les efforts.",
+             "Un deuxième trimestre passable. Un dernier effort pour terminer l'année en beauté.",
+             "Le niveau est correct. Un engagement plus soutenu au T3 permettrait de progresser.",
+             "À mi-année, les résultats sont dans la moyenne. Visons plus haut pour finir fort.",
+             "Résultats passables à mi-parcours. La tendance doit s'améliorer pour le bilan final.",
+             "Un deuxième trimestre honorable. Il faut maintenant s'appuyer sur ces bases pour progresser."],
+        exc:["Bon milieu d'année. Les qualités sont là pour terminer en beauté.",
+             "Un trimestre encourageant. La dynamique positive doit se confirmer au T3."]
+      },
+      T3:{
+        bon:["Un bilan de fin d'année correct mais perfectible. Des progrès sont attendus l'an prochain.",
+             "Les résultats finaux sont passables. Un travail plus régulier permettra de progresser.",
+             "Une année dans la moyenne. L'objectif sera de viser plus haut la prochaine fois.",
+             "Bilan final satisfaisant. La marge de progression est encore importante.",
+             "Les résultats de fin d'année sont corrects sans être remarquables.",
+             "Une année passable. Un engagement plus fort permettrait d'atteindre de meilleurs résultats."],
+        exc:["Un bilan de fin d'année honorable. Les qualités observées permettent d'envisager une progression.",
+             "Les résultats finaux sont corrects. Les efforts fournis sont à saluer."]
+      },
+      def:{
+        bon:["Des résultats passables. Un engagement plus régulier permettrait de progresser.",
+             "Le niveau est correct mais perfectible. Continuons les efforts.",
+             "Des résultats dans la moyenne, avec une marge de progression encore importante.",
+             "Un trimestre satisfaisant sans être remarquable. Visons plus haut.",
+             "Les résultats sont passables. Un effort supplémentaire permettrait de progresser davantage.",
+             "Correct mais perfectible. L'investissement doit être plus constant."],
+        exc:["Les qualités observées méritent de se traduire par de meilleurs résultats.",
+             "Bon état d'esprit. Les résultats doivent suivre."]
+      }
+    },
+    // 14-15 — Bon
+    bon:{
+      label:"Bon trimestre",
+      T1:{
+        bon:["Un très bon début d'année. Continuons sur cette lancée !",
+             "Excellent premier trimestre. Les bases sont solides pour la suite.",
+             "Un départ remarquable. Il faudra confirmer ce niveau tout au long de l'année.",
+             "Bon premier trimestre. L'objectif est de maintenir ce niveau sur la durée.",
+             "Un début d'année très encourageant. Les fondations sont là pour une belle année.",
+             "Premier trimestre réussi. Ces résultats témoignent d'un travail sérieux et régulier.",
+             "Un très bon départ. La dynamique est positive, il faut la maintenir."],
+        exc:["Excellent début d'année ! Les qualités observées promettent une belle progression.",
+             "Un premier trimestre remarquable. Les résultats récompensent un investissement sérieux."]
+      },
+      T2:{
+        bon:["À mi-parcours, les résultats sont très satisfaisants. Maintenons ce cap !",
+             "Un deuxième trimestre réussi. La tendance est très positive pour le bilan final.",
+             "Bons résultats à mi-année. Un dernier effort pour clôturer l'année en beauté.",
+             "À mi-parcours, le niveau est très satisfaisant. Continuons dans cette dynamique.",
+             "Un deuxième trimestre encourageant. L'objectif est de maintenir ces bons résultats.",
+             "De bons résultats à mi-année qui témoignent d'un travail régulier et sérieux.",
+             "Très bon deuxième trimestre. La progression est au rendez-vous."],
+        exc:["Excellent milieu d'année ! Les résultats récompensent un travail remarquable.",
+             "Un deuxième trimestre exceptionnel. La dynamique est au beau fixe."]
+      },
+      T3:{
+        bon:["Un bilan de fin d'année très satisfaisant. Bravo pour ce travail !",
+             "De très bons résultats finaux qui récompensent un engagement sérieux tout au long de l'année.",
+             "Une belle année ! Les résultats témoignent d'un travail régulier et efficace.",
+             "Bilan final très positif. Ces résultats sont le fruit d'un investissement constant.",
+             "Une fin d'année réussie. Ces bons résultats sont à saluer.",
+             "Un bilan final très satisfaisant. Bravo pour cette belle année de travail.",
+             "De très bons résultats pour clôturer l'année. Excellent travail !"],
+        exc:["Bilan final excellent. Une année remarquable qui récompense un travail exceptionnel.",
+             "Des résultats finaux remarquables. Bravo pour cette excellente année !"]
+      },
+      def:{
+        bon:["Bon trimestre. Continuons dans cette dynamique.",
+             "De bons résultats qui récompensent un travail sérieux.",
+             "Un trimestre réussi. Les efforts payent.",
+             "Très satisfaisant. Les résultats sont à la hauteur de l'investissement.",
+             "Bon trimestre. Ces résultats témoignent d'un engagement régulier.",
+             "De bons résultats. Bravo pour ce travail sérieux.",
+             "Un trimestre réussi. Maintenons ce cap."],
+        exc:["Excellent trimestre ! Les qualités se traduisent en de très bons résultats.",
+             "De très bons résultats. Le travail fourni est remarquable."]
+      }
+    },
+    // 16-17 — Très bon
+    tresbien:{
+      label:"Très bon trimestre",
+      T1:{
+        bon:["Un début d'année exceptionnel. Ces résultats promettent une très belle année.",
+             "Excellent premier trimestre ! Le niveau atteint est remarquable.",
+             "Un départ fantastique. Ces résultats témoignent d'un investissement exemplaire.",
+             "Premier trimestre exceptionnel. Les bases sont solides pour une année remarquable.",
+             "Un tout premier trimestre remarquable. La barre est placée très haut.",
+             "Excellent début d'année ! Ces résultats récompensent un travail rigoureux et constant."],
+        exc:["Un premier trimestre hors normes. Félicitations pour ces résultats exceptionnels.",
+             "Des résultats remarquables dès le premier trimestre. Bravo !"]
+      },
+      T2:{
+        bon:["À mi-parcours, les résultats sont exceptionnels. Maintenons ce niveau !",
+             "Un deuxième trimestre remarquable. La tendance est très positive pour le bilan final.",
+             "Excellent milieu d'année ! Ces résultats témoignent d'un travail constant et exigeant.",
+             "À mi-année, le niveau est exceptionnel. Ces résultats sont à saluer.",
+             "Un deuxième trimestre hors pair. Bravo pour cet engagement exemplaire.",
+             "De très bons résultats à mi-parcours. L'objectif est de clôturer l'année en beauté."],
+        exc:["Un deuxième trimestre exceptionnel. Ces résultats récompensent un travail remarquable.",
+             "Excellent milieu d'année ! La dynamique est au beau fixe."]
+      },
+      T3:{
+        bon:["Un bilan de fin d'année exceptionnel. Bravo pour cette très belle année !",
+             "Des résultats finaux remarquables qui couronnent une année de travail exemplaire.",
+             "Une fin d'année brillante. Ces résultats témoignent d'un engagement remarquable.",
+             "Bilan final exceptionnel. Une très belle année à saluer.",
+             "Des résultats de fin d'année remarquables. Bravo pour cet investissement exemplaire.",
+             "Une année brillante ! Ces résultats finaux sont le fruit d'un travail exceptionnel."],
+        exc:["Bilan final exceptionnel. Une année remarquable qui mérite toutes les félicitations.",
+             "Des résultats finaux hors normes. Bravo pour cette année exceptionnelle !"]
+      },
+      def:{
+        bon:["Très bon trimestre ! Ces résultats témoignent d'un travail remarquable.",
+             "Excellent trimestre. Le niveau atteint est très satisfaisant.",
+             "De très bons résultats. Bravo pour cet engagement exemplaire.",
+             "Très bon trimestre ! L'investissement se traduit par d'excellents résultats.",
+             "Des résultats remarquables. Ces efforts sont à saluer.",
+             "Excellent trimestre. Ces résultats récompensent un travail rigoureux.",
+             "Très bon trimestre ! Continuons sur cette lancée."],
+        exc:["Excellent trimestre ! Des résultats exceptionnels qui récompensent un travail remarquable.",
+             "Des résultats hors normes. Félicitations !"]
+      }
+    },
+    // >= 18 — Excellent
+    excellent:{
+      label:"Excellent trimestre",
+      T1:{
+        bon:["Un premier trimestre brillant. Ces résultats exceptionnels auguren d'une très belle année.",
+             "Début d'année exceptionnel ! Ces résultats témoignent d'une maîtrise remarquable.",
+             "Un départ fulgurant. Ces résultats placent la barre très haut.",
+             "Premier trimestre hors normes. Bravo pour cet investissement exemplaire.",
+             "Un début d'année brillant. Ces résultats sont à la hauteur d'un engagement exceptionnel.",
+             "Excellent premier trimestre ! Ces résultats remarquables sont à saluer chaleureusement."],
+        exc:["Un premier trimestre exceptionnel. Félicitations pour ces résultats brillants !",
+             "Des résultats hors normes dès le premier trimestre. Bravo !"]
+      },
+      T2:{
+        bon:["À mi-parcours, les résultats sont brillants. Ces performances sont remarquables.",
+             "Un deuxième trimestre exceptionnel. La tendance est au beau fixe.",
+             "Excellent milieu d'année ! Ces résultats témoignent d'une maîtrise exemplaire.",
+             "À mi-année, le niveau est exceptionnel. Ces performances sont à saluer.",
+             "Un deuxième trimestre brillant. Bravo pour cet engagement remarquable.",
+             "Des résultats exceptionnels à mi-parcours. L'objectif est de maintenir ce niveau jusqu'au bout."],
+        exc:["Un deuxième trimestre brillant. Ces résultats récompensent un travail hors normes.",
+             "Excellent milieu d'année ! Ces performances sont remarquables."]
+      },
+      T3:{
+        bon:["Un bilan de fin d'année brillant. Ces résultats couronnent une année exceptionnelle.",
+             "Des résultats finaux hors normes. Bravo pour cette année brillante !",
+             "Une fin d'année exceptionnelle qui récompense un travail remarquable tout au long de l'année.",
+             "Bilan final brillant. Ces résultats témoignent d'une maîtrise exemplaire.",
+             "Des résultats de fin d'année exceptionnels. Félicitations pour cette belle année.",
+             "Une année brillante ! Ces résultats finaux couronnent un investissement remarquable."],
+        exc:["Bilan final exceptionnel. Félicitations pour cette année brillante !",
+             "Des résultats finaux hors normes qui récompensent une année de travail exemplaire."]
+      },
+      def:{
+        bon:["Excellent trimestre ! Ces résultats remarquables témoignent d'un investissement exceptionnel.",
+             "Des résultats hors normes. Bravo pour ce travail brillant !",
+             "Excellent trimestre ! Ces performances sont à saluer chaleureusement.",
+             "Des résultats exceptionnels. Félicitations pour cet engagement remarquable.",
+             "Un trimestre brillant. Ces résultats témoignent d'une maîtrise exemplaire.",
+             "Excellent trimestre ! Ces performances sont remarquables.",
+             "Des résultats hors normes. Bravo !"],
+        exc:["Excellent trimestre ! Ces résultats exceptionnels récompensent un travail brillant.",
+             "Des performances hors normes. Félicitations !"]
+      }
+    }
+  };
+
+  var niveau;
+  if(v<8) niveau=data.insuf;
+  else if(v<10) niveau=data.fragile;
+  else if(v<12) niveau=data.passable;
+  else if(v<14) niveau=data.passable;
+  else if(v<16) niveau=data.bon;
+  else if(v<18) niveau=data.tresbien;
+  else niveau=data.excellent;
+
+  var trimData=t&&niveau[t]?niveau[t]:niveau.def;
+  return {label:niveau.label, concluBon:trimData.bon, concluExc:trimData.exc};
 }
 function updateMoyLabel(){
   var info=getMoyInfos();
