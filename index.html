@@ -644,8 +644,25 @@ function construire(keys,ft,f,Il,il,mat,ri){
 
   var p="";
 
+  var trim=document.getElementById("trim_sel")?document.getElementById("trim_sel").value:"";
+
+  var introsT={
+    "T1":["Ce premier trimestre révèle ","En début d'année, on note ","Ce début d'année met en lumière ","Dès ce premier trimestre, ","Ce premier trimestre souligne ","En ce début d'année, "],
+    "T2":["À mi-parcours, ","Ce deuxième trimestre confirme ","À mi-année, on constate ","Le bilan de ce deuxième trimestre révèle ","À mi-chemin, ","Ce deuxième trimestre met en évidence "],
+    "T3":["Ce bilan de fin d'année révèle ","En fin d'année, ","Pour clôturer cette année, on constate ","Ce troisième trimestre confirme ","À l'issue de cette année, ","Ce bilan final souligne "],
+    "":["Ce trimestre, ","Il est à noter que ","On constate ","Ce trimestre met en lumière ","Les résultats révèlent ","On relève "]
+  };
+  var conclusNegT={
+    "T1":["Un travail régulier dès maintenant permettra de progresser.","Une remobilisation rapide est indispensable pour la suite de l'année.","Il est encore tôt, mais ces points doivent être corrigés sans tarder.","Ces difficultés doivent être prises en charge rapidement.","Un engagement plus fort est attendu pour le reste de l'année.","Ces axes de progrès devront être travaillés tout au long de l'année."],
+    "T2":["Un dernier effort au T3 est indispensable pour redresser la situation.","Il est encore temps de progresser significativement au troisième trimestre.","Ces points devront impérativement s'améliorer pour terminer l'année correctement.","Le troisième trimestre doit être l'occasion d'une vraie remobilisation.","Un engagement total est attendu pour clôturer l'année de façon satisfaisante.","Ces lacunes devront être comblées avant le bilan final."],
+    "T3":["Un travail de fond sera indispensable pour la prochaine rentrée.","Ces difficultés devront impérativement être surmontées l'année prochaine.","La prochaine rentrée devra être l'occasion d'un nouveau départ.","Ces axes prioritaires devront être travaillés sérieusement l'an prochain.","Un bilan final en-dessous des attentes. Un réel engagement sera attendu à la rentrée.","Ces points restent à améliorer pour aborder la prochaine année dans de meilleures conditions."],
+    "":["Une remobilisation sérieuse est attendue.","Un effort régulier permettra de progresser.","Des efforts constants sont nécessaires.","Une implication plus forte est indispensable.","Ces points doivent être travaillés avec régularité.","Un engagement plus soutenu est attendu."]
+  };
+  var introArr=introsT[trim]||introsT[""];
+  var concluNegArr=conclusNegT[trim]||conclusNegT[""];
+
   if(hasPos&&hasNeg){
-    p=buildPos()+". "+liai+buildNeg()+".";
+    p=buildPos()+". "+liai+buildNeg()+". "+concluNegArr[ri%concluNegArr.length];
     if(hasProg&&prog.indexOf("potentiel")<0) p+=" "+Il+" affiche néanmoins "+joinNoms(progNoms)+".";
   } else if(hasPos){
     p=buildPos()+". ";
@@ -653,30 +670,18 @@ function construire(keys,ft,f,Il,il,mat,ri){
     else p+=conclu;
   } else if(hasNeg){
     if(neg.indexOf("perturb")>=0){
-      var pp=[Il+" perturbe le bon déroulement des cours. Une attitude plus respectueuse est indispensable.",
-              "Le comportement de "+il+" nuit à l'ambiance de travail. Un changement d'attitude est attendu."];
-      p=pp[ri%pp.length];
+      var ppT={
+        "T1":[Il+" perturbe déjà le bon déroulement des cours. Une attitude plus respectueuse est indispensable dès maintenant.","Le comportement de "+il+" est problématique dès ce début d'année. Un changement d'attitude est attendu immédiatement."],
+        "T2":[Il+" continue de perturber le bon déroulement des cours. Cette situation doit changer au T3.","À mi-parcours, le comportement de "+il+" reste problématique. Une vraie remobilisation est indispensable."],
+        "T3":["En fin d'année, le comportement de "+il+" a nui au bon déroulement des cours. Un changement s'imposera l'an prochain.","Ce troisième trimestre confirme un comportement perturbateur. La prochaine rentrée devra être l'occasion d'un vrai changement."],
+        "":  [Il+" perturbe le bon déroulement des cours. Une attitude plus respectueuse est indispensable.","Le comportement de "+il+" nuit à l'ambiance de travail. Un changement d'attitude est attendu."]
+      };
+      var ppArr=ppT[trim]||ppT[""];
+      p=ppArr[ri%ppArr.length];
     } else {
-      var intro=["Ce trimestre, ","Il est à noter que ","Des progrès sont attendus : "];
-      var remob=["Une remobilisation sérieuse est attendue.","Un effort régulier permettra de progresser.","Des efforts constants sont nécessaires."];
-      p=intro[ri%intro.length]+buildNeg()+". "+remob[ri%remob.length];
+      p=introArr[ri%introArr.length]+buildNeg()+". "+concluNegArr[ri%concluNegArr.length];
     }
-    if(hasProg&&prog.indexOf("potentiel")>=0) p+=" Le potentiel est là.";
-  } else if(compneg){
-    var cp=[Il+" doit revoir son attitude en cours. Des efforts de respect sont attendus.",
-            "Le comportement de "+il+" est à améliorer. Une implication plus positive est souhaitée."];
-    p=cp[ri%cp.length];
-  } else if(hasProg){
-    if(prog.indexOf("potentiel")>=0){
-      p=Il+" dispose d'un réel potentiel à exploiter. Avec plus d'implication, les résultats seront au rendez-vous.";
-    } else {
-      var pi=["Ce trimestre, "+il+" affiche ","Les résultats témoignent de "];
-      p=pi[ri%pi.length]+joinNoms(progNoms)+". Ces efforts méritent d'être soulignés.";
-    }
-  } else {
-    p=Il+" participe aux activités. Des marges de progression existent.";
-  }
-
+    if(hasProg&&prog.indexOf("potentiel")>=0) p+=" Le potentiel est là, il faut s'en saisir.";
   // Préfixe matière
   if(mat&&mat!=="EPS"){
     p="En "+mat+", "+p.charAt(0).toLowerCase()+p.slice(1);
