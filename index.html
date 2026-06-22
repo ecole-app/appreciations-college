@@ -81,6 +81,10 @@ hr{border:none;border-top:1px solid var(--bor);margin:12px 0}
     <div><label>Matière</label><select id="matiere" onchange="onMatiere()"></select></div>
     <div><label>Genre</label><div class="gr"><button class="grb on" id="gm" onclick="setG('M')">Garçon</button><button class="grb" id="gf" onclick="setG('F')">Fille</button></div></div>
   </div>
+  <div class="g2">
+    <div><label>Moyenne <span style="font-weight:400;color:var(--mut)">(optionnelle, /20)</span></label><input type="number" id="moyenne" min="0" max="20" step="0.5" placeholder="Ex: 13.5" oninput="updateMoyLabel()"></div>
+    <div style="display:flex;align-items:flex-end;padding-bottom:2px"><span id="moy-label" style="font-size:13px;color:var(--mut);font-style:italic"></span></div>
+  </div>
   <div class="sl">Général — toutes matières</div><div class="chips" id="cp-gen"></div>
   <div class="sl" id="lpos">Points positifs</div><div class="chips" id="cp-pos"></div>
   <div class="sl" id="lneg">Points à travailler</div><div class="chips" id="cp-neg"></div>
@@ -619,10 +623,11 @@ function construire(keys,ft,f,Il,il,mat,ri){
     return phrases.slice(0,-1).join(", ")+" et "+phrases[phrases.length-1];
   }
 
-  // Conclusions positives variées
-  var concBon=["Bon trimestre.","À poursuivre.","Continuons dans cette dynamique.","Ces efforts sont à saluer."];
-  var concExc=["Excellent trimestre, félicitations !","Très bon trimestre !","Bravo pour ce travail !","Des résultats à la hauteur de l'engagement."];
-  var isExc=(pos.length+gen.length)>=3;
+  // Conclusions basées sur la moyenne si disponible, sinon sur le nombre de points positifs
+  var moyInfo=getMoyInfos();
+  var concBon=moyInfo?moyInfo.concluBon:["Bon trimestre.","À poursuivre.","Continuons dans cette dynamique.","Ces efforts sont à saluer."];
+  var concExc=moyInfo?moyInfo.concluExc:["Excellent trimestre, félicitations !","Très bon trimestre !","Bravo pour ce travail !","Des résultats à la hauteur de l'engagement."];
+  var isExc=moyInfo?(parseFloat(document.getElementById("moyenne").value)>=15):(pos.length+gen.length)>=3;
   var conclu=(isExc?concExc:concBon)[ri%(isExc?concExc:concBon).length];
 
   // Liaisons négatif
@@ -746,9 +751,25 @@ function enregistrer(){
 function copierPhrase(){
   navigator.clipboard.writeText(phrase).catch(function(){var t=document.createElement("textarea");t.value=phrase;document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);});
 }
+function getMoyInfos(){
+  var v=parseFloat(document.getElementById("moyenne").value);
+  if(isNaN(v)||v<0||v>20) return null;
+  if(v<8)   return {label:"Résultats insuffisants",concluBon:["Des efforts importants sont nécessaires.","Les résultats sont en-dessous des attentes.","Un travail sérieux est indispensable pour progresser."],concluExc:["Des efforts importants sont nécessaires.","Les résultats restent insuffisants malgré quelques points positifs."]};
+  if(v<10)  return {label:"Résultats passables",concluBon:["Des efforts sont encore nécessaires.","Les résultats restent fragiles.","Il faudra travailler davantage pour progresser."],concluExc:["Des progrès sont à réaliser pour atteindre un niveau satisfaisant.","Les résultats sont encore insuffisants."]};
+  if(v<12)  return {label:"Résultats passables",concluBon:["Des progrès sont encore possibles.","Passable. Des efforts supplémentaires sont attendus.","Le niveau est suffisant mais perfectible."],concluExc:["Des progrès sont encore à réaliser.","Le niveau atteint reste en-dessous du potentiel."]};
+  if(v<14)  return {label:"Bon trimestre",concluBon:["Bon trimestre.","À poursuivre.","Continuons dans cette dynamique."],concluExc:["Bon trimestre, félicitations.","De bons résultats qui récompensent le travail fourni."]};
+  if(v<16)  return {label:"Très bon trimestre",concluBon:["Très bon trimestre.","De très bons résultats.","Continuons dans cette dynamique positive."],concluExc:["Très bon trimestre, félicitations !","Excellent travail, de très bons résultats."]};
+  return {label:"Excellent trimestre",concluBon:["Excellent trimestre !","Des résultats remarquables.","Félicitations pour ce trimestre exceptionnel !"],concluExc:["Excellent trimestre, félicitations !","Des résultats exceptionnels. Bravo !"]};
+}
+function updateMoyLabel(){
+  var info=getMoyInfos();
+  document.getElementById("moy-label").textContent=info?info.label:"";
+}
 function resetForm(){
   sel={};ri=0;
   document.getElementById("prenom").value="";
+  document.getElementById("moyenne").value="";
+  document.getElementById("moy-label").textContent="";
   document.getElementById("free").value="";
   document.getElementById("rz").style.display="none";
   phrase="";renderAll();
