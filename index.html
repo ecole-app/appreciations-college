@@ -1138,7 +1138,24 @@ function setTab(id){
 }
 
 // ── INIT ─────────────────────────────────────────────────────────────────────
+// Migration données eps_v2 → eps_v3
+(function(){
+  try{
+    var old=localStorage.getItem("eps_v2");
+    var cur=localStorage.getItem("eps_v3");
+    if(old&&!cur){
+      localStorage.setItem("eps_v3",old);
+    } else if(old&&cur){
+      var d1=JSON.parse(old)||[];
+      var d2=JSON.parse(cur)||[];
+      var ids=d2.map(function(x){return x.id;});
+      var merged=d2.concat(d1.filter(function(x){return ids.indexOf(x.id)<0;}));
+      localStorage.setItem("eps_v3",JSON.stringify(merged));
+    }
+  }catch(e){}
+})();
 onClasse();
+onMatiere();
 badge();
 </script>
 </body>
