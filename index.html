@@ -747,7 +747,14 @@ function generer(){
   var f=genre==="F";
   var Il=prenomCur||(f?"Elle":"Il");
   var il=prenomCur||(f?"elle":"il");
-  phrase=construire(keys,ft,f,Il,il,matCur,ri);
+  try{
+    phrase=construire(keys,ft,f,Il,il,matCur,ri);
+  }catch(e){
+    phrase="Erreur de génération. Essaie de modifier les mots-clés. ("+e.message+")";
+  }
+  if(!phrase||phrase.trim()===""){
+    phrase="Génération impossible avec cette combinaison. Essaie de regénérer.";
+  }
   document.getElementById("rz").style.display="block";
   document.getElementById("ok").style.display="none";
   document.getElementById("rl").textContent=prenomCur?"Phrase pour "+prenomCur:"Phrase générée";
