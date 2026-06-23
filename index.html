@@ -157,9 +157,11 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
 
   <div class="sl">Appréciations des professeurs</div>
   <div id="pp-list" style="margin-bottom:10px"></div>
-  <div class="g2">
-    <div><label>Matière</label><input type="text" id="pp-mat" placeholder="Ex: Français"></div>
-    <div><label>Appréciation</label><input type="text" id="pp-appr" placeholder="Coller ou saisir…"></div>
+  <div style="margin-bottom:8px">
+    <label>Matière</label>
+    <input type="text" id="pp-mat" placeholder="Ex: Français, Maths, EPS…" style="margin-bottom:8px">
+    <label>Appréciation du professeur</label>
+    <textarea id="pp-appr" placeholder="Coller ou saisir l'appréciation…" rows="3"></textarea>
   </div>
   <button type="button" class="a" onclick="ppAjouter()" style="margin-bottom:14px">+ Ajouter</button>
 
