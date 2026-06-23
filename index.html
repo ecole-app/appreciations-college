@@ -120,9 +120,9 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
 
   <div class="sl">Ton de l'appréciation</div>
   <div class="tonesel" id="tone-sel">
-    <button type="button" class="tonebtn encourageant on" id="tone-enc" onclick="setTone(this.dataset.tone)" data-tone="encourageant">😊 Encourageant</button>
-    <button type="button" class="tonebtn recommande" id="tone-rec" onclick="setTone(this.dataset.tone)" data-tone="recommande">📋 Neutre / Recommandé</button>
-    <button type="button" class="tonebtn ferme" id="tone-fer" onclick="setTone(this.dataset.tone)" data-tone="ferme">⚠️ Ferme</button>
+    <button type="button" class="tonebtn encourageant on" id="tone-enc">😊 Encourageant</button>
+    <button type="button" class="tonebtn recommande" id="tone-rec">📋 Neutre / Recommandé</button>
+    <button type="button" class="tonebtn ferme" id="tone-fer">⚠️ Ferme</button>
   </div>
 
   <div class="sl">Général — toutes matières</div><div class="chips" id="cp-gen"></div>
@@ -182,9 +182,9 @@ EPS : Très investie…" rows="7" style="margin-bottom:0"></textarea>
   <hr>
   <div class="sl">Ton de l'appréciation générale</div>
   <div class="tonesel">
-    <button class="tonebtn encourageant on" id="pp-tone-enc" onclick="setTone(this.dataset.tone)" data-tone="encourageant">😊 Encourageant</button>
-    <button class="tonebtn recommande" id="pp-tone-rec" onclick="setTone(this.dataset.tone)" data-tone="recommande">📋 Recommandé</button>
-    <button class="tonebtn ferme" id="pp-tone-fer" onclick="setTone(this.dataset.tone)" data-tone="ferme">⚠️ Ferme</button>
+    <button class="tonebtn encourageant on" id="pp-tone-enc">😊 Encourageant</button>
+    <button class="tonebtn recommande" id="pp-tone-rec">📋 Recommandé</button>
+    <button class="tonebtn ferme" id="pp-tone-fer">⚠️ Ferme</button>
   </div>
 
   <div class="sl">Trimestre</div>
@@ -734,6 +734,14 @@ function setTab(id){
 
 // ── Init ──
 (function(){try{var o=localStorage.getItem("eps_v2"),c=localStorage.getItem("eps_v3");if(o&&!c){localStorage.setItem("eps_v3",o);}else if(o&&c){var d1=JSON.parse(o)||[],d2=JSON.parse(c)||[];var ids=d2.map(function(x){return x.id;});var m=d2.concat(d1.filter(function(x){return ids.indexOf(x.id)<0;}));localStorage.setItem("eps_v3",JSON.stringify(m));}}catch(e){}})();
+// Attacher les événements sur les boutons de ton
+document.querySelectorAll(".tonebtn").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    var id = this.id.replace("pp-tone-","").replace("tone-","");
+    var map = {"enc":"encourageant","rec":"recommande","fer":"ferme"};
+    setTone(map[id]||id);
+  });
+});
 onMatiere();badge();renderPPList();
 </script>
 </body>
