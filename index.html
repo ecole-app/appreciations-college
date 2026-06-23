@@ -742,18 +742,13 @@ function setTab(id){
 
 // ── Init ──
 (function(){try{var o=localStorage.getItem("eps_v2"),c=localStorage.getItem("eps_v3");if(o&&!c){localStorage.setItem("eps_v3",o);}else if(o&&c){var d1=JSON.parse(o)||[],d2=JSON.parse(c)||[];var ids=d2.map(function(x){return x.id;});var m=d2.concat(d1.filter(function(x){return ids.indexOf(x.id)<0;}));localStorage.setItem("eps_v3",JSON.stringify(m));}}catch(e){}})();
-// Délégation d'événements pour les boutons de ton
-document.addEventListener("click", function(e){
-  var btn=e.target;
-  while(btn && btn!==document){
-    if(btn.classList && btn.classList.contains("tonebtn")){
-      var id=btn.id.replace("pp-tone-","").replace("tone-","");
-      var map={"enc":"encourageant","rec":"recommande","fer":"ferme"};
-      setTone(map[id]||id);
-      return;
-    }
-    btn=btn.parentNode;
-  }
+// Listeners directs sur les boutons de ton
+["enc","rec","fer"].forEach(function(x){
+  var map={"enc":"encourageant","rec":"recommande","fer":"ferme"};
+  var b1=document.getElementById("tone-"+x);
+  var b2=document.getElementById("pp-tone-"+x);
+  if(b1) b1.addEventListener("click",function(e){e.stopPropagation();setTone(map[x]);});
+  if(b2) b2.addEventListener("click",function(e){e.stopPropagation();setTone(map[x]);});
 });
 onMatiere();badge();renderPPList();
 </script>
