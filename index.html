@@ -162,6 +162,13 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
     <div><label>Prénom élève</label><input type="text" id="pp-prenom" placeholder="Ex: Lucas"></div>
     <div><label>Classe</label><select id="pp-classe"><option>6e</option><option>5e</option><option>4e</option><option>3e</option></select></div>
   </div>
+  <div style="margin-bottom:12px">
+    <label>Genre</label>
+    <div class="gr">
+      <button type="button" class="grb on" id="pp-gm" onclick="setPPGenre('M')">Garçon</button>
+      <button type="button" class="grb" id="pp-gf" onclick="setPPGenre('F')">Fille</button>
+    </div>
+  </div>
 
 
   <div style="margin-bottom:12px">
@@ -283,6 +290,8 @@ function setTone(t){
 }
 var genre="M",sel={},filtreCur="toutes",phrase="",prenomCur="",classeCur="",matCur="EPS",ri=0;
 var ppMatieres=[];
+var ppGenre='M';
+function setPPGenre(g){ppGenre=g;document.getElementById('pp-gm').classList.toggle('on',g==='M');document.getElementById('pp-gf').classList.toggle('on',g==='F');}
 
 function DB(){try{return JSON.parse(localStorage.getItem(KEY)||"[]");}catch(e){return[];}}
 function dbS(d){localStorage.setItem(KEY,JSON.stringify(d));}
@@ -561,6 +570,8 @@ function renderPPList(){
 function ppSuppr(i){ppMatieres.splice(i,1);renderPPList();}
 function ppGenerer(){
   var prenom=document.getElementById("pp-prenom").value.trim()||"L'élève";
+  var ppIl=prenom!=="L'élève"?prenom:(ppGenre==="F"?"Elle":"Il");
+  var ppil=prenom!=="L'élève"?prenom:(ppGenre==="F"?"elle":"il");
   var trim=document.getElementById("pp-trim").value;
   var apprText=document.getElementById("pp-appr").value.trim();
   if(!apprText){alert("Saisis les appréciations des professeurs.");return;}
@@ -604,6 +615,7 @@ function ppReset(){
   document.getElementById("pp-rz").style.display="none";
   ppMatieres=[];
   setTone("encourageant");
+  ppGenre='M';document.getElementById('pp-gm').classList.add('on');document.getElementById('pp-gf').classList.remove('on');
 }
 function ppEnregistrer(){
   var p=document.getElementById("pp-rt").value;if(!p)return;
