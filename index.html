@@ -570,44 +570,103 @@ function renderPPList(){
 function ppSuppr(i){ppMatieres.splice(i,1);renderPPList();}
 function ppGenerer(){
   var prenom=document.getElementById("pp-prenom").value.trim()||"L'élève";
-  var ppIl=prenom!=="L'élève"?prenom:(ppGenre==="F"?"Elle":"Il");
-  var ppil=prenom!=="L'élève"?prenom:(ppGenre==="F"?"elle":"il");
   var trim=document.getElementById("pp-trim").value;
   var apprText=document.getElementById("pp-appr").value.trim();
   if(!apprText){alert("Saisis les appréciations des professeurs.");return;}
   var tone_pp=tone;
-  var matList="l'ensemble des matières";
-  // Construire la phrase selon le ton
-  var introT={T1:["Ce premier trimestre","En ce début d'année","Pour ce premier conseil"],T2:["Ce deuxième trimestre","À mi-parcours","Pour ce deuxième conseil"],T3:["Ce troisième trimestre","En fin d'année","Pour le bilan final"],"":["Ce trimestre","Pour ce conseil de classe","À ce stade"]};
-  var introArr=introT[trim]||introT[""];var intro=introArr[Math.floor(Math.random()*introArr.length)];
-  var arr_t2=tone_pp;var phrases={
-    encourageant:[
-      intro+" montre un élève globalement investi dans son parcours scolaire. Les appréciations de l'équipe pédagogique témoignent d'un engagement sérieux en "+matList+". Continuons dans cette dynamique positive.",
-      "Le profil de "+prenom+" est encourageant : l'équipe pédagogique souligne des qualités réelles en "+matList+". "+intro+" est satisfaisant. Continuons les efforts !",
-      "Les retours de l'équipe enseignante sont positifs : "+prenom+" s'investit dans ses cours et fait preuve de sérieux en "+matList+". Un trimestre encourageant.",
-      intro+" confirme les qualités de "+prenom+". L'ensemble des professeurs note un élève engagé et sérieux. Bravo et continuons sur cette lancée !",
-      "L'équipe pédagogique dresse un bilan globalement satisfaisant. "+prenom+" fait preuve d'implication et de sérieux en "+matList+". "+intro+" est à saluer.",
-    ],
-    recommande:[
-      intro+" présente un bilan contrasté. Si des points positifs sont à souligner en "+matList+", l'équipe pédagogique invite "+prenom+" à redoubler d'efforts sur les points signalés. Un travail plus régulier est recommandé.",
-      "Le conseil de classe relève des résultats hétérogènes. "+prenom+" dispose de qualités mais doit travailler à plus d'homogénéité dans ses résultats. Les enseignants de "+matList+" soulignent des axes de progrès importants.",
-      intro+" révèle des disparités entre les matières. L'équipe pédagogique recommande à "+prenom+" de s'investir de manière plus équilibrée dans l'ensemble des disciplines.",
-      "Profil inégal ce trimestre. Si certains professeurs notent des efforts, d'autres attendent une plus grande implication. "+prenom+" doit harmoniser son investissement dans toutes les matières.",
-      "Le conseil de classe invite "+prenom+" à davantage de régularité. Les appréciations recueillies en "+matList+" témoignent d'un potentiel à mieux exploiter.",
-    ],
-    ferme:[
-      intro+" est préoccupant. L'équipe pédagogique exprime de sérieuses réserves quant à l'attitude et aux résultats de "+prenom+". Un redressement immédiat est indispensable en "+matList+".",
-      "Le conseil de classe alerte les familles : les résultats et le comportement de "+prenom+" ne sont pas satisfaisants. Une remobilisation urgente est exigée.",
-      intro+" confirme des difficultés persistantes. L'ensemble de l'équipe pédagogique demande à "+prenom+" de changer d'attitude et de s'impliquer sérieusement dans tous ses cours.",
-      "Bilan alarmant. Malgré les avertissements, "+prenom+" ne fournit pas les efforts nécessaires. Une rencontre avec les familles est vivement conseillée.",
-      "L'équipe enseignante est formelle : le niveau et le comportement de "+prenom+" sont insuffisants. Un engagement total est exigé dès maintenant.",
-    ]
+  var f=ppGenre==="F";
+  var Il=prenom!=="L'élève"?prenom:(f?"Elle":"Il");
+  var il=prenom!=="L'élève"?prenom:(f?"elle":"il");
+  var e=f?"e":"";
+
+  // Analyser le contenu pour détecter la tonalité globale
+  var textLower=apprText.toLowerCase();
+  var motsPos=["excellent","très bon","très bien","remarquable","félicitation","bravo","investie","investi","sérieux","sérieuse","appliqu","progress","motiv","encour","qualité","efficac","brillant","outstanding","bon trimestre","très bonne"];
+  var motsNeg=["insuffisant","difficul","lacune","manque","effort","en retrait","irrégul","perturb","bavard","concentr","faible","inacceptable","retard","absent","doit","nécessaire","améliorer","revoir","trop","baisse"];
+  var scorePos=0,scoreNeg=0;
+  motsPos.forEach(function(m){var c=(textLower.match(new RegExp(m,"g"))||[]).length;scorePos+=c;});
+  motsNeg.forEach(function(m){var c=(textLower.match(new RegExp(m,"g"))||[]).length;scoreNeg+=c;});
+  var ratio=scorePos/(scorePos+scoreNeg+1);
+  // 0=très négatif, 1=très positif
+  var profile = ratio>0.7?"positif":ratio>0.4?"mitige":"negatif";
+
+  var introT={
+    T1:["Ce premier trimestre","En ce début d'année","Pour ce premier conseil de classe"],
+    T2:["Ce deuxième trimestre","À mi-parcours","Pour ce deuxième conseil"],
+    T3:["Ce troisième trimestre","En fin d'année","Pour ce bilan final","À l'issue de cette année"],
+    "":["Ce trimestre","Pour ce conseil de classe","Le conseil de classe"]
   };
-  var arr=phrases[tone_pp];var p=arr[Math.floor(Math.random()*arr.length)];
+  var introArr=introT[trim]||introT[""];
+  var intro=introArr[Math.floor(Math.random()*introArr.length)];
+
+  var phrases={
+    encourageant:{
+      positif:[
+        intro+" dresse un bilan très positif pour "+Il+". L'ensemble de l'équipe pédagogique souligne son sérieux, son investissement et la qualité de son travail. Bravo, continuons sur cette lancée !",
+        "Le conseil de classe félicite "+Il+" pour ce trimestre remarquable. Les appréciations de l'équipe enseignante témoignent d'un engagement sérieux et de résultats à la hauteur. Excellent travail !",
+        intro+" confirme les belles qualités de "+Il+". Sérieux"+e+", investi"+e+" et appliqu"+e+", "+il+" donne entière satisfaction à l'ensemble des professeurs. Félicitations !",
+        "L'équipe pédagogique est unanime : "+Il+" fait preuve d'un investissement remarquable. "+intro+" est à saluer chaleureusement. Bravo et continuez ainsi !",
+        intro+" est excellent pour "+Il+". L'ensemble des professeurs souligne son sérieux et ses bons résultats. Ces efforts méritent d'être récompensés. Félicitations !"
+      ],
+      mitige:[
+        intro+" présente un bilan globalement satisfaisant pour "+Il+". Si les appréciations sont en grande majorité positives, quelques points restent à consolider. Continuons les efforts !",
+        "Le conseil de classe dresse un bilan encourageant. "+Il+" fait preuve de qualités réelles, et les professeurs l'encouragent à maintenir cet investissement. Bon trimestre !",
+        intro+" est encourageant pour "+Il+". L'essentiel des appréciations est positif, et les points à travailler sont peu nombreux. Continuons dans cette dynamique !",
+        "L'équipe pédagogique souligne les qualités de "+Il+" et l'encourage à poursuivre ses efforts. "+intro+" est globalement satisfaisant. Bravo !"
+      ],
+      negatif:[
+        intro+" révèle des difficultés persistantes. L'équipe pédagogique encourage "+Il+" à se remobiliser et croit en son potentiel. Courage, les progrès sont possibles !",
+        "Le conseil de classe invite "+Il+" à redoubler d'efforts. Malgré les difficultés signalées, les professeurs croient en ses capacités. Ne lâche pas !",
+        intro+" est difficile, mais tout reste possible. "+Il+" doit s'appuyer sur ses points forts pour surmonter les difficultés rencontrées. Courage et persévérance !"
+      ]
+    },
+    recommande:{
+      positif:[
+        intro+" dresse un bilan très satisfaisant pour "+Il+". L'ensemble de l'équipe pédagogique salue son sérieux et son investissement. Il est recommandé de maintenir ce niveau de travail.",
+        "Le conseil de classe note avec satisfaction les bons résultats de "+Il+". Les appréciations de l'équipe enseignante sont très positives. Il est recommandé de poursuivre dans cette voie.",
+        intro+" confirme les bonnes dispositions de "+Il+". Il est recommandé de maintenir cet engagement et de continuer à viser l'excellence.",
+        "L'équipe pédagogique salue la qualité du travail de "+Il+" ce trimestre. Il est recommandé de maintenir ce niveau d'investissement pour la suite."
+      ],
+      mitige:[
+        intro+" présente un bilan contrasté. Si des points positifs sont à noter, il est recommandé à "+Il+" de redoubler d'efforts sur les axes de progrès signalés par les professeurs.",
+        "Le conseil de classe relève des résultats hétérogènes. Il est recommandé à "+Il+" d'harmoniser son investissement dans l'ensemble des matières.",
+        intro+" révèle des disparités entre les matières. Il est conseillé à "+Il+" de s'investir de façon plus régulière dans toutes les disciplines.",
+        "L'équipe pédagogique recommande à "+Il+" plus de régularité dans le travail. Les résultats peuvent encore progresser avec un engagement plus constant."
+      ],
+      negatif:[
+        intro+" est préoccupant. Il est fortement recommandé à "+Il+" de se remobiliser rapidement et de fournir les efforts nécessaires dans toutes les matières.",
+        "Le conseil de classe exprime ses inquiétudes quant aux résultats de "+Il+". Un travail régulier et sérieux est vivement recommandé pour redresser la situation.",
+        intro+" révèle des difficultés importantes. Il est recommandé à "+Il+" de revoir ses méthodes de travail et de solliciter l'aide de ses professeurs."
+      ]
+    },
+    ferme:{
+      positif:[
+        intro+" dresse un excellent bilan. Cependant, ce niveau devra être maintenu sans relâchement. L'exigence restera élevée pour "+Il+" dans les prochains trimestres.",
+        "Le conseil de classe salue les bons résultats de "+Il+", mais rappelle que cet effort devra être maintenu. Aucun relâchement ne sera toléré.",
+        intro+" est satisfaisant pour "+Il+". Ce niveau est attendu et devra être maintenu, voire amélioré. L'exigence reste de mise."
+      ],
+      mitige:[
+        intro+" est insuffisant au regard des capacités de "+Il+". L'équipe pédagogique exige un engagement bien plus soutenu dans l'ensemble des matières.",
+        "Le conseil de classe est ferme : les résultats de "+Il+" doivent impérativement s'améliorer. Un effort sérieux et constant est exigé sans délai.",
+        intro+" révèle des insuffisances inacceptables. "+Il+" doit impérativement revoir son attitude et son investissement dans toutes les matières."
+      ],
+      negatif:[
+        intro+" est alarmant. Le conseil de classe exige de "+Il+" un changement radical d'attitude et un engagement total. La situation actuelle est inacceptable.",
+        "L'équipe pédagogique est formelle : les résultats et le comportement de "+Il+" sont insuffisants. Un redressement immédiat est exigé, sans quoi des mesures seront envisagées.",
+        intro+" confirme des difficultés graves et persistantes. Un effort majeur et immédiat est exigé de "+Il+". La famille est invitée à se rapprocher de l'établissement."
+      ]
+    }
+  };
+
+  var toneData=phrases[tone_pp]||phrases["recommande"];
+  var profileData=toneData[profile]||toneData["mitige"];
+  var p=profileData[Math.floor(Math.random()*profileData.length)];
+
   document.getElementById("pp-rz").style.display="block";
   document.getElementById("pp-rt").value=p;
   document.getElementById("pp-ok").style.display="none";
 }
+
 function ppReset(){
   document.getElementById("pp-prenom").value="";
   document.getElementById("pp-appr").value="";
