@@ -283,10 +283,18 @@ function setVue(v,btn){
 }
 function setTone(t){
   tone=t;
-  document.querySelectorAll(".tonebtn").forEach(function(b){
-    b.classList.remove("on");
-    if(b.getAttribute("data-tone")===t) b.classList.add("on");
+  var map={encourageant:"enc",recommande:"rec",ferme:"fer"};
+  ["enc","rec","fer"].forEach(function(x){
+    var b1=document.getElementById("tone-"+x);
+    var b2=document.getElementById("pp-tone-"+x);
+    if(b1) b1.classList.remove("on");
+    if(b2) b2.classList.remove("on");
   });
+  var key=map[t];
+  var b1=document.getElementById("tone-"+key);
+  var b2=document.getElementById("pp-tone-"+key);
+  if(b1) b1.classList.add("on");
+  if(b2) b2.classList.add("on");
 }
 var genre="M",sel={},filtreCur="toutes",phrase="",prenomCur="",classeCur="",matCur="EPS",ri=0;
 var ppMatieres=[];
@@ -734,13 +742,18 @@ function setTab(id){
 
 // ── Init ──
 (function(){try{var o=localStorage.getItem("eps_v2"),c=localStorage.getItem("eps_v3");if(o&&!c){localStorage.setItem("eps_v3",o);}else if(o&&c){var d1=JSON.parse(o)||[],d2=JSON.parse(c)||[];var ids=d2.map(function(x){return x.id;});var m=d2.concat(d1.filter(function(x){return ids.indexOf(x.id)<0;}));localStorage.setItem("eps_v3",JSON.stringify(m));}}catch(e){}})();
-// Attacher les événements sur les boutons de ton
-document.querySelectorAll(".tonebtn").forEach(function(btn){
-  btn.addEventListener("click", function(){
-    var id = this.id.replace("pp-tone-","").replace("tone-","");
-    var map = {"enc":"encourageant","rec":"recommande","fer":"ferme"};
-    setTone(map[id]||id);
-  });
+// Délégation d'événements pour les boutons de ton
+document.addEventListener("click", function(e){
+  var btn=e.target;
+  while(btn && btn!==document){
+    if(btn.classList && btn.classList.contains("tonebtn")){
+      var id=btn.id.replace("pp-tone-","").replace("tone-","");
+      var map={"enc":"encourageant","rec":"recommande","fer":"ferme"};
+      setTone(map[id]||id);
+      return;
+    }
+    btn=btn.parentNode;
+  }
 });
 onMatiere();badge();renderPPList();
 </script>
