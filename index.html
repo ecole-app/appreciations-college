@@ -213,7 +213,11 @@ EPS : Très investie…" rows="7" style="margin-bottom:0"></textarea>
     <span class="cnt" id="cnt"></span>
   </div>
   <div class="fr">
-    <select class="fs" id="fm" onchange="renderListe()"><option value="t">Toutes matières</option><option>Français</option><option>Maths</option><option>Anglais</option><option>Arabe</option><option>Espagnol</option><option>Histoire-Géo/EMC</option><option>SVT</option><option>Physique-Chimie</option><option>Technologie</option><option>Arts Plastiques</option><option>Éducation Musicale</option><option>EPS</option><option>Prof principal</option></select>
+    <button class="fb on" id="vue-elv" onclick="setVue('eleves',this)">📚 Matières</button>
+    <button class="fb" id="vue-pp" onclick="setVue('pp',this)">👑 Prof principal</button>
+  </div>
+  <div class="fr" id="filtre-mat-row">
+    <select class="fs" id="fm" onchange="renderListe()"><option value="t">Toutes matières</option><option>Français</option><option>Maths</option><option>Anglais</option><option>Arabe</option><option>Espagnol</option><option>Histoire-Géo/EMC</option><option>SVT</option><option>Physique-Chimie</option><option>Technologie</option><option>Arts Plastiques</option><option>Éducation Musicale</option><option>EPS</option></select>
     <select class="fs" id="ft" onchange="renderListe()"><option value="t">Tous trimestres</option><option value="T1">T1</option><option value="T2">T2</option><option value="T3">T3</option></select>
     <select class="fs" id="fa" onchange="renderListe()"><option value="t">Toutes années</option></select>
   </div>
@@ -260,6 +264,14 @@ function getNegP(k,ri){var o=NEG_PHRS[k];return o?o[ri%o.length]:"des progrès s
 
 var KEY="eps_v3";
 var tone="encourageant";
+var vue="eleves";
+function setVue(v,btn){
+  vue=v;
+  document.querySelectorAll("#vue-elv,#vue-pp").forEach(function(b){b.classList.remove("on");});
+  btn.classList.add("on");
+  document.getElementById("filtre-mat-row").style.display=v==="eleves"?"flex":"none";
+  renderListe();
+}
 function setTone(t){
   tone=t;
   ["enc","rec","fer"].forEach(function(x){document.getElementById("tone-"+x).classList.remove("on");});
@@ -596,8 +608,11 @@ function filtrer(f,btn){filtreCur=f;document.querySelectorAll(".fb").forEach(fun
 function popAn(){var d=DB();var ans=[];d.forEach(function(e){if(e.an&&ans.indexOf(e.an)<0)ans.push(e.an);});ans.sort().reverse();["fa","ean"].forEach(function(id){var el=document.getElementById(id);if(!el)return;el.innerHTML='<option value="t">Toutes années</option>'+ans.map(function(a){return '<option value="'+a+'">'+a+'</option>';}).join("");});}
 function renderListe(){
   var d=DB(),fm=document.getElementById("fm").value,ft=document.getElementById("ft").value,fa=document.getElementById("fa").value;
+  // Séparer PP et matières
+  if(vue==="pp") d=d.filter(function(e){return e.matiere==="Prof principal";});
+  else d=d.filter(function(e){return e.matiere!=="Prof principal";});
   if(filtreCur!=="toutes")d=d.filter(function(e){return e.classe===filtreCur;});
-  if(fm!=="t")d=d.filter(function(e){return e.matiere===fm;});
+  if(vue==="eleves"&&fm!=="t")d=d.filter(function(e){return e.matiere===fm;});
   if(ft!=="t")d=d.filter(function(e){return(e.tri||"T1")===ft;});
   if(fa!=="t")d=d.filter(function(e){return(e.an||"")===fa;});
   document.getElementById("cnt").textContent=d.length+" élève(s)";
