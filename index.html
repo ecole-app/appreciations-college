@@ -161,7 +161,7 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
     <div><label>Matière</label><input type="text" id="pp-mat" placeholder="Ex: Français"></div>
     <div><label>Appréciation</label><input type="text" id="pp-appr" placeholder="Coller ou saisir…"></div>
   </div>
-  <button class="a" onclick="ppAjouter()" style="margin-bottom:14px">+ Ajouter</button>
+  <button type="button" class="a" onclick="ppAjouter()" style="margin-bottom:14px">+ Ajouter</button>
 
   <hr>
   <div class="sl">Ton de l'appréciation générale</div>
@@ -453,10 +453,19 @@ function ppAjouter(){
 }
 function renderPPList(){
   var el=document.getElementById("pp-list");
-  if(!ppMatieres.length){el.innerHTML='<div class="emp">Aucune appréciation ajoutée.</div>';return;}
-  el.innerHTML=ppMatieres.map(function(x,i){
-    return '<div class="pp-block"><div class="pp-mat">'+x.mat+' <button class="pp-btn" onclick="ppSuppr('+i+')">✕</button></div><div class="pp-txt">'+x.appr+'</div></div>';
-  }).join("");
+  el.innerHTML="";
+  if(!ppMatieres.length){
+    var d=document.createElement("div");d.className="emp";d.textContent="Aucune appréciation ajoutée.";el.appendChild(d);return;
+  }
+  ppMatieres.forEach(function(x,i){
+    var bloc=document.createElement("div");bloc.className="pp-block";
+    var mat=document.createElement("div");mat.className="pp-mat";mat.textContent=x.mat+" ";
+    var btn=document.createElement("button");btn.className="pp-btn";btn.textContent="✕";btn.type="button";
+    btn.onclick=(function(idx){return function(){ppSuppr(idx);};})(i);
+    mat.appendChild(btn);
+    var txt=document.createElement("div");txt.className="pp-txt";txt.textContent=x.appr;
+    bloc.appendChild(mat);bloc.appendChild(txt);el.appendChild(bloc);
+  });
 }
 function ppSuppr(i){ppMatieres.splice(i,1);renderPPList();}
 function ppGenerer(){
