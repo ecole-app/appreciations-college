@@ -119,9 +119,9 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
 
   <div class="sl">Ton de l'appréciation</div>
   <div class="tonesel" id="tone-sel">
-    <button type="button" class="tonebtn encourageant on" id="tone-enc" onclick="setTone('encourageant')">😊 Encourageant</button>
-    <button type="button" class="tonebtn recommande" id="tone-rec" onclick="setTone('recommande')">📋 Neutre / Recommandé</button>
-    <button type="button" class="tonebtn ferme" id="tone-fer" onclick="setTone('ferme')">⚠️ Ferme</button>
+    <button type="button" class="tonebtn encourageant on" id="tone-enc" onclick="setTone(this.dataset.tone)" data-tone="encourageant">😊 Encourageant</button>
+    <button type="button" class="tonebtn recommande" id="tone-rec" onclick="setTone(this.dataset.tone)" data-tone="recommande">📋 Neutre / Recommandé</button>
+    <button type="button" class="tonebtn ferme" id="tone-fer" onclick="setTone(this.dataset.tone)" data-tone="ferme">⚠️ Ferme</button>
   </div>
 
   <div class="sl">Général — toutes matières</div><div class="chips" id="cp-gen"></div>
@@ -174,9 +174,9 @@ EPS : Très investie…" rows="7" style="margin-bottom:0"></textarea>
   <hr>
   <div class="sl">Ton de l'appréciation générale</div>
   <div class="tonesel">
-    <button class="tonebtn encourageant on" id="pp-tone-enc" onclick="setTone('encourageant')">😊 Encourageant</button>
-    <button class="tonebtn recommande" id="pp-tone-rec" onclick="setTone('recommande')">📋 Recommandé</button>
-    <button class="tonebtn ferme" id="pp-tone-fer" onclick="setTone('ferme')">⚠️ Ferme</button>
+    <button class="tonebtn encourageant on" id="pp-tone-enc" onclick="setTone(this.dataset.tone)" data-tone="encourageant">😊 Encourageant</button>
+    <button class="tonebtn recommande" id="pp-tone-rec" onclick="setTone(this.dataset.tone)" data-tone="recommande">📋 Recommandé</button>
+    <button class="tonebtn ferme" id="pp-tone-fer" onclick="setTone(this.dataset.tone)" data-tone="ferme">⚠️ Ferme</button>
   </div>
 
   <div class="sl">Trimestre</div>
@@ -274,17 +274,8 @@ function setVue(v,btn){
 }
 function setTone(t){
   tone=t;
-  ["enc","rec","fer"].forEach(function(x){
-    var e1=document.getElementById("tone-"+x);
-    var e2=document.getElementById("pp-tone-"+x);
-    if(e1) e1.classList.remove("on");
-    if(e2) e2.classList.remove("on");
-  });
-  var map={encourageant:"enc",recommande:"rec",ferme:"fer"};
-  var e1=document.getElementById("tone-"+map[t]);
-  var e2=document.getElementById("pp-tone-"+map[t]);
-  if(e1) e1.classList.add("on");
-  if(e2) e2.classList.add("on");
+  document.querySelectorAll(".tonebtn").forEach(function(b){b.classList.remove("on");});
+  document.querySelectorAll(".tonebtn[data-tone='"+t+"']").forEach(function(b){b.classList.add("on");});
 }
 var genre="M",sel={},filtreCur="toutes",phrase="",prenomCur="",classeCur="",matCur="EPS",ri=0;
 var ppMatieres=[];
