@@ -89,7 +89,7 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
 <div id="api-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center">
   <div style="background:#fff;border-radius:12px;padding:24px;width:90%;max-width:400px">
     <h2 style="font-size:16px;font-weight:600;margin-bottom:8px;color:#145f55">🔑 Clé API Anthropic</h2>
-    <p style="font-size:13px;color:#5a7570;margin-bottom:14px;line-height:1.5">Saisis ta clé API Anthropic (commence par sk-ant-). Stockée uniquement dans ton navigateur.</p>
+    <p style="font-size:13px;color:#5a7570;margin-bottom:14px;line-height:1.5">Saisis ta clé API Anthropic (commence par sk-ant-).</p>
     <input type="password" id="api-key-input" placeholder="sk-ant-api03-…" style="margin-bottom:10px">
     <div id="api-err" style="color:#A32D2D;font-size:12px;display:none;margin-bottom:8px">Clé invalide.</div>
     <div style="display:flex;gap:8px">
@@ -132,6 +132,13 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
       <option value="T2">T2 — Milieu d'année</option>
       <option value="T3">T3 — Fin d'année</option>
     </select></div>
+  </div>
+
+  <div class="sl">Ton de l'appréciation</div>
+  <div class="tonesel" id="tone-sel">
+    <button type="button" class="tonebtn encourageant on" id="tone-enc" onclick="setTone('encourageant')">😊 Encourageant</button>
+    <button type="button" class="tonebtn recommande" id="tone-rec" onclick="setTone('recommande')">📋 Neutre / Recommandé</button>
+    <button type="button" class="tonebtn ferme" id="tone-fer" onclick="setTone('ferme')">⚠️ Ferme</button>
   </div>
 
   <div class="sl">Général — toutes matières</div><div class="chips" id="cp-gen"></div>
@@ -269,6 +276,13 @@ var NEG_PHRS={"invest_n":["l'investissement doit progresser","une plus grande im
 function getNegP(k,ri){var o=NEG_PHRS[k];return o?o[ri%o.length]:"des progrès sont attendus";}
 
 var KEY="eps_v3";
+var tone="encourageant";
+function setTone(t){
+  tone=t;
+  ["enc","rec","fer"].forEach(function(x){document.getElementById("tone-"+x).classList.remove("on");});
+  var map={encourageant:"enc",recommande:"rec",ferme:"fer"};
+  document.getElementById("tone-"+map[t]).classList.add("on");
+}
 var genre="M",sel={},filtreCur="toutes",phrase="",prenomCur="",classeCur="",matCur="EPS",ri=0;
 var ppMatieres=[];
 var ppTone="encourageant";
@@ -318,9 +332,74 @@ function onMoy(){
   } else { plbl.innerHTML=""; }
 }
 
-function getConclu(isGood,ri){
+function getConclu(isGood,ri,tonOverride){
   var v=getMoy(),tr=getTrim();
   var prog=getProgression(prenomCur||document.getElementById("prenom").value.trim(),document.getElementById("classe").value,document.getElementById("matiere").value,tr,v);
+  var t_used = tonOverride || tone;
+
+  // Suffixes selon le ton
+  var toneSuffix={
+    encourageant:"",
+    recommande:"",
+    ferme:""
+  };
+
+  // Conclusions spécifiques au ton (remplacent les conclusions par défaut si ton spécifié)
+  var TONE_CONCLU={
+    encourageant:{
+      bon:{
+        T1:["Un début d'année encourageant ! Continuons sur cette lancée.","Les premiers résultats sont prometteurs. Bravo !","Un bon départ ! Ces efforts méritent d'être soulignés.","Encourageant ! Maintenons cette dynamique positive."],
+        T2:["À mi-parcours, les résultats sont satisfaisants. Bravo !","Un deuxième trimestre encourageant. Continuons !","De bons résultats qui méritent d'être salués.","Très bien ! La dynamique positive est là."],
+        T3:["Bravo pour cette belle année ! Ces efforts sont récompensés.","Un bilan final encourageant. Félicitations !","Une belle année à saluer. Continuons dans ce sens l'an prochain.","De très bons résultats qui couronnent une année de travail."],
+        "":["Bravo ! Ces résultats témoignent d'un bel investissement.","Encourageant ! Continuons dans cette dynamique.","De bons résultats qui méritent d'être salués.","Très bien ! Ces efforts sont récompensés."]
+      },
+      mauvais:{
+        T1:["Un début d'année difficile mais le potentiel est là. Courage !","Ces premières difficultés peuvent être surmontées avec du travail.","Encore des efforts à fournir, mais il est encore tôt. Accroche-toi !","Le début est difficile, mais avec de la volonté, les résultats suivront."],
+        T2:["À mi-parcours, des progrès sont encore possibles. Ne lâche pas !","Ces difficultés peuvent encore être surmontées. Courage pour le T3 !","Il reste un trimestre pour redresser la situation. On y croit !","Des efforts sont nécessaires, mais tout reste possible au T3."],
+        T3:["Une année difficile, mais l'important est de repartir avec de bonnes bases.","Ces difficultés doivent être l'occasion de repartir du bon pied l'an prochain.","Malgré les difficultés, le potentiel est là. Bonne continuation !","Il faudra redoubler d'efforts l'année prochaine. Courage !"],
+        "":["Des difficultés à surmonter, mais le potentiel est là. Courage !","Encore des efforts à fournir, mais avec de la volonté, ça viendra.","Ne lâche pas ! Les progrès sont encore possibles.","Des efforts nécessaires, mais tout reste possible."]
+      }
+    },
+    recommande:{
+      bon:{
+        T1:["Bon début d'année. Il faudra confirmer ce niveau sur la durée.","Un premier trimestre satisfaisant. Les efforts devront être maintenus.","Résultats corrects. Un travail régulier est recommandé pour progresser.","Bon trimestre. Il est recommandé de maintenir cet engagement."],
+        T2:["À mi-parcours, les résultats sont satisfaisants. Il faudra maintenir le cap.","Bon deuxième trimestre. Il est recommandé de poursuivre dans cette voie.","Résultats satisfaisants. Un effort constant au T3 est recommandé.","À mi-année, le niveau est correct. La régularité reste essentielle."],
+        T3:["Bilan final satisfaisant. Il est recommandé de maintenir cet effort l'an prochain.","Un bon bilan de fin d'année. Il faudra reproduire ces efforts l'année suivante.","Résultats corrects. Il est conseillé de viser encore plus haut l'an prochain.","Bon travail cette année. Il est recommandé de s'appuyer sur ces acquis."],
+        "":["Résultats satisfaisants. Il est recommandé de maintenir cet effort.","Bon trimestre. La régularité dans le travail est recommandée.","Des résultats corrects. Il faudra confirmer sur la durée.","Satisfaisant. Un engagement constant est recommandé."]
+      },
+      mauvais:{
+        T1:["Des difficultés persistantes. Il est recommandé de s'investir davantage sans tarder.","Résultats insuffisants. Un travail régulier est vivement recommandé.","Des lacunes à combler. Il est conseillé de demander de l'aide si nécessaire.","Il est recommandé de se remobiliser rapidement pour redresser la situation."],
+        T2:["À mi-parcours, les résultats sont préoccupants. Une remobilisation est recommandée.","Des difficultés persistantes. Il est fortement recommandé de travailler davantage au T3.","Il est conseillé de revoir les méthodes de travail pour progresser.","Une remobilisation immédiate est recommandée pour terminer l'année correctement."],
+        T3:["Bilan insuffisant. Il est recommandé de prendre un nouveau départ l'an prochain.","Des lacunes persistantes. Un travail de fond est recommandé pour la rentrée.","Il est conseillé de s'appuyer sur un soutien scolaire l'année prochaine.","Il est fortement recommandé de revoir les bases avant la prochaine rentrée."],
+        "":["Des lacunes à combler. Un travail régulier est vivement recommandé.","Il est recommandé de s'investir davantage pour progresser.","Des efforts supplémentaires sont recommandés.","Il est conseillé de se remobiliser rapidement."]
+      }
+    },
+    ferme:{
+      bon:{
+        T1:["Des résultats corrects, mais des efforts plus soutenus sont exigés.","Le niveau est acceptable, mais l'exigence devra être plus élevée.","Résultats passables. Plus de rigueur est attendu.","Le minimum est atteint, mais davantage est exigé."],
+        T2:["À mi-parcours, le niveau est juste suffisant. Un effort plus soutenu est exigé.","Des résultats qui doivent impérativement s'améliorer au T3.","Le niveau atteint est insuffisant au regard des capacités. Plus de travail est exigé.","Un engagement plus fort est exigé pour terminer l'année correctement."],
+        T3:["Bilan insuffisant au regard des capacités. Un vrai changement est exigé l'an prochain.","Ces résultats sont en deçà des attentes. Un effort majeur est exigé l'année prochaine.","Le niveau atteint est inacceptable. Un engagement total sera exigé à la rentrée.","Un travail sérieux et constant sera exigé l'année prochaine sans exception."],
+        "":["Le niveau est insuffisant. Un effort plus soutenu est exigé.","Plus de travail et de rigueur sont exigés.","Ces résultats sont insuffisants. Un changement d'attitude est exigé.","Un engagement plus fort est exigé sans délai."]
+      },
+      mauvais:{
+        T1:["Des résultats inacceptables dès le début d'année. Un changement immédiat est exigé.","Le niveau est très insuffisant. Un effort immédiat et soutenu est exigé.","Ces résultats sont inacceptables. Une remobilisation totale est exigée sans délai.","Des lacunes graves. Un travail intensif est exigé dès maintenant."],
+        T2:["À mi-parcours, la situation est inacceptable. Un redressement immédiat est exigé.","Des résultats très insuffisants. Un engagement total est exigé pour le T3.","La situation est alarmante. Un changement radical d'attitude est exigé.","Ces résultats sont inacceptables. Une remobilisation immédiate est exigée."],
+        T3:["Bilan alarmant. Un changement radical est exigé pour la prochaine année.","Ces résultats sont inacceptables. Un travail intensif est exigé dès la rentrée.","Une année très insuffisante. Un engagement total sera exigé sans exception l'an prochain.","La situation est grave. Un suivi renforcé et un engagement total seront exigés."],
+        "":["Ces résultats sont inacceptables. Un changement immédiat est exigé.","Un engagement total est exigé sans délai.","La situation est grave. Un travail intensif est exigé immédiatement.","Ces résultats sont insuffisants. Un redressement immédiat est exigé."]
+      }
+    }
+  };
+
+  // Utiliser les conclusions selon le ton si pas neutre
+  if(t_used !== "encourageant" || true) {
+    var isGoodResult = v===null ? isGood : v>=12;
+    var toneData = TONE_CONCLU[t_used];
+    if(toneData) {
+      var toneArr = isGoodResult ? (toneData.bon[tr]||toneData.bon[""]) : (toneData.mauvais[tr]||toneData.mauvais[""]);
+      if(toneData && toneArr) return toneArr[ri % toneArr.length];
+    }
+  }
+
   var C={
     insuf:{T1:["Un travail régulier dès maintenant est indispensable.","Une remobilisation rapide est nécessaire.","Ces lacunes doivent être prises en charge sans tarder.","Un engagement plus fort est attendu pour la suite de l'année.","Ces axes de progrès devront être travaillés tout au long de l'année.","Il est encore tôt, mais ces difficultés doivent être corrigées rapidement."],T2:["Un effort urgent est attendu pour redresser la situation au T3.","Il est encore temps de progresser, mais l'engagement doit être immédiat.","Ces lacunes doivent être comblées avant le bilan final.","Le T3 doit être celui de la remobilisation totale.","Un engagement total est indispensable pour terminer l'année correctement.","La situation doit impérativement évoluer dès maintenant."],T3:["Un travail de fond sera indispensable pour aborder la prochaine année.","La prochaine rentrée devra être l'occasion d'un vrai nouveau départ.","Ces lacunes persistantes devront être surmontées l'an prochain.","Un bilan final en-dessous des attentes. Un engagement fort sera attendu à la rentrée.","Un effort majeur sera nécessaire pour progresser l'année prochaine.","Ces difficultés devront être prises en charge sérieusement l'an prochain."],"":["Une remobilisation sérieuse est indispensable.","Un effort important est attendu.","Des efforts soutenus sont nécessaires pour progresser.","Une implication bien plus forte est attendue.","Un engagement plus fort est nécessaire.","Le potentiel doit se concrétiser en résultats."]},
     fragile:{T1:["Un travail régulier permettra de consolider les bases.","Un investissement plus constant est attendu.","Ces fragilités doivent être corrigées rapidement.","Un engagement plus régulier permettra de progresser.","La marge de progression est encore importante.","Un début d'année fragile qui appelle à plus d'efforts."],T2:["Un effort supplémentaire au T3 permettrait de redresser la situation.","Il est encore temps de progresser significativement.","Ces fragilités doivent être comblées avant le bilan final.","Un engagement plus fort permettrait d'améliorer les résultats.","La situation doit s'améliorer pour terminer l'année correctement.","Le T3 doit être l'occasion de progresser."],T3:["Des progrès seront attendus pour la prochaine rentrée.","La prochaine année devra consolider ces bases.","Un travail de consolidation s'impose pour l'année suivante.","Un effort plus régulier sera attendu l'année prochaine.","La progression n'a pas été suffisante sur l'ensemble de l'année.","Ces fragilités persistantes devront être surmontées."],"":["Des efforts supplémentaires sont attendus.","Un travail plus régulier permettra de progresser.","Un engagement plus constant est nécessaire.","Ces fragilités peuvent être surmontées avec du travail.","Un investissement plus fort est attendu.","Le niveau peut et doit progresser."]},
@@ -408,7 +487,7 @@ function genPhrase(keys,f,Il,il,mat,ri){
   var introNeg={T1:["En ce début d'année, ","Dès ce premier trimestre, ","Pour ce premier trimestre, ","En début d'année, ","À ce stade de l'année, ","Ce premier trimestre montre que "],T2:["À mi-parcours, ","En ce deuxième trimestre, ","Pour ce milieu d'année, ","À mi-année, ","Au cœur de cette année, ","Ce deuxième trimestre montre que "],T3:["En fin d'année, ","Pour ce bilan final, ","À l'issue de cette année, ","En ce troisième trimestre, ","Pour clôturer l'année, ","Ce troisième trimestre montre que "],"":["Ce trimestre, ","Sur ce trimestre, ","Pour cette période, ","Au cours de ce trimestre, ","À ce stade, ","Ce trimestre montre que "]};
   var introArr=introNeg[tr]||introNeg[""];
   var liai=["Cependant, ","Toutefois, ","Il est à noter que ","Un point de vigilance : ","Néanmoins, ","Il faudra veiller à ce que "];
-  var conclu=getConclu(hasPos&&!hasNeg,ri);
+  var conclu=getConclu(hasPos&&!hasNeg,ri,tone);
   var p="";
   if(hasPos&&hasNeg){p=bPos()+" "+liai[ri%liai.length]+bNeg()+". "+conclu;if(hasProg&&prog.indexOf("potentiel")<0)p+=" "+Il+" affiche par ailleurs "+jN(progNoms)+".";}
   else if(hasPos){p=bPos();if(hasProg)p+=" "+Il+" affiche "+jN(progNoms)+". "+conclu;else p+=" "+conclu;}
@@ -575,40 +654,29 @@ function setTab(id){
 
 // ── API Key ──
 function getApiKey(){return localStorage.getItem("eps_api_key")||"";}
-function saveApiKey(){
-  var k=document.getElementById("api-key-input").value.trim();
-  if(!k.startsWith("sk-")){document.getElementById("api-err").style.display="block";return;}
-  localStorage.setItem("eps_api_key",k);closeApiModal();updateApiBar();
-}
+function saveApiKey(){var k=document.getElementById("api-key-input").value.trim();if(!k.startsWith("sk-")){document.getElementById("api-err").style.display="block";return;}localStorage.setItem("eps_api_key",k);closeApiModal();updateApiBar();}
 function openApiModal(){document.getElementById("api-key-input").value=getApiKey();document.getElementById("api-err").style.display="none";document.getElementById("api-modal").style.display="flex";}
 function closeApiModal(){document.getElementById("api-modal").style.display="none";}
-function updateApiBar(){
-  var ok=getApiKey()!=="";
-  var bar=document.getElementById("api-bar");
-  bar.style.background=ok?"#e6f4f1":"#fef0e6";
-  document.getElementById("api-dot").style.background=ok?"#1a7a6e":"#e8671a";
-  document.getElementById("api-status").textContent=ok?"Clé API configurée ✓":"Clé API non configurée — clique sur Configurer";
-}
+function updateApiBar(){var ok=getApiKey()!=="";var bar=document.getElementById("api-bar");bar.style.background=ok?"#e6f4f1":"#fef0e6";document.getElementById("api-dot").style.background=ok?"#1a7a6e":"#e8671a";document.getElementById("api-status").textContent=ok?"Clé API configurée ✓":"Clé API non configurée — clique sur Configurer";}
 
 // ── Génération IA ──
 async function genererIA(){
-  var apiKey=getApiKey();
-  if(!apiKey){openApiModal();return;}
+  var apiKey=getApiKey();if(!apiKey){openApiModal();return;}
   var keys=Object.keys(sel);var fv=document.getElementById("free").value;var ft=fv?fv.split(",").map(function(s){return s.trim();}).filter(Boolean):[];
   if(!keys.length&&!ft.length){alert("Sélectionne au moins un mot-clé.");return;}
   prenomCur=document.getElementById("prenom").value.trim();classeCur=document.getElementById("classe").value;matCur=document.getElementById("matiere").value;
-  var f=genre==="F",Il=prenomCur||(f?"Elle":"Il");
-  var tr=getTrim(),v=getMoy();
+  var f=genre==="F";var tr=getTrim(),v=getMoy();
   var chips2=allChipsList();
   var labels=keys.map(function(k){var c=chips2.filter(function(c){return c.k===k;})[0];return c?c.l:k;}).concat(ft);
-  var prompt="Tu es professeur en collège français. Rédige UNE appréciation de bulletin scolaire (1-2 phrases max, STRICTEMENT moins de 255 caractères) à partir de ces éléments.\n\n";
-  prompt+="Matière : "+matCur+"\n";
-  prompt+="Genre : "+(f?"féminin (elle/sa)":"masculin (il/son)")+"\n";
-  if(prenomCur) prompt+="Prénom : "+prenomCur+" (utilise ce prénom à la place de il/elle)\n";
+  var toneLabel={encourageant:"bienveillant et encourageant",recommande:"neutre et professionnel",ferme:"ferme et exigeant"}[tone]||"professionnel";
+  var prompt="Tu es professeur en collège français. Rédige UNE appréciation de bulletin scolaire (1-2 phrases max, STRICTEMENT moins de 255 caractères).\n\n";
+  prompt+="Matière : "+matCur+"\nGenre : "+(f?"féminin":"masculin")+"\n";
+  if(prenomCur) prompt+="Prénom : "+prenomCur+" (utilise ce prénom)\n";
   if(v) prompt+="Moyenne : "+v+"/20\n";
-  if(tr) prompt+="Trimestre : "+tr+(tr==="T1"?" (début d'année)":tr==="T2"?" (milieu d'année)":" (fin d'année, bilan)")+"\n";
+  if(tr) prompt+="Trimestre : "+tr+(tr==="T1"?" (début d'année)":tr==="T2"?" (milieu d'année)":" (fin d'année)")+"\n";
+  prompt+="Ton : "+toneLabel+"\n";
   prompt+="Mots-clés : "+labels.join(", ")+"\n\n";
-  prompt+="Règles : phrase naturelle et professionnelle, bienveillante même si négatif, accords corrects, commence par le contexte matière si pas EPS. Juste la phrase, sans guillemets ni introduction.";
+  prompt+="Règles : phrase naturelle, accords corrects, commence par le contexte matière si pas EPS, respecte le ton demandé. Juste la phrase, sans guillemets.";
   var rz=document.getElementById("rz");rz.style.display="block";document.getElementById("ok").style.display="none";
   document.getElementById("rl").textContent=prenomCur?"Phrase pour "+prenomCur:"Phrase générée";
   document.getElementById("rt").value="Génération en cours…";document.getElementById("char-count").textContent="…";
