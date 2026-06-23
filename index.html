@@ -189,6 +189,7 @@ EPS : Très investie…" rows="7" style="margin-bottom:0"></textarea>
 
   <div class="brow" style="margin-bottom:12px">
     <button class="a p" onclick="ppGenerer()">⚡ Générer l'appréciation générale</button>
+    <button type="button" class="a" onclick="ppReset()">✕ Réinitialiser</button>
   </div>
 
   <div id="pp-rz" style="display:none" class="rb">
@@ -541,6 +542,7 @@ function ppAjouter(){
 }
 function renderPPList(){
   var el=document.getElementById("pp-list");
+  if(!el) return;
   el.innerHTML="";
   if(!ppMatieres.length){
     var d=document.createElement("div");d.className="emp";d.textContent="Aucune appréciation ajoutée.";el.appendChild(d);return;
@@ -593,6 +595,14 @@ function ppGenerer(){
   document.getElementById("pp-rz").style.display="block";
   document.getElementById("pp-rt").value=p;
   document.getElementById("pp-ok").style.display="none";
+}
+function ppReset(){
+  document.getElementById("pp-prenom").value="";
+  document.getElementById("pp-appr").value="";
+  document.getElementById("pp-trim").value="";
+  document.getElementById("pp-rz").style.display="none";
+  ppMatieres=[];
+  setTone("encourageant");
 }
 function ppEnregistrer(){
   var p=document.getElementById("pp-rt").value;if(!p)return;
