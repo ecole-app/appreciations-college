@@ -274,8 +274,10 @@ function setVue(v,btn){
 }
 function setTone(t){
   tone=t;
-  document.querySelectorAll(".tonebtn").forEach(function(b){b.classList.remove("on");});
-  document.querySelectorAll(".tonebtn[data-tone='"+t+"']").forEach(function(b){b.classList.add("on");});
+  document.querySelectorAll(".tonebtn").forEach(function(b){
+    b.classList.remove("on");
+    if(b.getAttribute("data-tone")===t) b.classList.add("on");
+  });
 }
 var genre="M",sel={},filtreCur="toutes",phrase="",prenomCur="",classeCur="",matCur="EPS",ri=0;
 var ppMatieres=[];
