@@ -81,15 +81,15 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
 <body>
 <div class="hdr"><h1>📋 Appréciations Collège Luqman <span style="font-size:13px;font-weight:400;opacity:.8">✨ IA</span></h1></div>
 <div class="bod">
-<div id="api-bar" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;border:1px solid var(--b);background:#fef0e6;font-size:13px;margin-bottom:12px">
-  <span id="api-dot" style="width:8px;height:8px;border-radius:99px;background:var(--o);flex-shrink:0;display:inline-block"></span>
+<div id="api-bar" style="display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;border:1px solid #dde8e6;background:#fef0e6;font-size:13px;margin-bottom:12px">
+  <span id="api-dot" style="width:8px;height:8px;border-radius:99px;background:#e8671a;flex-shrink:0;display:inline-block"></span>
   <span id="api-status">Clé API non configurée</span>
   <button type="button" class="a" style="margin-left:auto;padding:4px 10px;font-size:12px" onclick="openApiModal()">🔑 Configurer</button>
 </div>
 <div id="api-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center">
   <div style="background:#fff;border-radius:12px;padding:24px;width:90%;max-width:400px">
-    <h2 style="font-size:16px;font-weight:600;margin-bottom:8px;color:var(--vd)">🔑 Clé API Anthropic</h2>
-    <p style="font-size:13px;color:var(--m);margin-bottom:14px;line-height:1.5">Saisis ta clé API Anthropic (commence par sk-ant-). Elle est stockée uniquement dans ton navigateur.</p>
+    <h2 style="font-size:16px;font-weight:600;margin-bottom:8px;color:#145f55">🔑 Clé API Anthropic</h2>
+    <p style="font-size:13px;color:#5a7570;margin-bottom:14px;line-height:1.5">Saisis ta clé API Anthropic (commence par sk-ant-). Stockée uniquement dans ton navigateur.</p>
     <input type="password" id="api-key-input" placeholder="sk-ant-api03-…" style="margin-bottom:10px">
     <div id="api-err" style="color:#A32D2D;font-size:12px;display:none;margin-bottom:8px">Clé invalide.</div>
     <div style="display:flex;gap:8px">
@@ -99,10 +99,10 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
   </div>
 </div>
 <div class="tabs">
-  <button class="tab on" onclick="setTab('gen')">✦ Générer</button>
-  <button class="tab" onclick="setTab('pp')">👑 Prof principal</button>
-  <button class="tab" onclick="setTab('lst')">👥 Élèves <span id="bdg"></span></button>
-  <button class="tab" onclick="setTab('exp')">↗ Export</button>
+  <button class="tab on" onclick="setTab(this.dataset.t)" data-t="gen">✦ Générer</button>
+  <button class="tab" onclick="setTab(this.dataset.t)" data-t="pp">👑 Prof principal</button>
+  <button class="tab" onclick="setTab(this.dataset.t)" data-t="lst">👥 Élèves <span id="bdg"></span></button>
+  <button class="tab" onclick="setTab(this.dataset.t)" data-t="exp">↗ Export</button>
 </div>
 
 <!-- ═══ GÉNÉRER ═══ -->
@@ -158,7 +158,7 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
     <div style="font-size:11px;color:var(--m);margin-top:2px"><span id="char-count">0</span>/255 caractères</div>
     <div class="brow">
       <button class="a p" onclick="enregistrer()">💾 Enregistrer</button>
-      <button class="a" onclick="regenererIA()">↺ Regénérer</button>
+      <button class="a" onclick="regenerer()">↺ Regénérer</button>
       <button class="a" onclick="copierPhrase()">⎘ Copier</button>
     </div>
     <div class="ok" id="ok">✓ Enregistré !</div>
@@ -586,8 +586,7 @@ function updateApiBar(){
   var ok=getApiKey()!=="";
   var bar=document.getElementById("api-bar");
   bar.style.background=ok?"#e6f4f1":"#fef0e6";
-  bar.style.borderColor=ok?"var(--v)":"var(--b)";
-  document.getElementById("api-dot").style.background=ok?"var(--v)":"var(--o)";
+  document.getElementById("api-dot").style.background=ok?"#1a7a6e":"#e8671a";
   document.getElementById("api-status").textContent=ok?"Clé API configurée ✓":"Clé API non configurée — clique sur Configurer";
 }
 
@@ -598,33 +597,24 @@ async function genererIA(){
   var keys=Object.keys(sel);var fv=document.getElementById("free").value;var ft=fv?fv.split(",").map(function(s){return s.trim();}).filter(Boolean):[];
   if(!keys.length&&!ft.length){alert("Sélectionne au moins un mot-clé.");return;}
   prenomCur=document.getElementById("prenom").value.trim();classeCur=document.getElementById("classe").value;matCur=document.getElementById("matiere").value;
-  var f=genre==="F",Il=prenomCur||(f?"Elle":"Il"),il=prenomCur||(f?"elle":"il");
+  var f=genre==="F",Il=prenomCur||(f?"Elle":"Il");
   var tr=getTrim(),v=getMoy();
-  var allChips2=allChipsList();
-  var labels=keys.map(function(k){var c=allChips2.filter(function(c){return c.k===k;})[0];return c?c.l:k;}).concat(ft);
-  var prompt="Tu es professeur en collège français. Rédige UNE appréciation de bulletin scolaire (1-2 phrases, max 255 caractères) à partir de ces éléments.
-
-";
-  prompt+="Matière : "+matCur+"
-";
-  prompt+="Genre : "+(f?"féminin (elle/sa)":"masculin (il/son)")+"
-";
-  if(prenomCur) prompt+="Prénom : "+prenomCur+" (utilise ce prénom à la place de il/elle)
-";
-  if(v) prompt+="Moyenne : "+v+"/20
-";
-  if(tr) prompt+="Trimestre : "+tr+(tr==="T1"?" (début d'année)":tr==="T2"?" (milieu d'année)":" (fin d'année, bilan)")+"
-";
-  prompt+="Mots-clés : "+labels.join(", ")+"
-
-";
-  prompt+="Règles : phrase naturelle et professionnelle, bienveillante même si négatif, commence par le contexte matière si pas EPS, respecte les accords. Juste la phrase, sans guillemets.";
+  var chips2=allChipsList();
+  var labels=keys.map(function(k){var c=chips2.filter(function(c){return c.k===k;})[0];return c?c.l:k;}).concat(ft);
+  var prompt="Tu es professeur en collège français. Rédige UNE appréciation de bulletin scolaire (1-2 phrases max, STRICTEMENT moins de 255 caractères) à partir de ces éléments.\n\n";
+  prompt+="Matière : "+matCur+"\n";
+  prompt+="Genre : "+(f?"féminin (elle/sa)":"masculin (il/son)")+"\n";
+  if(prenomCur) prompt+="Prénom : "+prenomCur+" (utilise ce prénom à la place de il/elle)\n";
+  if(v) prompt+="Moyenne : "+v+"/20\n";
+  if(tr) prompt+="Trimestre : "+tr+(tr==="T1"?" (début d'année)":tr==="T2"?" (milieu d'année)":" (fin d'année, bilan)")+"\n";
+  prompt+="Mots-clés : "+labels.join(", ")+"\n\n";
+  prompt+="Règles : phrase naturelle et professionnelle, bienveillante même si négatif, accords corrects, commence par le contexte matière si pas EPS. Juste la phrase, sans guillemets ni introduction.";
   var rz=document.getElementById("rz");rz.style.display="block";document.getElementById("ok").style.display="none";
   document.getElementById("rl").textContent=prenomCur?"Phrase pour "+prenomCur:"Phrase générée";
   document.getElementById("rt").value="Génération en cours…";document.getElementById("char-count").textContent="…";
   try{
     var resp=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:"claude-haiku-4-5-20251001",max_tokens:300,messages:[{role:"user",content:prompt}]})});
-    if(!resp.ok){var err=await resp.json();if(err.error&&err.error.type==="authentication_error"){openApiModal();return;}throw new Error(err.error&&err.error.message||resp.status);}
+    if(!resp.ok){var err=await resp.json();if(err.error&&err.error.type==="authentication_error"){openApiModal();return;}throw new Error((err.error&&err.error.message)||resp.status);}
     var data=await resp.json();phrase=data.content[0].text.trim();
   }catch(e){phrase="Erreur : "+e.message;}
   document.getElementById("rt").value=phrase;document.getElementById("char-count").textContent=phrase.length;
