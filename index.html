@@ -273,6 +273,7 @@ function getNegP(k,ri){var o=NEG_PHRS[k];return o?o[ri%o.length]:"des progrès s
 
 var KEY="eps_v3";
 var tone="encourageant";
+var ppTone="encourageant";
 var vue="eleves";
 function setVue(v,btn){
   vue=v;
@@ -539,18 +540,21 @@ function setTone(t){
   tone=t;
   var map={encourageant:"enc",recommande:"rec",ferme:"fer"};
   ["enc","rec","fer"].forEach(function(x){
-    var b1=document.getElementById("tone-"+x);
-    var b2=document.getElementById("pp-tone-"+x);
-    if(b1) b1.classList.remove("on");
-    if(b2) b2.classList.remove("on");
+    var b=document.getElementById("tone-"+x);
+    if(b) b.classList.remove("on");
   });
-  var key=map[t];
-  if(key){
-    var b1=document.getElementById("tone-"+key);
-    var b2=document.getElementById("pp-tone-"+key);
-    if(b1) b1.classList.add("on");
-    if(b2) b2.classList.add("on");
-  }
+  var b=document.getElementById("tone-"+(map[t]||t));
+  if(b) b.classList.add("on");
+}
+function setPPTone(t){
+  ppTone=t;
+  var map={encourageant:"enc",recommande:"rec",ferme:"fer"};
+  ["enc","rec","fer"].forEach(function(x){
+    var b=document.getElementById("pp-tone-"+x);
+    if(b) b.classList.remove("on");
+  });
+  var b=document.getElementById("pp-tone-"+(map[t]||t));
+  if(b) b.classList.add("on");
 }
 function ppAjouter(){
   // Ajouter désactivé
@@ -578,7 +582,7 @@ function ppGenerer(){
   var trim=document.getElementById("pp-trim").value;
   var apprText=document.getElementById("pp-appr").value.trim();
   if(!apprText){alert("Saisis les appréciations des professeurs.");return;}
-  var tone_pp=tone;
+  var tone_pp=ppTone;
   var f=ppGenre==="F";
   var Il=prenom!=="L'élève"?prenom:(f?"Elle":"Il");
   var il=prenom!=="L'élève"?prenom:(f?"elle":"il");
@@ -678,7 +682,7 @@ function ppReset(){
   document.getElementById("pp-trim").value="";
   document.getElementById("pp-rz").style.display="none";
   ppMatieres=[];
-  setTone("encourageant");
+  setPPTone("encourageant");
   ppGenre='M';document.getElementById('pp-gm').classList.add('on');document.getElementById('pp-gf').classList.remove('on');
 }
 function ppEnregistrer(){
@@ -745,7 +749,7 @@ function setTab(id){
   var b1=document.getElementById("tone-"+x);
   var b2=document.getElementById("pp-tone-"+x);
   if(b1) b1.addEventListener("click",function(e){e.stopPropagation();setTone(map[x]);});
-  if(b2) b2.addEventListener("click",function(e){e.stopPropagation();setTone(map[x]);});
+  if(b2) b2.addEventListener("click",function(e){e.stopPropagation();setPPTone(map[x]);});
 });
 onMatiere();badge();renderPPList();
 </script>
