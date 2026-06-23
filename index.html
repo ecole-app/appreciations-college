@@ -288,7 +288,6 @@ function setTone(t){
 }
 var genre="M",sel={},filtreCur="toutes",phrase="",prenomCur="",classeCur="",matCur="EPS",ri=0;
 var ppMatieres=[];
-var ppTone="encourageant";
 
 function DB(){try{return JSON.parse(localStorage.getItem(KEY)||"[]");}catch(e){return[];}}
 function dbS(d){localStorage.setItem(KEY,JSON.stringify(d));}
@@ -539,7 +538,7 @@ function resetForm(){sel={};ri=0;["prenom","moyenne","free"].forEach(function(i)
 
 // ── Prof principal ──
 function setTone(t){
-  ppTone=t;
+  tone=t;
   ["enc","rec","fer"].forEach(function(x){document.getElementById("tone-"+x).classList.remove("on");});
   var map={encourageant:"enc",recommande:"rec",ferme:"fer"};
   document.getElementById("tone-"+map[t]).classList.add("on");
@@ -569,12 +568,12 @@ function ppGenerer(){
   var trim=document.getElementById("pp-trim").value;
   var apprText=document.getElementById("pp-appr").value.trim();
   if(!apprText){alert("Saisis les appréciations des professeurs.");return;}
-  var tone=ppTone;
+  var tone_pp=tone;
   var matList="l'ensemble des matières";
   // Construire la phrase selon le ton
   var introT={T1:["Ce premier trimestre","En ce début d'année","Pour ce premier conseil"],T2:["Ce deuxième trimestre","À mi-parcours","Pour ce deuxième conseil"],T3:["Ce troisième trimestre","En fin d'année","Pour le bilan final"],"":["Ce trimestre","Pour ce conseil de classe","À ce stade"]};
   var introArr=introT[trim]||introT[""];var intro=introArr[Math.floor(Math.random()*introArr.length)];
-  var phrases={
+  var arr_t2=tone_pp;var phrases={
     encourageant:[
       intro+" montre un élève globalement investi dans son parcours scolaire. Les appréciations de l'équipe pédagogique témoignent d'un engagement sérieux en "+matList+". Continuons dans cette dynamique positive.",
       "Le profil de "+prenom+" est encourageant : l'équipe pédagogique souligne des qualités réelles en "+matList+". "+intro+" est satisfaisant. Continuons les efforts !",
@@ -597,7 +596,7 @@ function ppGenerer(){
       "L'équipe enseignante est formelle : le niveau et le comportement de "+prenom+" sont insuffisants. Un engagement total est exigé dès maintenant.",
     ]
   };
-  var arr=phrases[tone];var p=arr[Math.floor(Math.random()*arr.length)];
+  var arr=phrases[tone_pp];var p=arr[Math.floor(Math.random()*arr.length)];
   document.getElementById("pp-rz").style.display="block";
   document.getElementById("pp-rt").value=p;
   document.getElementById("pp-ok").style.display="none";
