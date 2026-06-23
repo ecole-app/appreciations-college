@@ -281,21 +281,7 @@ function setVue(v,btn){
   document.getElementById("filtre-mat-row").style.display=v==="eleves"?"flex":"none";
   renderListe();
 }
-function setTone(t){
-  tone=t;
-  var map={encourageant:"enc",recommande:"rec",ferme:"fer"};
-  ["enc","rec","fer"].forEach(function(x){
-    var b1=document.getElementById("tone-"+x);
-    var b2=document.getElementById("pp-tone-"+x);
-    if(b1) b1.classList.remove("on");
-    if(b2) b2.classList.remove("on");
-  });
-  var key=map[t];
-  var b1=document.getElementById("tone-"+key);
-  var b2=document.getElementById("pp-tone-"+key);
-  if(b1) b1.classList.add("on");
-  if(b2) b2.classList.add("on");
-}
+
 var genre="M",sel={},filtreCur="toutes",phrase="",prenomCur="",classeCur="",matCur="EPS",ri=0;
 var ppMatieres=[];
 var ppGenre='M';
@@ -551,9 +537,20 @@ function resetForm(){sel={};ri=0;["prenom","moyenne","free"].forEach(function(i)
 // ── Prof principal ──
 function setTone(t){
   tone=t;
-  ["enc","rec","fer"].forEach(function(x){document.getElementById("tone-"+x).classList.remove("on");});
   var map={encourageant:"enc",recommande:"rec",ferme:"fer"};
-  document.getElementById("tone-"+map[t]).classList.add("on");
+  ["enc","rec","fer"].forEach(function(x){
+    var b1=document.getElementById("tone-"+x);
+    var b2=document.getElementById("pp-tone-"+x);
+    if(b1) b1.classList.remove("on");
+    if(b2) b2.classList.remove("on");
+  });
+  var key=map[t];
+  if(key){
+    var b1=document.getElementById("tone-"+key);
+    var b2=document.getElementById("pp-tone-"+key);
+    if(b1) b1.classList.add("on");
+    if(b2) b2.classList.add("on");
+  }
 }
 function ppAjouter(){
   // Ajouter désactivé
