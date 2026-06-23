@@ -155,15 +155,14 @@ hr{border:none;border-top:1px solid var(--b);margin:12px 0}
     <div><label>Classe</label><select id="pp-classe"><option>6e</option><option>5e</option><option>4e</option><option>3e</option></select></div>
   </div>
 
-  <div class="sl">Appréciations des professeurs</div>
-  <div id="pp-list" style="margin-bottom:10px"></div>
-  <div style="margin-bottom:8px">
-    <label>Matière</label>
-    <input type="text" id="pp-mat" placeholder="Ex: Français, Maths, EPS…" style="margin-bottom:8px">
-    <label>Appréciation du professeur</label>
-    <textarea id="pp-appr" placeholder="Coller ou saisir l'appréciation…" rows="3"></textarea>
+
+  <div style="margin-bottom:12px">
+    <label>Appréciations des professeurs <span style="font-weight:400;color:var(--m)">(colle toutes les appréciations ici)</span></label>
+    <textarea id="pp-appr" placeholder="Ex:
+Français : Élève sérieuse…
+Maths : Bon trimestre…
+EPS : Très investie…" rows="7" style="margin-bottom:0"></textarea>
   </div>
-  <button type="button" class="a" onclick="ppAjouter()" style="margin-bottom:14px">+ Ajouter</button>
 
   <hr>
   <div class="sl">Ton de l'appréciation générale</div>
@@ -447,11 +446,7 @@ function setTone(t){
   document.getElementById("tone-"+map[t]).classList.add("on");
 }
 function ppAjouter(){
-  var mat=document.getElementById("pp-mat").value.trim();var appr=document.getElementById("pp-appr").value.trim();
-  if(!mat||!appr)return;
-  ppMatieres.push({mat:mat,appr:appr});
-  document.getElementById("pp-mat").value="";document.getElementById("pp-appr").value="";
-  renderPPList();
+  // Ajouter désactivé
 }
 function renderPPList(){
   var el=document.getElementById("pp-list");
@@ -473,10 +468,10 @@ function ppSuppr(i){ppMatieres.splice(i,1);renderPPList();}
 function ppGenerer(){
   var prenom=document.getElementById("pp-prenom").value.trim()||"L'élève";
   var trim=document.getElementById("pp-trim").value;
-  if(!ppMatieres.length){alert("Ajoute au moins une appréciation.");return;}
+  var apprText=document.getElementById("pp-appr").value.trim();
+  if(!apprText){alert("Saisis les appréciations des professeurs.");return;}
   var tone=ppTone;
-  // Analyse globale des appréciations
-  var matList=ppMatieres.map(function(x){return x.mat;}).join(", ");
+  var matList="l'ensemble des matières";
   // Construire la phrase selon le ton
   var introT={T1:["Ce premier trimestre","En ce début d'année","Pour ce premier conseil"],T2:["Ce deuxième trimestre","À mi-parcours","Pour ce deuxième conseil"],T3:["Ce troisième trimestre","En fin d'année","Pour le bilan final"],"":["Ce trimestre","Pour ce conseil de classe","À ce stade"]};
   var introArr=introT[trim]||introT[""];var intro=introArr[Math.floor(Math.random()*introArr.length)];
